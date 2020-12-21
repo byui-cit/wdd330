@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Instructor Preparation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Instructor Preparation</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          The team activity for this week should feel like mostly review. We
+          will revisit the Hikes app one last time. Our goal is to add some new
+          functionality...the ability to add comments. The students can start
+          with
+          <a
+            href="https://github.com/byui-cit/cit261/tree/gh-pages/solutions/week05"
+            target="_blank"
+            rel="noreferrer"
+            >this version</a
+          >
+          if they need. Then they should use MVC to design and build a
+          commenting system for the app.
+        </p>
+
+        <p>
+          Encourage the students also to record their questions while reading
+          and give them to you to be addressed.
+        </p>
+        <h2>Meeting Time</h2>
+
+        <p>
+          The reading for this week introduces Asynchronous programming and AJAX
+          using <code>fetch</code> and promises.
+        </p>
+        <p>A list of things you might discuss is below</p>
+        <ol>
+          <li>Make a list of foods in a json file.</li>
+          <li>
+            Make a <code>fetch</code> call to get the list of foods. Explain
+            that we can grab some data from a database, some html from a file,
+            an image, etc with fetch. This has traditionally been done with
+            XMLHTTPRequest.
+          </li>
+          <li>
+            Explain that this takes time and JS runs asynchronously...it doesn't
+            wait for things to finish before executing the next statement
+          </li>
+          <li>Add some logs to show this. for loop, setTimeout.</li>
+          <li>
+            Callbacks are the traditional way to handle this...but could often
+            lead to unreadable code..."callback hell"
+          </li>
+          <li>
+            Now we have Promises which address some of the issues from
+            callbacks. Show the promise returned from our fetch.
+          </li>
+          <li>
+            Promises must be processed with a then() call. Anything that should
+            happen after the promise resolves should go in the then().
+          </li>
+          <li>
+            Once processed the Promise gives us a stream. That must be converted
+            into the data that was sent back. It can be processed as
+            <code>text()</code>, <code>json()</code>, or as a
+            <code>blob()</code>
+          </li>
+          <li>
+            Fetching data from a server is not the only thing that can take
+            time. Create a longProcess function with a timeout in it. It should
+            return a number after a delay. Try adding that number to another
+            one.
+            <pre><code class="lang-js">
+function longProcess() {
+   setTimeout(() => {
+      return 42
+    }, 200);
+  });
+  const total = 100 + longProcess();
+  console.log('total', total); // NaN
+}</code></pre>
+          </li>
+          <li>
+            Show how to create your own Promise, and show how we can get things
+            to add up successfully.
+            <pre><code class="lang-js">
+function longProcess() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (1) {
+        resolve(42);
+      } else reject('failed');
+    }, 200);
+  });
+}
+longProcess()
+  .then(result => {
+    let total = 100 + result;
+    console.log('total', total);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+            </code></pre>
+          </li>
+          <li>
+            Finish example with food list...create a getJson function with some
+            error checking and use it to grab the list of things and then render
+            it to the HTML.
+            <pre><code class="lang-js">
+function getJson(url) {
+  return fetch(url)
+    .then(response => {
+      if (response.ok) {
+        console.log('in then', response);
+        return response.json();
+      } else {
+        throw new Error('not ok');
+        console.log('will not run');
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
+} </code></pre>
+          </li>
+          <li>
+            Pulling from a remote server works just the same as from
+            locally...show pokeapi.co and look at the data it sends back.
+            <pre><code class="lang-js">
+const baseUrl = 'https://pokeapi.co/api/v2/';
+const myList = getJson(baseUrl + 'type/3');
+
+myList.then(data => {
+  console.log(data);
+  buildList(data);
+});
+
+function buildList(data) {
+  const myListElement = document.getElementById('list');
+  myListElement.innerHTML = data.pokemon
+    .map(item => `&lt;li&gt;${item.pokemon.name}&lt;/li&gt;`)
+    .join('');
+}
+            </code></pre>
+          </li>
+          <li>Talk about CORS</li>
+        </ol>
+        <!-- <p>This would be a good time to
+          really talk about Single Page Applications (SPA) as this gives us the
+          last piece we need to really build one. A possible example could be a
+          <a
+            href="https://github.com/byui-cit/cit261/tree/gh-pages/examples/spa-example-complete/"
+            target="_blank" rel="noreferrer"
+            >simple routing system</a
+          >
+          for the Hikes app that the students worked with in their team
+          activity.
+        </p>
+        <p>
+          Here is a zip of the starter files (without the comments piece in case
+          you do you office hour before groups have finished this week's team
+          activity) if you want to use the routing example. I would first give a
+          basic example of using Fetch and promises, then move on to this.
+        </p>
+        <p>
+          <a
+            href="https://github.com/byui-cit/cit261/tree/gh-pages/teacher/spa-example-start.zip"
+            target="_blank" rel="noreferrer"
+            >https://github.com/byui-cit/cit261/tree/gh-pages/teacher/spa-example-start.zip</a
+          >
+        </p> -->
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>

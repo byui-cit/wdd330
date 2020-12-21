@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/prism-coy.css" />
+    <link rel="stylesheet" href="../../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team 4 Activity</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          This activity will finish the process of converting our site to a
+          dynamic site.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team4: Dynamic header and footer" task...then move it to
+                'Doing'. Read the details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                Github before proceeding. Next they should create a new branch
+                called <kbd>initials--team4</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team4</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Plan</h3>
+              <p>
+                As you completed the reading for this week there were two
+                articles about Single Page Applications (SPA). One outlining
+                what they are, and another indicating some of the drawbacks to
+                them. At this point we need to decide if a Single Page
+                Application is the right architecture for our application.
+                Discuss with your group your feelings. You may want to pull up
+                the two articles (<a
+                  href="https://blog.pshrmn.com/how-single-page-applications-work/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >How Single Page Applications work</a
+                >
+                and
+                <a
+                  href="https://gomakethings.com/the-problem-with-single-page-apps/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >The problem with single page apps</a
+                >
+                ) to refresh you memory about the advantages, disadvantages, and
+                alternatives.
+              </p>
+              <!-- <ul>
+                <li>
+                  I would recommend having a one to one relationship with
+                  views/pages and modules. Then any functionality that needs to
+                  be shared between modules can be placed in a utility modules.
+                </li>
+                <li>
+                  The following views are needed: productList, productDetail,
+                  cart, checkout
+                </li>
+                <li>
+                  productList and productDetail are going to be mostly dynamic,
+                  so let's just generate those entirely through Javascript.
+                </li>
+                <li>
+                  cart and checkout will have more static content on them...so
+                  let's load in an html partial as a starting point, and then
+                  modify as needed with Javascript.
+                </li>
+              </ul> -->
+              <p>
+                Once you are done with your discussion, review the information
+                below with the instructor's recommendation and reasoning. Keep
+                in mind that there is no one right answer here. There's more
+                than one way to skin a cat...as the old adage goes. You may
+                disagree with the conclusion or reasoning and that is fine...but
+                because the future activities will make certain assumptions
+                about the structure of your app I would recommend that you still
+                follow the recommendation below.
+              </p>
+              <section class="hint">
+                <input type="checkbox" />
+                <h3>Instructor's recommendation</h3>
+                <i></i>
+                <div>
+                  <p>SPAs can be great in the right circumstances:</p>
+                  <ul>
+                    <li>
+                      Once the page has downloaded switching betwen views is
+                      usually very fast
+                    </li>
+                    <li>
+                      In complex applications where there is a lot of state to
+                      manage SPAs make it easier
+                    </li>
+                    <li>
+                      when you need a very native application type of a feel.
+                    </li>
+                  </ul>
+                  <p>But they do come with a few drawbacks:</p>
+                  <ul>
+                    <li>
+                      Initial load times are often higher...people are most
+                      sensitive to initial load times...first impressions...
+                    </li>
+                    <li>SPAs are more complex than multipage apps</li>
+                    <li>
+                      You lose some great native features of browsers like
+                      history
+                    </li>
+                    <li>SEO often becomes hard</li>
+                  </ul>
+                  <p>
+                    In the case of our application I'm not sure the additional
+                    complexities added by converting to a SPA are worth the
+                    extra work and complexity it will introduce:
+                  </p>
+                  <ul>
+                    <li>
+                      We don't have complex state that needs to persist from one
+                      page to another. The product listing page for example
+                      really doesn't care what happens on the product detail
+                      page.
+                    </li>
+                    <li>
+                      It would be really nice to not have to write our own
+                      routing and history functionality.
+                    </li>
+                    <li>
+                      This really isn't trying to duplicate a native app...so a
+                      bit of flash on a page load isn't going to feel too out of
+                      place.
+                    </li>
+                    <li>
+                      As a retail site initial loading speed needs to be as fast
+                      as possible...and SEO is really important to get new
+                      customers to the site.
+                    </li>
+                  </ul>
+                  <p>
+                    In our case a SPA would be overkill, but there are some
+                    advantages to dynamically generating parts of the site. I
+                    like the hybrid approach introduced in the second article.
+                    We should implement something along those lines. The good
+                    news is that what we have done already kind of follows that
+                    model.
+                  </p>
+                </div>
+              </section>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Restructure</h3>
+              <p>
+                We need to first build make some changes in our project
+                structure. We need to create a directory for each "view", and
+                place an index.html file in each to have our clean URLs like the
+                article suggested. We already have a directory for
+                product_pages. We need a <kbd>cart</kbd>, and
+                <kbd>checkout</kbd> directory. Create those then move the
+                cooresponding files into the directories and rename them to
+                <kbd>index.html</kbd>. You will also need to edit the cart and
+                checkout index files. Since we have moved them the paths to the
+                JS, CSS, and images will be different.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Header and Footer</h3>
+              <p>
+                The code for the Header and Footer of our site should be the
+                same (or nearly) on all pages. We currently have 4 copies of
+                those...one on each .html file in the site. If we need to make a
+                change to the header we will have to visit each page to keep
+                them the same. That is a bother with 4 pages...it becomes
+                unmanagable with larger sites. We actually need to make a change
+                now. The path to the cart just changed! Just as it was for the
+                product list, templating can be a solution here as well.
+              </p>
+              <p>
+                There is a difference this time however...If we do our
+                templating the same as we did for the product list (template
+                embedded in the page) we would still have the same problem...we
+                would have to update the template in each page still! So for the
+                header and footer it would be nice to have only one copy of the
+                template. We can do that by pulling the template HTML into a
+                separate file that we can load in with AJAX.
+              </p>
+              <p>
+                Create another directory called <kbd>partials</kbd> and create
+                two files in it: <kbd>header.html</kbd> and
+                <kbd>footer.html</kbd>. Then copy the html from
+                <em>inside</em> of the header and footer elements from the
+                index.html page into the respective file. We should then add an
+                id to the header and footer elements in index. In the end for
+                the header your code should look something like this (don't just
+                copy this code! Your code might have changes to it that are not
+                represented here. Copy the code out of your index.html file!):
+              </p>
+              <pre><code class="lang-markup">
+&lt;!-- header.html --&gt;
+&lt;div class="logo"&gt;
+  &lt;img src="/images/noun_Tent_2517.svg" alt="tent image for logo"&gt;
+  &lt;a href="index.html"&gt; Sleep&lt;span class="highlight"&gt;Outside&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="cart"&gt;
+  &lt;a href="cart.html"&gt;
+    &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+      ...all the SVG code ...
+    &lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+              <pre><code class="lang-markup">&lt;!-- index.html --&gt;
+&lt;header class="divider" id="main-header"&gt;
+  
+&lt;/header&gt;
+</code></pre>
+              <p>
+                To load our templates we can start with the
+                <code>renderListWithTemplate</code> function we wrote last week,
+                but will need to make some changes. We are only rendering one
+                template instead of a list. We also need to write a function to
+                request the html file with our header and footer, then create a
+                <kbd>template</kbd> out of it.
+              </p>
+              <ol>
+                <li>
+                  Copy the <code>renderListWithTemplate</code> function and
+                  paste it into our utils.js module. Rename it to
+                  <code>renderWithTemplate</code>. Modify the function to remove
+                  the loop and instead of passing in a <kbd>list</kbd>, let's
+                  pass in <kbd>data</kbd>
+                </li>
+                <li>
+                  If you recall from last week our
+                  <code>renderListWithTemplate</code> function required a
+                  callback that inserted data into our template. Our header and
+                  footer do not currently have any dynamic elements that would
+                  require us to run that callback. They might require it later
+                  though. Add an if statement in
+                  <code>renderWithTemplate</code> that checks for the existence
+                  of the callback parameter, if it exists then call it.
+                </li>
+                <li>
+                  Create another function in utils.js called
+                  <code>loadTemplate(path)</code>. In this function we need to
+                  make a fetch request to the provided path, then process the
+                  response as <kbd>text</kbd>. (We have usually processed our
+                  responses as JSON!)
+                </li>
+                <li>
+                  Create a new template element (document.createElement) and set
+                  the results of our fetch into the innerHTML of that new
+                  element. Return the element from the function.
+                </li>
+                <li>
+                  Update <kbd>main.js</kbd>. Import in
+                  <code>renderWithTemplate</code>, and
+                  <code>loadTemplate</code>. Then use those functions to load
+                  the header and footer into <kbd>index.html</kbd>
+                </li>
+                <li>
+                  Do the same thing for
+                  <kbd>product-details.html</kbd>,
+                  <kbd>cart/index.html</kbd> and
+                  <kbd>checkout/index.html</kbd> (you will probably need to
+                  create a <kbd>checkout.js</kbd> file for this)
+                </li>
+              </ol>
+              <div class="callout">
+                <p>
+                  The solution we are using for templating our header and footer
+                  works, but it would usually be done in a different way in 'the
+                  real world'. There are a couple of disadvantages to our
+                  approach. The biggest is that we have to make 2 extra file
+                  requests from the web server to render our pages. We are using
+                  this method for simplicity.
+                </p>
+
+                <p>
+                  Below are a couple of other more common approaches to solving
+                  this:
+                </p>
+                <ul>
+                  <li>
+                    Using a templating tool such as
+                    <a
+                      href="https://handlebarsjs.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Handlebars</a
+                    >
+                    or
+                    <a
+                      href="https://mozilla.github.io/nunjucks/"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Nunjucks</a
+                    >. This would be incorporated into our build process to
+                    insert the templates <em>before</em> we sent the file to the
+                    webserver.
+                  </li>
+                  <li>
+                    Server Side Rendering (SSR) We could use a server side
+                    language like PHP, .NET, or NodeJS to insert the template
+                    when the page was requested, but before it was sent. (For
+                    more information take CSE 340 (php), CSE 341 (nodejs), or
+                    CIT 365 (.NET))
+                  </li>
+                  <li>
+                    Use a Frontend framework like Angular, React, or Vue. They
+                    all have templating built in. (For more information take WDD
+                    430)
+                  </li>
+                </ul>
+              </div>
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Refactor the Cart</h3>
+              <p>
+                Cart was already a dynamic page. It read the list of items out
+                of localStorage and then built the HTML to display them. It
+                needs to be updated however to match the rest of the
+                application. We should create a
+                <kbd>shoppingCart.js</kbd> module similar to what we did for
+                <kbd>productList</kbd>. We should also convert it to use a
+                <kbd>template</kbd> like we did for the productList as well.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructors Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/byui-cit/cit261/tree/gh-pages/solutions/week02/solution.html"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, and reviewed the instructor's
+          solution, the driver should commit and push their changes, then submit
+          a pull request for this branch. Then review the pull request as a
+          team, close it, and merge the branch back into Main. Finally someone
+          should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../../js/course.js"></script>
+    <script src="../../js/prism.js"></script>
+  </body>
+</html>
