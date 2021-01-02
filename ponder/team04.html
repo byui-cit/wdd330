@@ -226,8 +226,8 @@
                 two files in it: <kbd>header.html</kbd> and
                 <kbd>footer.html</kbd>. Then copy the html from
                 <em>inside</em> of the header and footer elements from the
-                index.html page into the respective file. We should then add an
-                id to the header and footer elements in index. In the end for
+                src/index.html page into the respective file. We should then add
+                an id to the header and footer elements in index. In the end for
                 the header your code should look something like this (don't just
                 copy this code! Your code might have changes to it that are not
                 represented here. Copy the code out of your index.html file!):
@@ -290,10 +290,47 @@
                   element. Return the element from the function.
                 </li>
                 <li>
+                  Create one more function in utils.js called
+                  <kbd>loadHeaderFooter</kbd>. It needs to do the following:
+                  <ol>
+                    <li>
+                      Load the header and footer templates in from our partials.
+                      (<code>loadTemplate</code>)
+                    </li>
+                    <li>Grab the header and footer elements out of the DOM</li>
+                    <li>
+                      Render the header and footer
+                      (<code>renderWithTemplate</code>.
+                    </li>
+                  </ol>
+                </li>
+                <li>
                   Update <kbd>main.js</kbd>. Import in
-                  <code>renderWithTemplate</code>, and
-                  <code>loadTemplate</code>. Then use those functions to load
-                  the header and footer into <kbd>index.html</kbd>
+                  <code>loadHeaderFooter</code> and then use that function to
+                  load the header and footer into <kbd>src/index.html</kbd>
+                  <div class="callout">
+                    <p>
+                      Our build tool Snowpack is going to have problems with our
+                      new header and footer since they are not valid html. We
+                      need to let it know that we are doing this on purpose and
+                      it should be ok with it.
+                    </p>
+                    <p>
+                      Open the <kbd>snowpack.config.js</kbd> file and add
+                      <code>'htmlFragments': true</code> to the buildOptions
+                      section. It should look like this:
+                    </p>
+                    <pre><code class="lang-js">'buildOptions': {
+  'out': 'build',
+  'baseUrl': '/sleepoutside/build/',
+  'clean': true,
+  'htmlFragments': true
+}</code></pre>
+                    <p>
+                      Then shut down (<kbd>ctrl-c</kbd>) and relaunch Snowpack
+                      (<kbd>npm run start</kbd>)
+                    </p>
+                  </div>
                 </li>
                 <li>
                   Do the same thing for
@@ -393,7 +430,7 @@
         <p>
           After working with your team for the one hour activity,
           <a
-            href="https://github.com/byui-cit/cit261/tree/gh-pages/solutions/week02/solution.html"
+            href="https://github.com/matkat99/sleepoutside/tree/team4/src"
             target="_blank"
             rel="noreferrer"
             >click here for the instructor's solution</a
