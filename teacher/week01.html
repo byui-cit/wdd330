@@ -21,13 +21,11 @@
         <hr />
         <h2>Overview</h2>
         <p>
-          This week will be about review. It will also be about introducing the
-          course. There is no team activity for this week, and most of the
-          student's time will be spent working through the Doing Stuff book. 90%
-          of the material in that book is intended to be review...but it feels
-          new to too many students. They might panic a bit when they pull it
-          down and look at the pages, but once they get into it, they should
-          move quickly.
+          This week is all about foundation. All of the tools we will be using
+          will be introduced, along with ideas about workflow in modern frontend
+          development. Time can also be spent on reviewing the Javascript
+          concepts from the syllabus that they students are expected to know.
+          There is no team activity for this week.
         </p>
         <p>
           Make sure the students understand the grading structure. 30% comes
@@ -36,20 +34,41 @@
           and once at the end of the semester.
         </p>
         <p>
-          Help them to understand that the readings are important, and they get
-          to choose how to best spend their time. If they learn best by just
-          reading then you should expect detailed notes from them. If they learn
-          best by experimentation and doing, then you should expect exercises
-          that have been worked through. They have the option but
-          <strong>should plan on spending adequate time during the week</strong>
-          to learn the material.
+          Explain the way the course will work. They will be working in groups
+          through the whole semester. Those groups need to be formed this week.
+          2-3 per group ideally. You might talk about some of the ideas in the
+          <a
+            href="https://byui-cit.github.io/advcss/resources/working-with-groups.html"
+            target="_blank"
+            >Working in Team</a
+          >
+          document. The first 9 weeks will be spent modeling what a typical web
+          frontend project might look like. They will work together to build a
+          simple ecommerce site. Some will be done all together in a peer
+          programming model. Other parts will be done individually.
         </p>
         <p>
-          Encourage them also to look to other sources when things don't make
-          sense. The book does a pretty good job, but the way it addresses some
-          topics might be confusing to some students. Help them to remember that
-          there are other options. Several are listed in this weeks reading in
-          fact. The notes they turn in do not have to be all from the assigned
+          The last part of the course will be spent building an application of
+          the student's choosing. They will be paired up with students in CSE
+          341 (Backend Development II) This class will be responsible for
+          building the Frontend, the other students will build the backend and
+          they must work together!
+        </p>
+        <p>
+          There is a high emphasis on working effectively as a team in the
+          course. Using tools like linters, bundlers, and Github are also
+          stressed. The students will be expected to branch, pull request and
+          merge with their projects. You may choose to spend some time talking
+          about that this week as well.
+        </p>
+
+        <p>
+          Help them to understand that the readings are important and encourage
+          them also to look to other sources when things don't make sense. The
+          book does a pretty good job, but the way it addresses some topics
+          might be confusing to some students. Help them to remember that there
+          are other options. Several are listed in this weeks reading in fact.
+          The notes they turn in do not have to be all from the assigned
           reading.
         </p>
         <p>
@@ -60,22 +79,83 @@
         <h2>Meeting Time</h2>
 
         <p>
-          For your meeting with them you might consider running through an
-          exercise building a basic html file...talk about the parts and why
-          each are important. Then build and style a basic form as review. The
-          course does not spend a lot of time teaching CSS, but students are
-          expected to style their applications. A review would probably be
-          welcomed by many students.
-          <a href="../examples/form-demo.html" target="_blank"
-            >Here is an example form</a
-          >
-          you could use as part of your demo.
+          For your meeting with them you might consider running through the
+          tools they are asked to install. You might even initialize a simple
+          Node application, and show them how to add packages. They will do more
+          of that next week in the team activity.
         </p>
         <p>
-          You could also spend some time discussing the material in the Design
-          video that is listed in the readings for the week.
+          Or you could review some Javascript concepts. Array methods, fetch,
+          promises, modules would all be good to review. Point out the resources
+          in the syllabus for review! You could fetch some data from something
+          like
+          <a href="https://pokeapi.co" target="_blank">PokeApi</a>, or
+          <a href="https://www.swapi.tech" target="_blank">Swapi</a>. Use the
+          array methods to manipulate it, then build some html and output to the
+          page as a demo.
         </p>
-        <p>Here are a few website examples you could talk through as well.</p>
+        <p>
+          This
+          <a href="../examples/poke-demo/index.html" target="_blank">example</a>
+          shows one way you could go. It uses arrow functions...if you poll your
+          students and they feel uncomfortable with that you could start your
+          demo with traditional anonymous functions and work into arrows. Get as
+          far as you can while giving good explanations of what you are doing.
+          You probably won't get everything in that example done.
+        </p>
+        <p>Recommended order:</p>
+        <ol>
+          <li>
+            Pull information for the types first to review fetch and promises.
+            Don't wrap the fetch call in a function initially
+            (https://pokeapi.co/api/v2/type/) Pull up the
+            <a href="https://pokeapi.co/docs/v2#types" target="_blank"
+              >documentation</a
+            >
+            to show them how we know what URL to use.
+          </li>
+          <li>
+            Then make a function to generate the html list to review DOM
+            manipulation, and array methods (forEach), and you can use
+            <kbd>data-</kbd> prefixed attributes to store the url for each
+            specific type.
+          </li>
+          <li>
+            Attach a listener to the types list that will call a function called
+            <code>typeClickedHandler</code> talk about how we need to make
+            another call to the API, but the code would be very similar to what
+            we wrote before...refactor to take our previous code and make it
+            reusable with a function <code>getData(url, callback)</code>. Talk
+            about the callback. Lets us define the action done with the returned
+            data at runtime...very powerful!
+          </li>
+          <li>
+            Finish implementing the <code>typeClickedHandler</code>, talk about
+            the difference between <code>event.target</code>, and
+            <code>event.currentTarget</code>. You will need to make another
+            function to render the list of pokemon.
+          </li>
+          <li>
+            Bring up that unknown, and shadow have no pokemon and create a
+            function using <code>Array.filter</code> to remove them from our
+            list of types.
+          </li>
+          <li>
+            If you still have time do some CSS, including highlighting the
+            currently selected type by adding a class when it is clicked.
+          </li>
+        </ol>
+        <p>
+          Students who have come up through the new courses: CSE 121b and WDD
+          230 should have already seen everything in that demo. It should be
+          review...but many students will probably not recognize that.
+        </p>
+        <p>
+          You might also use your demo to show working with Github. Initialize
+          the repo...commit and push, even do a branch if you have time.
+        </p>
+
+        <!-- <p>Here are a few website examples you could talk through as well.</p>
         <ul>
           <li>
             <a
@@ -109,7 +189,7 @@
               >Guide to mobile design
             </a>
           </li>
-        </ul>
+        </ul> -->
       </main>
       <!-- end #article -->
     </div>
