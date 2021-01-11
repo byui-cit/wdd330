@@ -19,20 +19,20 @@
       <main>
         <h1>Instructor Preparation</h1>
         <hr />
-        <h2>Overview</h2>
+        <h2>Week 2 Overview</h2>
         <p>
           The first team activity happens this week. There will be one during
-          most of the weeks. You can either designate groups, or let students
-          self-select them. The activities are intended to be done in peer
-          programming style. For online you might suggest something like
-          multiplayer in
+          most of the weeks. Groups should have been formed last week. The
+          activities are intended to be done in peer programming style. For
+          online you might suggest something like multiplayer in
           <a href="https://repl.it/" target="_blank" rel="noreferrer"
             >repl.it</a
           >
-          to code together, or screen sharing in Zoom or Hangouts can work as
-          well. The teams need to schedule an hour at some point during the week
-          for the team activity. This week they will build a simple adding
-          machine.
+          to code together, or screen sharing in Teams, Zoom, or Hangouts can
+          work as well. The teams need to schedule an hour at some point during
+          the week for the team activity. This week is pretty critical as they
+          will be setting up the project they will be working on over the next 7
+          weeks and learning how to use it.
         </p>
 
         <p>
@@ -49,14 +49,111 @@
         </p>
         <h2>Meeting Time</h2>
         <p>
-          Since the reading introduced object literals, mention in your meeting
-          that pretty much everything in JS is an object with properties and
-          methods. Review the three ways to declare functions (declaration,
-          expression, arrow) and mention that since functions are just objects
-          they can be bound to variables, or passed as arguments in functions
-          (callback) or made part of another object.
+          I would spend some time talking about the NodeJs based development
+          environment we will be working in. Talk about the role of the package
+          manager (npm), bundlers (using Snowpack...I know it's not exactly a
+          bundler, but it's setup is very simple, it works well for multi-page
+          apps, will run Babel on our code as well as minify, and it doesn't add
+          a bunch of code so debugging looks cleaner), and task managers (npm)
         </p>
         <p>
+          The readings this week are on OOP, this, and modules. So it would be
+          good to model a class based ESModule as well. Discuss DRY and the
+          importance of organizing as part of this.
+        </p>
+        <p>
+          You could code up something like this
+          <a href="../examples/expenses/index.html" target="_blank"
+            >Expense tracker</a
+          >.
+        </p>
+        <ol>
+          <li>
+            Start by creating the following files in a new directory:
+            <kbd>index.html</kbd>, <kbd>main.js</kbd>, and
+            <kbd>ExpenseTracker.js</kbd>. Add the HTML base (! tab in Vs Code)
+            with a script element bringing in <kbd>main.js</kbd>. Mention the
+            first change with modules: we need to add
+            <kbd>type="module"</kbd> to our script element.
+          </li>
+          <li>
+            Add a title to the HTML and inputs to get a description, and amount,
+            with a button to submit. Then add a div with an ID of output or
+            something.
+          </li>
+          <li>
+            In <kbd>main.js</kbd> add a listener to the button for a click. Have
+            it use a function called <kbd>submit</kbd> as the handler. Stub out
+            that function, grab the contents of the two inputs, add them to an
+            object and console.log it out so we know it is working.
+          </li>
+          <li>
+            Now to the module. In <kbd>ExpenseTracker.js</kbd> add a class
+            called <code>ExpenseTracker</code>, add a constructor and talk about
+            it's role. Talk about re-usability. We might want more than one of
+            these eventually, so let's pass in some sort of identifier so we can
+            tell them apart. Use the constructor to store the label in the
+            class. Mention that the class will need to know where to output the
+            expenses, so pass in the ID of the output element.
+          </li>
+          <li>
+            Next add a method to the class called <kbd>addExpense</kbd>, it
+            should expect an expense object. It should add the expense to the
+            list of expenses (go back and add an empty array to the class in the
+            constructor) then output the expense to HTML. for now just add a
+            console.log outputting some success message
+          </li>
+          <li>
+            At this point I would stop and finish getting the module to work
+            before finishing the functionality. Talk about
+            <code>export</code> and <code>export default</code>. Add
+            <code>export default</code> to the class. Then go back to
+            <kbd>main.js</kbd> and talk about importing. Then create an instance
+            of your class (<code
+              >const janExpenses = new ExpenseTracker('Jan', 'output')</code
+            >), and add <code>janExpenses.addExpense()</code> to the submit
+            handler. Test to make sure everything is working.
+          </li>
+          <li>
+            We will need a function to build the table we need, and another to
+            build the contents of the table body. Create two functions called
+            something like <kbd>renderTable</kbd>, and
+            <kbd>renderExpenses</kbd> in our module. <kbd>renderTable</kbd> only
+            needs to be called once, so we can do that in the constructor.
+            <kbd>renderExpenses</kbd> needs to be called everytime we add a new
+            row to our expenses. I chose to add those two functions to the
+            module outside of the class. I use this as an opportunity to talk
+            about what should be in the class and publically available, and what
+            shouldn't. (and that this is often a matter of opinion :)
+          </li>
+          <li>
+            Finish the render functions. Try to use examples of using the array
+            helper methods whenever possible.Test to make sure everything is
+            working.
+          </li>
+          <li>
+            Next show how easy it is to re-use our class to create a listing for
+            another month. Add a select element to the html to select a month.
+            Also add a new div to hold the new expense table (#febOutput). In
+            main.js create a new instance of our class:
+            <code
+              >const febExpenses = new ExpenseTracker('Feb', 'febOutput')</code
+            >, then modify the submit handler to look at the selected value in
+            our dropdown, and call the addExpense with the correct class
+            instance.
+          </li>
+          <li>
+            If you have time then you could add another class method to
+            calculate a running total and output that with each expense row. Or
+            you could spend some time on CSS.
+          </li>
+        </ol>
+        <p>
+          As you demo take the opportunity to model debugging with the browser
+          tools, and watch for opportunities to use the array methods like
+          forEach, map, push, etc. in your code
+        </p>
+        <!-- <p>
           You can use something like <code>console.dir()</code> on an array to
           show them what an array object looks like as well to introduce the
           array methods. (<code
@@ -64,8 +161,8 @@
             .reduce .filter array.map(callback)</code
           >). Keep in mind that the team activity for next week will also be on
           the array methods.
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
           Your demo should show examples of using <code>const</code> and
           <code>let</code>, and contain a review of the three methods for
           declaring functions in javascript (function expression, function
@@ -80,7 +177,7 @@
           <a href="random.html" target="_blank"
             >random sentence generator as an example</a
           >.
-        </p>
+        </p> -->
       </main>
       <!-- end #article -->
     </div>
