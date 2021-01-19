@@ -108,6 +108,23 @@
                 create this HTML file. Open one of your current product pages in
                 the editor, and file->Save As-> <kbd>product-details.html</kbd>
               </p>
+              <div class="callout">
+                <h3>IMPORTANT!</h3>
+                <p>
+                  Make sure that you are working in the <kbd>src</kbd> directory
+                  and NOT the <kbd>build</kbd> directory! The build directory
+                  will get erased and completely rebuilt each time you run
+                  <kbd>npm run build</kbd>. Think of <kbd>build</kbd> as the
+                  production version of your code. <kbd>src</kbd> is your
+                  working directory. You should not need to run
+                  <kbd>npm run build</kbd> very often...like once a week after
+                  you have merged some branches.
+                </p>
+                <p>
+                  When you run <kbd>npm run start</kbd> it will use the files in
+                  <kbd>src</kbd>.
+                </p>
+              </div>
             </li>
             <li>
               <!-- BEGIN STEP -->
@@ -118,14 +135,21 @@
                   <kbd>productData.js</kbd> and <kbd>productDetails.js</kbd>.
                 </li>
                 <li>
-                  Any of the code from <kbd>product.js</kbd> that deals with
-                  getting or filtering products will need to be moved into
-                  <kbd>productData.js</kbd>. There are two functions that will
-                  be easy to move (<code>getProductsData()</code>, and
-                  <code>convertToJson(res)</code>, but if you look on line 29
-                  you will see we filter our product list to find a specific
-                  product. This line should be moved as well...we will need to
-                  add a new function to our module for this.
+                  <p>
+                    Any of the code from <kbd>product.js</kbd> that deals with
+                    getting or filtering products will need to be moved into
+                    <kbd>productData.js</kbd>. There are two functions that will
+                    be easy to move (<code>getProductsData()</code>, and
+                    <code>convertToJson(res)</code>, but if you look inside the
+                    <code>AddToCart</code> function you will see a line that
+                    looks like this:
+                  </p>
+                  <pre><code class="lang-js">const product = products.find((item) => item.Id === e.target.dataset.id);</code></pre>
+                  <p>
+                    This line filters our product list to find a specific
+                    product. This line should be moved as well...we will need to
+                    add a new function to our module for this.
+                  </p>
                 </li>
                 <li>
                   In order to make our module portable and easy to use, let's
