@@ -129,11 +129,21 @@
               <p>Finish the project setup:</p>
               <ol>
                 <li>
+                  Open the project in VS Code. File->Open, then select the
+                  <em>directory</em> that the repository cloned into.
+                </li>
+                <li>
                   Each member of the team should then open a terminal window and
-                  switch to the project directory (If you are using VS Code and
-                  open the folder as the current project and type
-                  <kbd>ctrl ~</kbd> the terminal window will automatically be
-                  set to the right directory.) then type <kbd>npm install</kbd>.
+                  switch to the project directory. If you are using VS Code
+                  <kbd>ctrl ~</kbd> toggles the terminal panel open and closed.
+                  When you open the terminal in VS Code it will automatically be
+                  set to the root of your project. Type <kbd>ls</kbd> if you are
+                  on a unix based system (MacOS, Linux), or <kbd>dir</kbd> if on
+                  Windows. Make sure that you see <kbd>package.json</kbd> in the
+                  list of files it prints out. If not you will need to change
+                  the working directory in the terminal to whatever directory
+                  you put the project files in. Then type
+                  <kbd>npm install</kbd>.
                 </li>
                 <li>
                   Notice that a new directory was created:
