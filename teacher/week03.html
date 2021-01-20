@@ -21,15 +21,17 @@
         <hr />
         <h2>Overview</h2>
         <p>
-          The team activity for this week is from a great set of exercises from
-          Wes Bos
-          <a href="https://javascript30.com" target="_blank" rel="noreferrer"
-            >Javascript30</a
-          >. It is lesson 4: Array Cardio I. It does a great job of getting the
-          students in and using the array methods. The readings introduce DOM
-          manipulation and Events.
+          The team activity for this week will have us start making changes to
+          the Sleepoutside site. We will begin making it dynamic instead of
+          static. We start with the product detail page. Currently we have one
+          html file per product. This is not scalable so we will make one html
+          page that will load in the details we desire.
         </p>
 
+        <p>
+          The students will also begin adding some structure to the code by
+          creating our first couple modules.
+        </p>
         <p>
           Again with the readings, encourage them also to look to other sources
           when things don't make sense. The book does a pretty good job, but the
@@ -45,35 +47,84 @@
         <h2>Meeting Time</h2>
 
         <p>
-          For your meeting with them give an example of building some dynamic
-          DOM and add some events. For the events portion you may consider
-          assigning another lesson from the Javascript30 course or reviewing the
-          concepts from it:
-          <a href="https://javascript30.com" target="_blank" rel="noreferrer"
-            >25: Event Capture, Propagation...</a
-          >.
+          For your meeting with them continue to give examples of building
+          dynamic DOM, using events, organizing with modules, and leveraging
+          things like the array methods that Javascripr gives us.
         </p>
         <p>
           You might then do something like this
-          <a href="../examples/hiking-complete.html" target="_blank"
-            >dynamically built list of hikes</a
-          >. (Here is a link to
-          <a href="hiking-start.html" target="_blank">just the html and css</a>
-          you could provide as a starting point to the students.
+          <a href="../examples/quotes/index.html" target="_blank"
+            >dynamic filterable list of quotes</a
+          >.
         </p>
         <p>
-          You will probably not have time to do this entire demo (pulling up a
-          detailed view of a hike when a summary list view hike is
-          touched)....which is fine since the last part is revisited in the Week
-          5 team activity. The important part is to show how to create DOM
-          elements from a data source...and show some examples of using events.
+          Try to get into the browser developer tools as much as possible to
+          troubleshoot.
         </p>
+        <ol>
+          <li>
+            Start with a new directory and index.html, main.js, and
+            QuoteGetter.js files.
+          </li>
+          <li>
+            In the HTML we need a select element, a button, and a list to output
+            the quotes to.
+          </li>
+          <li>
+            In <kbd>main.js</kbd> we initially need to attach an event listener
+            to our button. It needs to grab the selected option in our select.
+            Test to make sure the listener works.
+          </li>
+          <li>
+            Then start on the QuoteGetter module. Create a class. I would
+            recommend passing in the ID of the select element, and the output
+            element.
+          </li>
+          <li>
+            Next we need to get the list of quotes. (A list can be found at
+            https://type.fit/api/quotes) Create a method to retrieve them, then
+            store them as part of the class
+          </li>
+          <li>
+            Next we need to extract a unique list of author names from the quote
+            list. One way you could do this is to create a Set and map the
+            author into the Set. Sets automatically remove duplicates.
+            <code>new Set(quotes.map(quote=> quote.author))</code>. Then convert
+            it to an array and return it. <code>[...authors]</code>. You will
+            need to spend a few minutes talking about Sets and Spread
+          </li>
+          <li>
+            Next take the author list and build them as options in our select in
+            the HTML.
+          </li>
+          <li>
+            Either in the class constructor, or in an init method we need to
+            make sure that we do all the setup required: get the quotes, make
+            the author list, and build the select based on the list.
+          </li>
+          <li>
+            I would pause to get everything wired up and test. (Import the class
+            into <kbd>main.js</kbd>. create an instance, call init if that's how
+            you approached it. Do some console.logging or use breakpoints to
+            make sure things are working.)
+          </li>
+          <li>
+            Next we need a method to filter our quote list by an author. It
+            should take an author as argument, and return a list of quotes by
+            that author.
+          </li>
+          <li>
+            Finally we need a function or method that will take a list of quotes
+            and output it as HTML.
+          </li>
+        </ol>
         <p>
-          This is also a good time to talk about issues that may arise from
-          javascript executing before the DOM is loaded. Talk about ways to
-          avoid those problems (onload listener, adding the script at the bottom
-          of the body, or using the <code>defer</code> flag on your script
-          element)
+          This is also a good time to remind students about issues that may
+          arise from javascript executing before the DOM is loaded. Talk about
+          ways to avoid those problems (onload listener, adding the script at
+          the bottom of the body, or using the <code>defer</code> flag on your
+          script element...<code>type="module"</code> actually defers it as
+          well.)
         </p>
       </main>
       <!-- end #article -->
