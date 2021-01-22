@@ -1,3 +1,15 @@
+/* Always good to stop at the beginning of a new project and think about what needs to be done.
+
+get list of quotes
+get distinct list of authors from the quotes
+populate dropdown with authors
+When get button clicked...
+     get currently selected author
+    get a filtered list of quotes.
+    show quotes
+    */
+
+
 import ExpenseTracker from './ExpenseTracker.js';
 
 const myExpense = new ExpenseTracker('Jan', 'output');
