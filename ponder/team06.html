@@ -56,12 +56,12 @@
               <h3>The Cart</h3>
               <p>
                 Check your cart page to make sure that it is correctly
-                displaying a total. If it is not then you need to add the code
-                to do that.
+                displaying a total. If it is not then someone in your group
+                should really complete that card in Trello. :)
               </p>
               <p>
-                Then add a <kbd>Checkout</kbd> button/link that will take us to
-                the checkout page.
+                Add a <kbd>Checkout</kbd> button/link that will take us to the
+                checkout page.
               </p>
 
               <!-- END STEP -->
@@ -89,21 +89,35 @@
               <div class="fig-block">
                 <figure>
                   <img
-                    src="../images/product-categories-grid.png"
-                    alt="index product grid."
+                    src="../images/sleepoutside-checkout-form.png"
+                    alt="checkout form."
                   />
                 </figure>
               </div>
+              <p>
+                Notice that the inputs for the last section are disabled. We
+                need that information in the form so that it can be sent to the
+                server, but we don't want the users to be able to edit that
+                themselves! We could have embedded it in a hidden input...but we
+                needed to display it anyway, so this works.
+              </p>
+              <p>
+                In a real site the server should verify the totals as well to
+                make sure that the user doesn't try anything funny.
+              </p>
 
               <!-- END STEP -->
             </li>
             <li>
               <!-- BEGIN STEP -->
-              <h3>Calculating Tax and shipping</h3>
+              <h3>Order summary</h3>
               <p>
-                We need to add Tax and shipping costs to the order total. Once
-                the user supplies a zip code you should calculate both shipping
-                and tax and display it in the order summary to the user.
+                We need to fill in the information in the summary section. the
+                Item Subtotal will come from the items in the cart, and then we
+                need to add Tax and shipping costs and calculate the order
+                total. Once the user supplies a zip code you should calculate
+                both shipping and tax and display it in the order summary to the
+                user.
               </p>
               <div class="callout">
                 <p>
@@ -122,6 +136,18 @@
                   </dd>
                 </dl>
               </div>
+              <ol>
+                <li>
+                  Create a <kbd>CheckoutProcess</kbd> module, and add a method
+                  to calculate and display the item subtotal. This should get
+                  called when the page loads.
+                </li>
+                <li>
+                  Then create a second method to calculate and display shipping,
+                  tax, and order total. This method should get called after the
+                  user fills in the Zip code.
+                </li>
+              </ol>
               <!-- END STEP -->
             </li>
             <li>
@@ -207,10 +233,25 @@ items: [
     { description: ""}                    
 ] </code></pre>
               <p>
-                The method should POST that object to the address above
+                The method should POST that object (remember to stringify your
+                object before sending it!) to the address above
                 (http://157.201.228.93:2992/checkout) and return the server
                 response. The response will be JSON.
               </p>
+              <p>
+                You will also need to add a method in
+                <kbd>CheckoutProcess</kbd> that will get called when the
+                checkout button is clicked. It should prepare the order data
+                object, and then call ExternalServices.checkout.
+              </p>
+              <div class="callout">
+                <p>
+                  When you attach the listener to the checkout button you will
+                  probably want to keep the form from doing what it would
+                  normally do on submit. You can do this by calling
+                  <code>event.preventDefault()</code> in the listener function.
+                </p>
+              </div>
               <!-- END STEP -->
             </li>
           </ol>

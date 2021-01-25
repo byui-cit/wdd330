@@ -489,6 +489,10 @@ figcaption {
   text-align: center;
 }
 
+dt {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 400px) {
   #content {
     width: 100%;

@@ -21,9 +21,15 @@
         <hr />
         <h2>Overview</h2>
         <p>
-          The team activity for this week is build a Tic Tac Toe board. The
-          focus is on DOM manipulation and events. The trickiest part will
-          probably be clearing the board when the button is pressed.
+          The readings for this week cover a fairly wide variety of topics.
+          Debugging is one, then Single Page Applications, and finally the HTML
+          Template element. Plan on spending some time addressing questions.
+        </p>
+        <p>
+          The team activity continues our work at making the site dynamic by
+          addressing the product list on the home page. It does introduce using
+          a Template element. So you will want to include that in your demo this
+          week.
         </p>
 
         <p>
@@ -33,50 +39,66 @@
         <h2>Meeting Time</h2>
 
         <p>
-          This week is all about architecting and organizing code. For your
-          meeting with them give an example of organizing code using ESModules
-          and objects of some sort. This could be a factory function and
-          prototype, an object literal, or an ES6 class. With the modules make
-          sure to show that they need <kbd>type="module"</kbd> in their script
-          tag in the HTML for it to work.
+          To help the students prepare for the team activity you might do
+          something like this
+          <a href="../examples/sw/index.html" target="_blank"
+            >SW Film information</a
+          >
+          app. It uses the HTML template element to model one way of providing
+          re-usable HTML to our code.
         </p>
-        <p>
-          You might then do something like this
-          <a href="../examples/todo/index.html" target="_blank"
-            >simple To Do list</a
-          >. My example uses the class syntax. I went this way for two reasons:
-          one it tends to be more familiar with students coming from other
-          languages, and two if they move on to do any work with Angular, React,
-          Vue, etc this is most likely the syntax they will be working with.
-        </p>
-        <p>
-          Note that the students will continue with this project for their first
-          challenge in weeks 5-6, so don't worry about getting through the
-          entire demo. Focus on how they can use modules and objects/classes to
-          organize their code and make it reusable. You could also say a few
-          words introducing MVC or some other design philosophy to explain some
-          of the decisions you might make.
-        </p>
-        <p>
-          Begin the demo with a bit of brainstorming on what parts and pieces we
-          would need for the To Do list. Then help them to organize those parts
-          based on what would need to be public or private. Most of it will
-          actually end up being private. Since we are making this into an ES
-          Module, the public stuff will go into a class that will get exported.
-          The private methods will be in the module but not exported. Then build
-          out as much of it as you have time for. See the comments in the
-          example code above (<kbd>todo.js</kbd>).
-        </p>
-        <p>
-          It would also be good to remind the students that 70% of their grade
-          is not determined until the end of the semester. This is a time to
-          learn, explore, and break stuff :). Encourage them to keep working on
-          the topics that do not make as much sense as they would like and it
-          will come. That is the purpose of the challenge assignments. As
-          students are thinking about the project they would like to work on for
-          the second challenge, remind them that there is no right or wrong
-          project. The goal is to become better programmers.
-        </p>
+        <ol>
+          <li>
+            Start by creating a new directory and files: index.html, main.js,
+            SwapiHelper.js.
+          </li>
+          <li>
+            Continue by brainstorming a list of tasks that need to be done. It
+            might look something like this:
+            <pre>
+get list of films
+output list of films
+when a film is clicked:
+    get detailed info on film
+    output film details
+    for each planet
+        get planet info
+        render planet with planet template
+    for each species
+        get species info
+        render with template
+    for each starship
+        get info
+        render with template
+    for each vehicle
+        get info
+        render with template</pre
+            >
+          </li>
+          <li>
+            You might turn the students loose on the first two steps as review
+            of what we have learned in previous weeks. They can use
+            <kbd>https://swapi.dev/api/films</kbd> to get the initial info they
+            need.
+          </li>
+          <li>
+            Once they are done have a conversation about the method they wrote
+            to get the info from the API. What happens if something goes wrong?
+            Harden the method with try/catch. Also make sure that what the
+            students came up with is re-usable...we will be making lots of
+            different requests with that method.
+          </li>
+          <li>
+            Add the code to handle a click on a film. Talk about how we will be
+            using the same HTML to output all of the planets for example. In the
+            past we have used functions to generate the HTML, we could also use
+            a <kbd>template</kbd> in the HTML.
+          </li>
+          <li>
+            Add a <kbd>template</kbd> element to the <kbd>head</kbd> of our
+            index.html file.
+          </li>
+        </ol>
       </main>
       <!-- end #article -->
     </div>

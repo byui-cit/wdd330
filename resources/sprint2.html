@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho - WDD 330 - Mobile Application Development</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Sprint two</h1>
+        <hr />
+
+        <h2>Description</h2>
+        <p>
+          As we move into the next sprint of the project some new requirements have been added. Your team should add these as cards to your Trello board and complete them over the next three weeks. Each team should plan on completing the Team card plus at least one card per person per week.
+        </p>
+
+        <h2>Changes and additions</h2>
+
+        <dl>
+            <dt>Product search</dt>
+            <dd>Add a search box to the navbar that will allow to search for a product. Whent he form submits the search results should be retrieved from the API and displayed on a product list page.</dd>
+            <dt>Product List sort</dt>
+            <dd>On the product list page add the ability to sort by name or price.</dd>
+            <dt>Correct image size</dt>
+            <dd>Right now our pages show the same sized product image for all browser window sizes. Change the image shown based on the screen width.</dd>
+            <dt>Sale flag</dt>
+            <dd>Add a visual indicator of how much a product is discounted to the product listing page.</dd>
+            <dt>Cart quantities</dt>
+            <dd>Add the ability to change the quantity of a product desired in the cart.</dd>
+            <dt>Breadcrumbs</dt>
+            <dd>Right below the navbar add a breadcrumb that will indicate where the user is in the site. On the home page it will not show. On the product list it will show "Product Category->(#products)" (so if you were looking at Tents it would be "Tents->(24 items)".  If you were looking at a product it would show "Product category"</dd>
+            <dt>Call to action-register with site</dt>
+            <dd>The first time a visitor comes to the site it should show them a banner or modal that encourages them to register with the site, and gives details about a giveaway for those whoe register.</dd>
+            <dt>Quick lookup</dt>
+            <dd>On the product listing page add a quick view button. When clicked it should show a modal with the product details in it.</dd>
+          <dt>Discount flag on product detail</dt>
+          <dd>Add a flag on the product detail page indicating the amount the product is discounted.</dd>
+          <dt>Newsletter sign up.</dt>
+          <dd>Add a box on the home page that would allow a user to sign up to receive a Newsletter.</dd>
+          <dt>Team 4: Dynamic Header and footer</dt>
+          <dd>As we move forward the site would benefit greatly from dynamic generation of any pages dealing with products. We began this process last week. Now we should finish by addressing the product listing page, as well as allowing for the templating of the header and footer.</dd>
+          <dt>Team5: Expand inventory</dt>
+          <dd>With the changes we have made we are ready to expand our inventory into 4 categories: Tents, Backpacks, Sleeping Bags, and Hammocks.
+            The products can be accessed through a couple of API endpoints.
+            /products/search/{search term} and /product/id.
+            The main index page should be updated to show the four categories. Clicking on one should take you to a new product listing page for the appropriate category.
+        <div><img src="../images/product-categories-grid.png"></div></dd>
+        <dt>Team 6: Checkout</dt>
+        <dd>Add a button to the cart page to take the user to a checkout form. Add the form to gather the required info (see the team activity instructions in Ilearn) calculate the shipping, tax, and order total, then submit the order to the server.</dd>
+
+        <!-- end #article -->
+      </main>
+    </div>
+    <script src="../js/course.js"></script>
+  </body>
+</html>
