@@ -95,11 +95,12 @@
                 </figure>
               </div>
               <p>
-                Notice that the inputs for the last section are disabled. We
-                need that information in the form so that it can be sent to the
-                server, but we don't want the users to be able to edit that
-                themselves! We could have embedded it in a hidden input...but we
-                needed to display it anyway, so this works.
+                Notice that the last section is just displaying that
+                information, but not in inputs. We need that information to be
+                sent to the server, but we don't want the users to be able to
+                edit that themselves! In the function that prepares the data to
+                send to the server that we will write we will need to add those
+                totals back in.
               </p>
               <p>
                 In a real site the server should verify the totals as well to
@@ -199,14 +200,22 @@
                   everywhere it found the name that you want to change. If you
                   left-click on one of the lines it will open the file side by
                   side with how it was before the changes and how it will be
-                  after. If the change looks good then right-click on the same
-                  line in the Preview panel and select 'apply Refactoring'.
-                  Review each change and apply it after making sure it looks
-                  good.
+                  after. Review each change. If the changes looks good then
+                  right-click on the same line in the Preview panel and select
+                  'apply Refactoring'. Then go File->Save All
                 </li>
                 <li>
-                  Finally we need to adjust the filename of the module so that
-                  it reflects the change.
+                  Next we need to adjust the filename of the module so that it
+                  reflects the change. If you right-click on the file in the
+                  file explorer in VS Code and select rename there...you should
+                  get a popup message that asks if you want to rename the
+                  imports as well. Say yes! File->Save All again
+                </li>
+                <li>
+                  Finally just to make sure nothing was missed...on the side of
+                  your VsCode window click on the magnifying glass icon
+                  (ctrl/cmd + shift + F). Type <kbd>ProductData</kbd> and if
+                  there are any more instances change them.
                 </li>
                 <li>
                   Test the product list and product detail pages to make sure
@@ -223,15 +232,45 @@
                 Add a new method to our newly renamed
                 <kbd>ExternalServices</kbd> class. Call it <kbd>checkout</kbd>.
                 It should accept an object that represents our order. The object
-                should look like the following:
+                should look like the following (order does not matter):
               </p>
-              <pre><code class="lang-js">{ orderDate: '2021-1-10',
-orderTotal: 116,
-shipping: 10,
-tax: 6,
-items: [
-    { description: ""}                    
-] </code></pre>
+              <pre><code class="lang-js">{ 
+  orderDate: '20210125',
+  fname: "John",
+  lname: "Doe",
+  street: "123 Main",
+  city: "Rexburg",
+  state: "ID",
+  zip: "83440",
+  card-number: "1234123412341234",
+  expiration: "8/21",
+  code: "123",
+  items: [{
+    id: "20CXG"
+    name: "The North Face Pivoter 27 L Backpack"
+    price: 39.99,
+    quantity: 1
+  }, {
+    id: "14GVF",
+    name: "Marmot 5°F Rampart Down Sleeping Bag - 650 Fill, Mummy (For Men and Women)",
+    price: 229.99,
+    quantity: 1
+  }],
+  orderTotal: "298.18",
+  shipping: 12,
+  tax: "16.20"
+}</code></pre>
+              <p>
+                Use <kbd>1234123412341234</kbd> for the card number,
+                <kbd>123</kbd> for the security code, and any expiration in the
+                future if you want your order to succeed.
+              </p>
+              <p class="callout">
+                For testing to save you time and typing remember that you can
+                set the <code>value=""</code> property of an html input
+                element...just remember to remove your defaults once everything
+                is working.
+              </p>
               <p>
                 The method should POST that object (remember to stringify your
                 object before sending it!) to the address above
@@ -252,26 +291,12 @@ items: [
                   <code>event.preventDefault()</code> in the listener function.
                 </p>
               </div>
-              <!-- END STEP -->
-            </li>
-          </ol>
-          <h3>Stretch Goals</h3>
-
-          <ol class="bigSteps">
-            <li>
-              <!-- BEGIN STEP -->
-              <h3>Handle the order response</h3>
               <p>
-                Once the order is submitted to the server it will respond with a
-                success or an error. The application should give feedback to the
-                user based on which result was sent back.
+                You can consider this activity completed when you receive a
+                response from your POST to the server. Next week the team
+                activity will continue this by handling the success and failure
+                responses appropriately.
               </p>
-              <p>
-                On success you should give the user a message indicating that,
-                and clear out the cart.
-              </p>
-              <p>On error let them know something went wrong.</p>
-
               <!-- END STEP -->
             </li>
           </ol>
