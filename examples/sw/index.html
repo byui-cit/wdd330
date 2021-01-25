@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" type="module"></script>
+    <template id="planet">
+      <li>
+        <h4 class="planet-name"></h4>
+        <p>Climate:<span class="planet-climate"></span></p>
+        <p>Terrain:<span class="planet-terrain"></span></p>
+        <p>Year: <span class="planet-year"></span></p>
+        <p>Day: <span class="planet-day"></span></p>
+        <p>Population: <span class="planet-population"></span></p>
+      </li>
+    </template>
+    <template id="starship">
+      <li>
+        <h4 class="ship-name"></h4>
+        <p>Model:<span class="ship-model"></span></p>
+        <p>Class:<span class="ship-class"></span></p>
+        <p>
+          Crew/Passengers: <span class="ship-crew"></span> /
+          <span class="ship-passengers"></span>
+        </p>
+        <p>Length: <span class="ship-length"></span></p>
+        <p>Speed: <span class="ship-speed"></span></p>
+      </li>
+    </template>
+  </head>
+  <body>
+    <h1>Swapi</h1>
+    <main>
+      <ul id="films" class="film-list"></ul>
+      <section id="output">
+        <h2 class="film-name"></h2>
+        <p class="crawl"></p>
+        <section class="planets">
+          <h3>Planets</h3>
+          <ul class="film-planets"></ul>
+          <h3>Starships</h3>
+          <ul class="film-starships"></ul>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

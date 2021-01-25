@@ -47,14 +47,24 @@
           app. It uses the HTML template element to model one way of providing
           re-usable HTML to our code.
         </p>
+        <p>
+          This is a more complex demo. Lots going on. Focus on try/catch to
+          harden their code first, then using templates, then making multiple
+          requests for data and building a more complex page last.
+        </p>
         <ol>
           <li>
             Start by creating a new directory and files: index.html, main.js,
             SwapiHelper.js.
           </li>
           <li>
-            Continue by brainstorming a list of tasks that need to be done. It
-            might look something like this:
+            Pull up the SWAPI documentation for the
+            <a href="https://swapi.dev/documentation#films" target="_blank"
+              >film endpoint</a
+            >. Note that some of the information is listed as lists of links.
+            Continue by brainstorming a list of tasks that need to be done if we
+            wanted to display this information. It might look something like
+            this:
             <pre>
 get list of films
 output list of films
@@ -95,8 +105,54 @@ when a film is clicked:
             a <kbd>template</kbd> in the HTML.
           </li>
           <li>
+            Write the method in SwapiHelper to retrieve the details about a film
+            when it is clicked. In this case we can just filter the list of
+            films that we already have if it was saved to the class (suggest
+            they do that if they did not). Go ahead and output the film name and
+            opening crawl to our HTML. Add an unordered list with a class or id
+            as well to hold the list of planet information.
+          </li>
+          <li>
+            For each of the planets returned with the film data, we need to make
+            a request to the api with the URL provided. This is a great
+            opportunity to talk about resolving a list of Promises with
+            Promise.all().
+          </li>
+          <li>
             Add a <kbd>template</kbd> element to the <kbd>head</kbd> of our
-            index.html file.
+            index.html file to display a planet. Might look something like this:
+            <pre><code class="lang-markup">&lt;template id="planet"&gt;
+  &lt;li&gt;
+    &lt;h4 class="planet-name"&gt;&lt;/h4&gt;
+    &lt;p&gt;Climate:&lt;span class="planet-climate"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Terrain:&lt;span class="planet-terrain"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Year: &lt;span class="planet-year"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Day: &lt;span class="planet-day"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Population: &lt;span class="planet-population"&gt;&lt;/span&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/template&gt;</code></pre>
+          </li>
+          <li>
+            We now need a method to retrieve our template from the html, clone
+            it, insert the data for a planet, and attach it to the list in the
+            DOM. There is one in the team activity for this week we could use as
+            a model if you think enough students have already completed that by
+            the time you are doing your demo.
+            <kbd>utils/renderListWithTemplate</kbd>. We also need a function to
+            insert the planet details into our template clone. Talk about how an
+            element can be used to call <code>querySelector</code> to limit our
+            search.
+          </li>
+          <li>
+            Pull it all together...get the details on the list of planets, pass
+            it to the render function, hydrate and attach. You might also spend
+            a few minutes on CSS to style the list of planets.
+          </li>
+          <li>
+            Talk about how with the work we have done adding the starships,
+            vehicles, and species would be pretty easy...we just need to add the
+            template to the html, and create a prepare function to load the
+            data. If you have time show this with starships.
           </li>
         </ol>
       </main>
