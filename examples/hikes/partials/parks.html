@@ -1,0 +1,21 @@
+<section id="parks">
+  <h1>My favorite parks</h1>
+  <ul class="listStyles"></ul>
+</section>
+<section id="comments"></section>
+<template id="itemTemplate">
+  <li class="light">
+    <h2>{{ name }}</h2>
+    <div class="image"><img src="{{ imgSrc }}" alt="{{ imgAlt }}" /></div>
+    <div>
+      <div>
+        <h3>Distance</h3>
+        <p>{{ distance }}</p>
+      </div>
+      <div>
+        <h3>Description</h3>
+        <p>{{ description }}</p>
+      </div>
+    </div>
+  </li>
+</template>

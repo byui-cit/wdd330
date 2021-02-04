@@ -1,0 +1,35 @@
+[
+    {
+      "id": 1,
+      "name": "Yellowstone National Park",
+      "imgSrc": "//byui-cit.github.io/cit261/examples/falls.jpg",
+      "imgAlt": "Image of Yellowstone National Park",
+      "distance": "70 miles",
+      "description":
+        "One of the premier National Parks in the USA",
+      "directions":
+        "Take Highway 20 north All the way to West Yellowstone. Turn right at the first light. Then left at the second light to find the West entrance."
+    },
+    {
+      "id": 2,
+      "name": "Craters of The Moon",
+      "imgSrc": "//byui-cit.github.io/cit261/examples/falls.jpg",
+      "imgAlt": "Image of Craters of the moon",
+      "distance": "92 miles",
+      "description":
+        "Amazing scenery in one of the youngest volcanic areas in Idaho",
+      "directions":
+        "Take Highway 33 west out of Rexburg. Total drive 2-2.5 hrs"
+    },
+    {
+      "id": 3,
+      "name": "Harriman State Park",
+      "imgSrc": "//byui-cit.github.io/cit261/examples/falls.jpg",
+      "imgAlt": "Image of Harriman",
+      "distance": "50 miles",
+      "description":
+        "Beautiful park full of forests, meadows, and lakes. Hiking, biking and horsebackriding in the summer...Cross country skiing, snowshoeing and fatbiking in the winter.",
+      "directions":
+        "Take Highway 20 north to Ashton. Continue on until almost to the Henries Fork. Turn left when you see the signs."
+    }
+  ]

@@ -1,0 +1,21 @@
+<section id="hikes">
+  <h1>My favorite hikes</h1>
+  <ul class="listStyles"></ul>
+</section>
+<section id="comments"></section>
+<template id="itemTemplate">
+  <li class="light">
+    <h2>{{ name }}</h2>
+    <div class="image"><img src="{{imgSrc}}" alt="{{ imgAlt }}" /></div>
+    <div>
+      <div>
+        <h3>Distance</h3>
+        <p>{{ Distance }}</p>
+      </div>
+      <div>
+        <h3>Difficulty</h3>
+        <p>{{ difficulty }}</p>
+      </div>
+    </div>
+  </li>
+</template>
