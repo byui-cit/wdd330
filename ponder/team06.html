@@ -272,11 +272,30 @@
                 is working.
               </p>
               <p>
-                The method should POST that object (remember to stringify your
-                object before sending it!) to the address above
-                (http://157.201.228.93:2992/checkout) and return the server
-                response. The response will be JSON.
+                The method should POST that object You will need to create a
+                custom options object and pass it in with your fetch. (remember
+                to stringify your object before sending it!) to the address
+                above (http://157.201.228.93:2992/checkout) and return the
+                server response. The response will be JSON.
               </p>
+              <div class="callout">
+                <p>
+                  All of the requests we have made this far have been fairly
+                  simple and the default settings for fetch have been
+                  sufficient. The defaults will not work for us here. Fetch has
+                  an optional second argument that is for options. An options
+                  object that will work for use here is below:
+                </p>
+                <pre><code class="lang-js">const options = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(payload)
+}</code></pre>
+                <p>We would use it like this:</p>
+                <pre><code class="lang-js">fetch(url, options);</code></pre>
+              </div>
               <p>
                 You will also need to add a method in
                 <kbd>CheckoutProcess</kbd> that will get called when the

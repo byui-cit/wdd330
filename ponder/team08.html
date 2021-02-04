@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team 8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team 8 Activity</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          Now that our users can places orders...we need to create a way for our
+          staff to review and process those orders. This week we will add a
+          simple Administrative portion of our site. This portion of the site
+          should only be accessed by authenticated users.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team8: Authentication" task...then move it to 'Doing'. Read the
+                details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                Github before proceeding. Next they should create a new branch
+                called <kbd>initials--team8</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team8</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Setup our Admin page</h3>
+              <p>
+                Create a new directory in the src directory called
+                <kbd>admin</kbd>. Add an <kbd>index.html</kbd> and add the basic
+                HTML we need as well as add the header and footer of the site.
+              </p>
+              <p>
+                Create an <kbd>Admin.js</kbd> module as well. Add a class and
+                two initial methods: <code>login</code>, and
+                <code>showLogin</code>
+              </p>
+              <p>
+                Finish writing the <code>showLogin</code> method. It should
+                build a login form in the <code>main</code> element of our page.
+                The form should include a box for email, password, and a submit
+                button. When the button is clicked it should call the
+                <code>login</code> method.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Logging in</h3>
+              <p>
+                Next we need to finish our <code>login</code> method. The server
+                that we need to authenticate with to retrieve the orders
+                information has a login endpoint at this address:
+              </p>
+              <pre><code class="lang-js">http://157.201.228.93:2992/login</code></pre>
+              <p>
+                We need to make a <code>POST</code> request to that address with
+                the email and password the user provides as the body.
+              </p>
+              <pre><code class="lang-js">{ email: "user1@email.com" , password: "user1" }</code></pre>
+              <p>
+                If our request is successful (email and password match a user in
+                the database) then the server will return a token. This token
+                must be provided with each additional request we make so the
+                server. Save it as a property of the Admin class.
+              </p>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Getting the orders</h3>
+              <p>The orders we are looking for can be found at</p>
+              <pre><code class="lang-js">http://157.201.228.93:2992/orders</code></pre>
+              <p>
+                If you make a <code>GET</code> request to that address however
+                you will get an error. This is a protected endpoint. We need to
+                send our token along with our request so that the server knows
+                we can be trusted. Tokens like this are usually included in the
+                <kbd>headers</kbd> of the request.
+              </p>
+              <p>
+                Add a header for our request called
+                <code>Authorization</code> that will include our token. If you
+                look in <kbd>ExternalServices->checkout</kbd> there is an
+                example of using a custom header. If you decide to copy/paste
+                that one, remember that we want to do a GET, which means we
+                shouldn't have a <code>body</code> property.
+              </p>
+              <p>
+                You will probably want to make a new method in
+                <kbd>ExternalServices</kbd> to get the orders, The line you will
+                want to add to the <code>headers</code> portion of your options
+                should look like this:
+              </p>
+              <pre><code class="lang-js">headers: {
+  'Authorization': `Bearer ${token}`
+} </code></pre>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Display the orders</h3>
+              <p>
+                Write the code necessary to display the list of orders to the
+                user.
+              </p>
+              <p class="callout">
+                'That's not very detailed instructions' you may be saying to
+                yourself...you are right! You shouldn't need detailed
+                instructions for this part at this point :) Keep usability in
+                mind when you do this however, and make it look good. Also...you
+                probably do not want to display all of the information in the
+                order. Put yourself in the shoes of someone needing to review
+                and process these orders to fill them. What information would
+                YOU like to see?
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructors Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/team8/src"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, and reviewed the instructor's
+          solution, the driver should commit and push their changes, then submit
+          a pull request for this branch. Then review the pull request as a
+          team, close it, and merge the branch back into Main. Finally someone
+          should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>
