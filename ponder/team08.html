@@ -90,7 +90,11 @@
               <pre><code class="lang-js">http://157.201.228.93:2992/login</code></pre>
               <p>
                 We need to make a <code>POST</code> request to that address with
-                the email and password the user provides as the body.
+                the email and password the user provides as the body. Just to
+                keep things consistent lets create a function in
+                <kbd>ExternalServices</kbd> called
+                <code>loginRequest(creds)</code> that will make the actual
+                request to the server.
               </p>
               <pre><code class="lang-js">{ email: "user1@email.com" , password: "user1" }</code></pre>
               <p>
@@ -99,6 +103,32 @@
                 must be provided with each additional request we make so the
                 server. Save it as a property of the Admin class.
               </p>
+              <p class="callout">
+                If you get tired of typing <kbd>user1@email.com</kbd> you can
+                add <code>value="user1@email.com"</code> to your email input
+                element...and it will remember it. Just remember to remove it
+                when you are done testing!
+              </p>
+              <p>This is how my <code>Admin.login</code> method ended up:</p>
+              <pre><code class="lang-js">constructor(outputSelector) {
+    this.mainElement = document.querySelector(outputSelector);
+    this.token = null;
+    this.services = new ExternalServices();
+  }
+  async login(creds, next) {
+  // I built the login method with a callback: next. 
+  // This makes it much more flexible...
+  // there could be many different things the user wants to do after logging in...
+  // this allows us that flexibility without having to write a bunch of login methods
+  try {
+    this.token = await this.services.loginRequest(creds);
+    next()
+  } 
+  catch(err) {
+    // remember this from before?
+    alertMessage(err.message.message);
+  }
+}</code></pre>
               <!-- END STEP -->
             </li>
             <li>
@@ -123,9 +153,11 @@
               </p>
               <p>
                 You will probably want to make a new method in
-                <kbd>ExternalServices</kbd> to get the orders, The line you will
-                want to add to the <code>headers</code> portion of your options
-                should look like this:
+                <kbd>ExternalServices</kbd> to get the orders from the server,
+                and another in <kbd>Admin</kbd> to kick off the request after
+                login has finished successfully. The line you will want to add
+                to the <code>headers</code> portion of your options should look
+                like this:
               </p>
               <pre><code class="lang-js">headers: {
   'Authorization': `Bearer ${token}`
