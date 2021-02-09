@@ -62,12 +62,13 @@
               <!-- BEGIN STEP -->
               <h3>Refactor</h3>
               <p>
-                Create a new directory called <kbd>product-listing</kbd>, and
-                create an html file in it. Also create a
-                <kbd>product-listing.js</kbd> file in the JS directory. Add the
-                HTML to our new page to get the foundation up...header, footer,
-                styles, etc. (Hint...you may just want to use src/index.html as
-                a starting point. Then remove the banner and text.)
+                Create a new directory in <kbd>src</kbd> called
+                <kbd>product-listing</kbd>, and create an html file in it. Also
+                create a <kbd>product-listing.js</kbd> file in the JS directory.
+                Add the HTML to our new page to get the foundation up...header,
+                footer, styles, etc. (Hint...you may just want to use
+                src/index.html as a starting point. Then remove the banner and
+                text.)
               </p>
               <p>
                 Move the JS from the <kbd>main.js</kbd> that is responsible to
@@ -75,6 +76,13 @@
                 <kbd>product-listing.js</kbd> file. Open up
                 <kbd>product-listing/index.html</kbd> in the browser to make
                 sure the tents we had before are still rendered.
+              </p>
+              <p class="callout">
+                You will need to fix some paths to get everything working
+                correctly...your page will not be able to find the css file or
+                the new JS file we made until you do. Do not worry about fixing
+                the image urls yet. Those will change again anyway and we will
+                fix those later.
               </p>
               <p>
                 Finally add a grid of 4 boxes to the src/index.html page, one
