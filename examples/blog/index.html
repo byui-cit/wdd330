@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A simple Blog</title>
+    <script src="main.js" type="module"></script>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    <form id="postForm">
+      <fieldset>
+        <legend>New Post</legend>
+        <p>
+          <label for="title">Title</label>
+          <input name="title" type="text" required />
+        </p>
+        <p>
+          <label for="content">Content</label>
+          <textarea name="content" id="content" cols="30" rows="10"></textarea>
+        </p>
+        <p>
+          <label for="tags">Tags</label>
+          <input name="tags" type="checkbox" value="tag1" /> Tag1
+          <input name="tags" type="checkbox" value="tag2" /> Tag2
+          <input name="tags" type="checkbox" value="tag3" /> Tag3
+        </p>
+      </fieldset>
+      <button type="submit">Submit</button>
+    </form>
+    <ul id="postList"></ul>
+  </body>
+</html>

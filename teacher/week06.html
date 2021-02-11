@@ -133,9 +133,9 @@ return results;</code></pre>
             HTML validation...what we get for free, and add a submit button.
           </li>
           <li>
-            In <kbd>main.js</kbd> add a listener to the form. Talk about
-            preventDefault, we are submitting the form through AJAX so we don't
-            want the default behavior to happen.
+            In <kbd>main.js</kbd> add a <code>submit</code> listener to the
+            form. Talk about preventDefault, we are submitting the form through
+            AJAX so we don't want the default behavior to happen.
           </li>
           <li>
             You might mention that you can manually access the HTML form
@@ -160,7 +160,7 @@ function formDataToJSON(formElement) {
     // Object.entries takes an object and converts it into an Array that is iterable.
     const converted = Object.fromEntries(formData.entries());
     // if we have radios or checkboxes which share the same name
-      converted.category = formData.getAll("category");
+      converted.tags = formData.getAll("tags");
     return converted;
 }
           </code></pre>
