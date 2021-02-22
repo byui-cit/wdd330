@@ -61,7 +61,7 @@
               <h3>Figuring out what went wrong.</h3>
               <p>
                 Currently if our order fails we get the very descriptive error
-                message "Bad Request". Turns out that the server is acually
+                message "Bad Request". Turns out that the server is actually
                 sending back much more information than that, but we are
                 throwing it away by how we are processing our response. We need
                 to change this first.
@@ -174,44 +174,49 @@
                 button.
               </p>
               <p>
-                You should notice that the validation did not seem to work! Last
-                week we determined that since we were submitting our form
-                through AJAX, we did not want the form to do what it normally
-                would do if submitted. In the listener for the form button you
-                have added <code>e.preventDefault();</code>. That part of your
-                code should look something like this:
+                Depending on how you are listening for the form submission your
+                HTML validation may or may not be working. If you attached a
+                <code>click</code> listener on the button we will need to
+                trigger the validation ourselves, if you listened for the
+                <code>submit</code> event on the form the validation should
+                automatically be working. Last week we determined that since we
+                were submitting our form through AJAX, we did not want the form
+                to do what it normally would do if submitted. In the listener
+                for the form button you have added
+                <code>e.preventDefault();</code>. That part of your code should
+                look something like this:
               </p>
               <pre><code class="lang-js">document.querySelector('#checkoutSubmit')
 .addEventListener('click', (e) => {
   e.preventDefault();
   myCheckout.checkout();
 });</code></pre>
-              <p>
-                One unfortunate side effect of this is that it also disables the
-                HTML form validation! We can turn it back on however. We need to
-                do the following:
-              </p>
-              <ol>
-                <li>Get the form from the DOM.</li>
-                <li>
-                  Forms have a method called <code>checkValidity</code> that
-                  will return false if it finds anything in the form data that
-                  goes against our validation rules. Call it and store the
-                  result.
-                </li>
-                <li>
-                  We can also manually trigger the messages that the browser
-                  will add to the page when something is wrong. That is done
-                  with <code>myForm.reportValidity()</code>
-                </li>
-                <li>
-                  Finally if our validity test came back false we do not want to
-                  continue...so wrap <code>myCheckout.checkout();</code> in an
-                  if statement.
-                </li>
-              </ol>
-              <p>Your final code should look something like this:</p>
-              <pre><code class="lang-js">document.querySelector('#checkoutSubmit')
+              <div class="callout">
+                <p>
+                  IF your HTML form validation is not working...do the following
+                  in your listener handler function:
+                </p>
+                <ol>
+                  <li>Get the form from the DOM.</li>
+                  <li>
+                    Forms have a method called <code>checkValidity</code> that
+                    will return false if it finds anything in the form data that
+                    goes against our validation rules. Call it and store the
+                    result.
+                  </li>
+                  <li>
+                    We can also manually trigger the messages that the browser
+                    will add to the page when something is wrong. That is done
+                    with <code>myForm.reportValidity()</code>
+                  </li>
+                  <li>
+                    Finally if our validity test came back false we do not want
+                    to continue...so wrap <code>myCheckout.checkout();</code> in
+                    an if statement.
+                  </li>
+                </ol>
+                <p>Your final code should look something like this:</p>
+                <pre><code class="lang-js">document.querySelector('#checkoutSubmit')
   .addEventListener('click', (e) => {
     e.preventDefault();
     var myForm = document.forms[0];
@@ -220,6 +225,7 @@
     if(chk_status) 
       myCheckout.checkout();
   });</code></pre>
+              </div>
               <p>
                 By leveraging the built in HTML validation that the browser can
                 do, we dramatically reduced the amount of error handling we will
@@ -264,7 +270,8 @@
                 <kbd>checkedout.html</kbd>. Add our base formatting including
                 header and footer, and then add a success message for the user.
                 Then add the code to your checkout process to take the user to
-                this page upon a successful checkout.
+                this page upon a successful checkout. Make sure to also clear
+                out our cart contents in localStorage.
               </p>
 
               <!-- END STEP -->

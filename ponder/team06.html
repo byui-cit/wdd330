@@ -304,9 +304,14 @@
               </p>
               <div class="callout">
                 <p>
-                  When you attach the listener to the checkout button you will
-                  probably want to keep the form from doing what it would
-                  normally do on submit. You can do this by calling
+                  We have a couple of choices here. One is we could watch for a
+                  <code>click</code> event on the form button, or we can watch
+                  for a <code>submit</code> event on the form.
+                </p>
+                <p>
+                  Whichever you choose, you will want to keep the form from
+                  doing what it would normally do on submit. You can do this by
+                  calling
                   <code>event.preventDefault()</code> in the listener function.
                 </p>
               </div>
