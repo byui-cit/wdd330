@@ -158,9 +158,17 @@
                   the default export.
                 </li>
                 <li>
-                  Add the <code>getProductsData()</code>, and
-                  <code>convertToJson(res)</code> functions as methods in our
-                  object.
+                  It would be nice to be able to use this class for more than
+                  just tents. In order to do that add a constructor to your
+                  class. Pass in a category name (ie 'tents') Store it alone and
+                  also use it to build a path to the correct file (ie
+                  <code>this.path = `../json/${this.category}.json`;</code> ).
+                </li>
+                <li>
+                  Add the <code>getProductsData()</code>, function as a method
+                  in our object. You will need to make a few small changes to
+                  the method. Namely we need the data to be returned instead of
+                  set to a variable.
                 </li>
                 <li>
                   Add one more method called <code>findProductById</code> that
@@ -270,7 +278,7 @@ const product = urlParams.get('product')
                 <code>href="product_pages/marmot-ajax-3.html"</code> to
                 <code
                   >href="product_pages/product-details.html?product=880RR"</code
-                >.
+                >. (Don't forget to return the parameter!)
               </p>
               <p class="callout">
                 Where did the <code>880RR</code> come from? If you look in the
