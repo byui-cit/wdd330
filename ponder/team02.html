@@ -250,12 +250,14 @@ console.log(dataSource.getData());
               <p>
                 After you have worked on your module check out the example below
               </p>
-              <section class="hint">
-                <input type="checkbox" />
-                <h3>ProductData.js example</h3>
-                <i></i>
-                <div>
-                  <pre><code class="lang-js line-numbers">function convertToJson(res) {
+              <!-- <section class="hint">
+                <input type="checkbox" /> -->
+              <details>
+                <summary>
+                  Click for example code (<kbd>productData.js</kbd>)
+                </summary>
+
+                <pre><code class="lang-js line-numbers">function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
@@ -278,39 +280,37 @@ export default class ProductData  {
   }
 }
                   </code></pre>
-                  <p>
-                    Notice the <code>getData()</code> method compared to the
-                    <code>findProductById()</code> method. One uses just
-                    promises and <code>.then()</code>, the other uses
-                    <a
-                      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
-                      target="_blank"
-                      >async/await</a
-                    >. Many find the async/await syntax to be easier to read
-                    (and write) than the typical <code>.then()</code> based
-                    promise handling.
-                  </p>
-                  <p>
-                    If the syntax on line 15 <code>(data) => data</code> is
-                    confusing you may want to spend more time reading about
-                    arrow functions in Javascript. You could re-write that short
-                    callback function like this using a more traditional
-                    anonymous function declaration:
-                  </p>
-                  <pre><code class="lang-js">function(data) { return data; }</code></pre>
-                  <p>
-                    The callback on line 19 is similar...<code
-                      >(item) => item.Id === id</code
-                    >. Another way to write that could be:
-                  </p>
-                  <pre><code class="lang-js">function(item) { return item.Id === id; }</code></pre>
-                  <p>
-                    It is very common to see short functions that just return
-                    some value or expression written using the arrow function
-                    syntax.
-                  </p>
-                </div>
-              </section>
+                <p>
+                  Notice the <code>getData()</code> method compared to the
+                  <code>findProductById()</code> method. One uses just promises
+                  and <code>.then()</code>, the other uses
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+                    target="_blank"
+                    >async/await</a
+                  >. Many find the async/await syntax to be easier to read (and
+                  write) than the typical <code>.then()</code> based promise
+                  handling.
+                </p>
+                <p>
+                  If the syntax on line 15 <code>(data) => data</code> is
+                  confusing you may want to spend more time reading about arrow
+                  functions in Javascript. You could re-write that short
+                  callback function like this using a more traditional anonymous
+                  function declaration:
+                </p>
+                <pre><code class="lang-js">function(data) { return data; }</code></pre>
+                <p>
+                  The callback on line 19 is similar...<code
+                    >(item) => item.Id === id</code
+                  >. Another way to write that could be:
+                </p>
+                <pre><code class="lang-js">function(item) { return item.Id === id; }</code></pre>
+                <p>
+                  It is very common to see short functions that just return some
+                  value or expression written using the arrow function syntax.
+                </p>
+              </details>
 
               <!-- END STEP -->
             </li>
