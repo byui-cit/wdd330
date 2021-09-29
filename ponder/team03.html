@@ -35,6 +35,14 @@
           sure that everyone on the team gets a copy of the code. Each week let
           someone else be the "main driver" of the coding.
         </p>
+        <p>
+          There are many spots where code examples have been given. To get the
+          most out of this activity do not look at the examples until your group
+          has given that section a try. Then after you look at the example
+          resist the temptation to copy/paste. Use the examples to give
+          correction, or help you get unstuck...do not just use them to get it
+          done.
+        </p>
 
         <div class="requirements">
           <h3>Core Requirements</h3>
@@ -102,9 +110,38 @@
                 render to, and we should send in our dataSource.
               </p>
               <p>
+                Finally we will need use our datasource to get the list of
+                products we will be working with. We could do that in the
+                constructor, or in an <code>init()</code> method. One advantage
+                of the init method is it will allow us to use async/await.
+              </p>
+              <details>
+                <summary>
+                  Click for example code (<kbd>productListing.js</kbd>)
+                </summary>
+                <pre><code class="lang-js">
+export default class ProductListing {
+  constructor(category, dataSource, listElement) {
+    // We passed in this information to make our class as reusable as possible.
+    // Being able to define these things when we use the class will make it very flexible
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
+  async init() {
+    // our dataSource will return a Promise...so we can use await to resolve it.
+    const list = await this.dataSource.getData();
+    // render the list 
+  }
+}
+                </code></pre>
+              </details>
+              <p>
                 Then create an instance of your <code>ProductList</code> class
-                in <kbd>main.js</kbd>. Review the code from the week 2 team
-                activity if you need help remembering how to do this.
+                in <kbd>main.js</kbd> and make sure that you can see the list of
+                products. (use console.log or a breakpoint) Review the code from
+                the week 2 team activity if you need help remembering how to do
+                this.
               </p>
 
               <!-- END STEP -->
@@ -178,7 +215,36 @@
                 product in our list, and add it to the DOM. The method should
                 take the product list as an argument.
               </p>
-
+              <details>
+                <summary>
+                  Click for example code (<kbd>productListing.js</kbd>)
+                </summary>
+                <pre><code class="lang-js">
+export default class ProductListing {
+  constructor(category, dataSource, listElement) {
+    // We passed in this information to make our class as reusable as possible.
+    // Being able to define these things when we use the class will make it very flexible
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
+  async init() {
+    // our dataSource will return a Promise...so we can use await to resolve it.
+    const list = await this.dataSource.getData();
+    // render the list 
+    this.renderList(list);
+  }
+  renderList(list) {
+    const template = document.getElementById('product-card-template');
+    list.forEach(product => {
+      const clone = template.content.cloneNode(true);
+      // insert the actual details of the current product into the template
+      this.listElement.appendChild(clone);
+    })
+  }
+}
+                </code></pre>
+              </details>
               <!-- END STEP -->
             </li>
             <li>
@@ -192,6 +258,10 @@
                 clone, and a product as arguments. It should then insert the
                 information from the product into the template.
               </p>
+              <p>
+                After writing the method you need to make sure and call it once
+                for each of the products in our list.
+              </p>
               <p class="callout">
                 If you have trouble with this step it is useful to remember than
                 while we usually call methods like
@@ -202,7 +272,42 @@
                 only look inside the template instead of looking at the whole
                 document!
               </p>
-
+              <details>
+                <summary>
+                  Click for example code (<kbd>productListing.js</kbd>)
+                </summary>
+                <pre><code class="lang-js">
+export default class ProductListing {
+  constructor(category, dataSource, listElement) {
+    // We passed in this information to make our class as reusable as possible.
+    // Being able to define these things when we use the class will make it very flexible
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
+  async init() {
+    // our dataSource will return a Promise...so we can use await to resolve it.
+    const list = await this.dataSource.getData();
+    // render the list 
+    this.renderList(list);
+  }
+  renderList(list) {
+    const template = document.getElementById('product-card-template');
+    list.forEach(product => {
+      const clone = template.content.cloneNode(true);
+      const hydratedTemplate = this.prepareTemplate(clone, product);
+      this.listElement.appendChild(hydratedTemplate);
+    })
+  }
+  prepareTemplate(template, product) {
+    
+    template.querySelector('a').href +=  product.Id;
+    // fill in the rest of the data here... 
+    return template;
+  }
+}
+                </code></pre>
+              </details>
               <!-- END STEP -->
             </li>
           </ol>
@@ -277,13 +382,13 @@
             </li>
             <li>
               <!-- BEGIN STEP -->
-              <h3>Remove extra products</h3>
+              <!-- <h3>Remove extra products</h3>
               <p>
                 <kbd>tents.json</kbd> has more tents than we currently need.
                 Write a method in <kbd>productList.js</kbd> that will filter our
                 list of products to just the 4 we need. Use that method to show
                 only those 4 tents.
-              </p>
+              </p> -->
 
               <!-- END STEP -->
             </li>

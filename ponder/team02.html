@@ -34,6 +34,14 @@
           sure that everyone on the team gets a copy of the code. Each week let
           someone else be the "main driver" of the coding.
         </p>
+        <p>
+          There are many spots where code examples have been given. To get the
+          most out of this activity do not look at the examples until your group
+          has given that section a try. Then after you look at the example
+          resist the temptation to copy/paste. Use the examples to give
+          correction, or help you get unstuck...do not just use them to get it
+          done.
+        </p>
 
         <div class="requirements">
           <h3>Core Requirements</h3>
@@ -227,14 +235,6 @@ export default class ProductData  {
                   <kbd>product.js</kbd> so that we can use it. Declare an
                   instance of the class, and then test to see if your
                   <code>getData</code> works.
-                  <p>
-                    Remember that to use ESModules in Javascript we have to tell
-                    the browser we want to use modules...we do that with
-                    <code>type="module"</code> in the script tag in the HTML.
-                    You will need to add that in the
-                    <kbd>product-details.html</kbd> file that we created
-                    earlier. Use that file for your testing.
-                  </p>
                   <details>
                     <summary>
                       Click for example code (<kbd>product.js</kbd>)
@@ -245,6 +245,14 @@ const dataSource = new ProductData('tents');
 console.log(dataSource.getData());
                     </code></pre>
                   </details>
+                  <p>
+                    Remember that to use ESModules in Javascript we have to tell
+                    the browser we want to use modules...we do that with
+                    <code>type="module"</code> in the script tag in the HTML.
+                    You will need to add that in the
+                    <kbd>product-details.html</kbd> file that we created
+                    earlier. Use that file for your testing.
+                  </p>
                 </li>
               </ol>
               <p>
@@ -507,7 +515,7 @@ product.init();</code></pre>
         </p>
         <p>
           Please DO NOT open the solution until you have worked through this
-          activity as a team for the one hour period. At the end of the hour, if
+          activity as a team for at least one hour. At the end of the hour, if
           you are still struggling with some of the core requirements, you are
           welcome to view the instructor's solution and use it to help you
           complete your own code. Even if you use the instructor's code to help
@@ -525,12 +533,12 @@ product.init();</code></pre>
         </p>
         <h2>Make a pull request.</h2>
         <p>
-          After you have completed what you can, and reviewed the instructor's
-          solution, the driver should commit and push their changes (don't
-          forget to lint and format your code before committing!), then submit a
-          pull request for this branch. Then review the pull request as a team,
-          close it, and merge the branch back into Main. Finally someone should
-          move the Trello card to "Done".
+          After you have completed what you can, reviewed the instructor's
+          solution, and gotten your code working the driver should commit and
+          push their changes (don't forget to lint and format your code before
+          committing!), then submit a pull request for this branch. Then review
+          the pull request as a team, close it, and merge the branch back into
+          Main. Finally someone should move the Trello card to "Done".
         </p>
         <h2>Submission</h2>
         <p>
