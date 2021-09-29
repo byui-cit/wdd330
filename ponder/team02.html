@@ -140,7 +140,7 @@
                     getting or filtering products will need to be moved into
                     <kbd>productData.js</kbd>. There are two functions that will
                     be easy to move (<code>getProductsData()</code>, and
-                    <code>convertToJson(res)</code>, but if you look inside the
+                    <code>convertToJson(res)</code>), but if you look inside the
                     <code>AddToCart</code> function you will see a line that
                     looks like this:
                   </p>
@@ -155,29 +155,96 @@
                   In order to make our module portable and easy to use, let's
                   create a class that we will put any public facing code from
                   our module in. Call it <code>ProductData</code>, and make it
-                  the default export.
+                  the default export. Add a constructor, getData(), and
+                  findProductById methods. You can leave them empty for now.
+                  <details>
+                    <summary>
+                      Click for example code (<kbd>productData.js</kbd>)
+                    </summary>
+                    <pre><code class="lang-js">
+export default class ProductData  {
+  constructor() {
+    
+  }
+  getData() {
+    
+  }
+  findProductById(id) {
+    
+  }
+}
+                    </code></pre>
+                  </details>
                 </li>
                 <li>
                   It would be nice to be able to use this class for more than
-                  just tents. In order to do that add a constructor to your
+                  just tents. We can do that by using the constructor to your
                   class. Pass in a category name (ie 'tents') Store it alone and
                   also use it to build a path to the correct file (ie
                   <code>this.path = `../json/${this.category}.json`;</code> ).
+                  <details>
+                    <summary>
+                      Click for example code (<kbd>productData.js</kbd>)
+                    </summary>
+                    <pre><code class="lang-js">
+export default class ProductData  {
+  constructor(category) {
+    this.category = category;
+    this.path = `../json/${this.category}.json`;
+  }
+  getData() {
+    
+  }
+  findProductById(id) {
+    
+  }
+}
+                    </code></pre>
+                  </details>
                 </li>
                 <li>
-                  Add the <code>getProductsData()</code>, function as a method
-                  in our object. You will need to make a few small changes to
-                  the method. Namely we need the data to be returned instead of
-                  set to a variable.
+                  Copy the code from the <code>getProductsData()</code>,
+                  function currently in <kbd>product.js</kbd> into the
+                  <code>getData</code> method in our class. You will need to
+                  make a few small changes to the method. Namely we need the
+                  data to be returned instead of set to a variable. (you can
+                  remove <code>getProductsData()</code> from
+                  <kbd>product.js</kbd> once you have moved it. ) You will also
+                  need the <code>convertToJson</code> function. Place it at the
+                  top of the file. You should not need to make any changes to
+                  it.
                 </li>
                 <li>
-                  Add one more method called <code>findProductById</code> that
-                  will take a product id and return the product with that id.
+                  Take the code from around line 29 of
+                  <kbd>product.js</kbd> that starts with
+                  <code>products.find((item)</code> and add it to the
+                  <code>findProductById</code> method. You will need to make
+                  some additions and changes so that the method will take a
+                  productId that is passed in and return the correct product.
                 </li>
                 <li>
-                  Import our module into <kbd>product.js</kbd> so that we can
-                  use it. Make the other changes in the existing code to make it
-                  work.
+                  Import the <code>ProductData</code> module into
+                  <kbd>product.js</kbd> so that we can use it. Declare an
+                  instance of the class, and then test to see if your
+                  <code>getData</code> works.
+                  <p>
+                    Remember that to use ESModules in Javascript we have to tell
+                    the browser we want to use modules...we do that with
+                    <code>type="module"</code> in the script tag in the HTML.
+                    You will need to add that in the
+                    <kbd>product-details.html</kbd> file that we created
+                    earlier. Use that file for your testing.
+                  </p>
+                  <details>
+                    <summary>
+                      Click for example code (<kbd>product.js</kbd>)
+                    </summary>
+                    <pre><code class="lang-js">
+import ProductData from './productData.js';
+const dataSource = new ProductData('tents');
+console.log(dataSource.getData());
+                    </code></pre>
+                  </details>
                 </li>
               </ol>
               <p>
@@ -272,13 +339,18 @@ const product = urlParams.get('product')
                 Use those lines to create a new function in the
                 <kbd>utils.js</kbd> file called
                 <code>getParams(param)</code> that we can use to get a parameter
-                from the URL when we need to. Import your new function into
-                <kdb>product.js</kdb>. Open <kbd>index.html</kbd> and change the
-                link to the first product page from
+                from the URL when we need to. (Don't forget to return the
+                parameter!)
+              </p>
+
+              <p>
+                Import your new function into <kdb>product.js</kdb>. Open
+                <kbd>index.html</kbd> and change the link to the first product
+                page from
                 <code>href="product_pages/marmot-ajax-3.html"</code> to
                 <code
                   >href="product_pages/product-details.html?product=880RR"</code
-                >. (Don't forget to return the parameter!)
+                >.
               </p>
               <p class="callout">
                 Where did the <code>880RR</code> come from? If you look in the
@@ -289,7 +361,27 @@ const product = urlParams.get('product')
               <p>
                 Then test your getParams function in <kbd>product.js</kbd> to
                 see if you can get the product id successfully when someone
-                navigates to the product-details page.
+                navigates to the product-details page. This would be a good time
+                to test out our <code>findProductById</code> method as well.
+              </p>
+              <details>
+                <summary>
+                  Click for example code (<kbd>product.js</kbd>)
+                </summary>
+                <pre><code class="lang-js">
+import ProductData from './productData.js';
+import { getParam } from './utils.js';
+const dataSource = new ProductData('tents');
+
+const productId = getParam('product');
+
+console.log(dataSource.findProductById(productId));
+                </code></pre>
+              </details>
+              <p>
+                You should also update the rest of the links in
+                <kbd>index.html</kbd> to match the first one. You can look up
+                the IDs in the <kbd>tents.json</kbd> file.
               </p>
             </li>
             <li>
@@ -387,7 +479,9 @@ product.init();</code></pre>
                   necessary to make it work.
                 </li>
                 <li>
-                  <code>init()</code>: this function needs to do a few things:
+                  <code>init()</code>: this function needs to do a few things,
+                  copy/paste the following into your code to use as a guide for
+                  finishing it:
                   <pre><code class="lang-js">async init() {
   // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
   // once we have the product details we can render out the HTML
