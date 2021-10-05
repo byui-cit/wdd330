@@ -33,6 +33,14 @@
           sure that everyone on the team gets a copy of the code. Each week let
           someone else be the "main driver" of the coding.
         </p>
+        <p>
+          There are many spots where code examples have been given. To get the
+          most out of this activity do not look at the examples until your group
+          has given that section a try. Then after you look at the example
+          resist the temptation to copy/paste. Use the examples to give
+          correction, or help you get unstuck...do not just use them to get it
+          done.
+        </p>
 
         <div class="requirements">
           <h3>Core Requirements</h3>
@@ -136,6 +144,11 @@
                       sensitive to initial load times...first impressions...
                     </li>
                     <li>SPAs are more complex than multipage apps</li>
+                    <li>
+                      SPAs often require more processing power on the
+                      client...so older less powerful computers and phones might
+                      struggle.
+                    </li>
                     <li>
                       You lose some great native features of browsers like
                       history
@@ -278,6 +291,22 @@
                   though. Add an if statement in
                   <code>renderWithTemplate</code> that checks for the existence
                   of the callback parameter, if it exists then call it.
+                  <details>
+                    <summary>
+                      Click for example code (<kbd>utils.js</kbd>)
+                    </summary>
+                    <pre><code class="lang-js">
+export function renderWithTemplate(template, parent, data, callback) {
+
+  let clone = template.content.cloneNode(true);
+  if(callback) {
+    clone = callback(clone, data);
+  }
+  parent.appendChild(clone);
+
+}
+                    </code></pre>
+                  </details>
                 </li>
                 <li>
                   Create another function in utils.js called
@@ -290,6 +319,19 @@
                   Create a new template element (document.createElement) and set
                   the results of our fetch into the innerHTML of that new
                   element. Return the element from the function.
+                  <details>
+                    <summary>
+                      Click for example code (<kbd>utils.js</kbd>)
+                    </summary>
+                    <pre><code class="lang-js">
+export async function loadTemplate(path) {
+  const html = await fetch(path).then(convertToText);
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template;
+}
+                    </code></pre>
+                  </details>
                 </li>
                 <li>
                   Create one more function in utils.js called
@@ -440,11 +482,11 @@
         </p>
         <h2>Make a pull request.</h2>
         <p>
-          After you have completed what you can, and reviewed the instructor's
-          solution, the driver should commit and push their changes, then submit
-          a pull request for this branch. Then review the pull request as a
-          team, close it, and merge the branch back into Main. Finally someone
-          should move the Trello card to "Done".
+          After you have completed what you can, reviewed the instructor's
+          solution, and gotten your code working the driver should commit and
+          push their changes then submit a pull request for this branch. Then
+          review the pull request as a team, close it, and merge the branch back
+          into Main. Finally someone should move the Trello card to "Done".
         </p>
         <h2>Submission</h2>
         <p>
