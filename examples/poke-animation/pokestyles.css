@@ -1,0 +1,50 @@
+main {
+  width: 100vw;
+  display: flex;
+  overflow-x: hidden;
+}
+
+.listbox {
+  transition: all 0.3s;
+  width: 100vw;
+  flex: 1 0 100vw;
+}
+.details {
+  height: 60vh;
+  width: 95vw;
+  padding: 1em;
+  text-align: center;
+  border: 2px solid;
+  transform: translateX(100vw);
+  transition: all 0.3s;
+  flex: 1 0 90vw;
+}
+#back {
+  padding: 1em;
+  display: block;
+}
+.details dl {
+  border: 1px solid;
+  text-align: left;
+}
+
+.list {
+  display: flex;
+  width: 95vw;
+  flex-flow: row wrap;
+  list-style-type: none;
+  line-height: 2em;
+  padding: 0;
+}
+
+.list li {
+  flex: 1 0 6em;
+  text-align: center;
+  border: 1px solid;
+  background-color: azure;
+  cursor: pointer;
+}
+.list li:hover {
+  background-color: bisque;
+  text-decoration: underline;
+}

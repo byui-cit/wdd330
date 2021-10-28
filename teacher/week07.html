@@ -47,9 +47,34 @@
           transitions to demo the basics. I'll finish with a bouncing ball or
           make a box go around the content div (slide corner to corner all the
           way around). Then you might build something like this:
-          <a href="../examples/poketest.html" target="_blank">PokeApi Demo</a>
+          <a href="../examples/poke-animation/poketest.html" target="_blank"
+            >PokeApi Demo with animation</a
+          >
           to review Ajax and add the sliding transition effect.
         </p>
+        <p>
+          Start by coming up with the list of steps we might follow to solve the
+          problem. For example:
+        </p>
+        <pre>
+  /*
+  create an element with a list to hold the names of the pokemon
+  create a container to hold the details of the pokemon
+  place the containers side by side, make them each the size of the screen
+  hide the details element (overflow:hidden on main)
+
+  get the list of pokemon
+  display the list of pokemon in the list element
+      make sure to include the url for the pokemon details in the html
+  attach a listener to the pokemon list when clicked:
+      get the details for the correct pokemon
+      insert the details into the details element
+      slide the list and the details elements left 100vw
+  Add a back button to the details element.
+  attach a listener to the button, when clicked:
+      slide list and details 100vw right
+*/
+        </pre>
       </main>
       <!-- end #article -->
     </div>

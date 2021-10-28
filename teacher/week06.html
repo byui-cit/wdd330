@@ -62,7 +62,7 @@
           <li>
             Create one more file in the <kbd>server</kbd> directory:
             <kbd>database.json</kbd> Then add the following line in that file:
-            <kbd>{ { "recipes": [] }</kbd>
+            <kbd>{ { "posts": [] }</kbd>
           </li>
           <li>
             Because the LiveServer extention watches the project directory for
@@ -118,8 +118,10 @@ async function convertToJson(res) {
 }</code></pre>
           </li>
           <li>
-            Talk about doing POSTs. We will need to set some custom request
-            options. Below is a sample:
+            Spend a few minutes talking about REST. We have been doing GET
+            requests up til now...since that is the default for Fetch. Talk
+            about doing POSTs. We will need to set some custom request options.
+            Below is a sample:
             <pre><code class="lang-js">const options = {
     method: 'POST',
     headers: {
