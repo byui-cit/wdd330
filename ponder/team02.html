@@ -36,9 +36,9 @@
         </p>
         <p>
           There are many spots where code examples have been given. To get the
-          most out of this activity do not look at the examples until your group
-          has given that section a try. Then after you look at the example
-          resist the temptation to copy/paste. Use the examples to give
+          most out of this activity, do not look at the examples until your
+          group has given that section a try. Then after you look at the
+          example, resist the temptation to copy/paste. Use the examples to get
           correction, or help you get unstuck...do not just use them to get it
           done.
         </p>
@@ -56,7 +56,7 @@
               </p>
               <p>
                 The driver should make sure to <kbd>pull</kbd> any changes from
-                Github before proceeding. Next they should create a new branch
+                GitHub before proceeding. Next they should create a new branch
                 called <kbd>initials--team2</kbd>. So if the driver's name were
                 John Doe the branch should be called <code>jd--team2</code>
               </p>
@@ -68,11 +68,11 @@
               <h3>Plan</h3>
               <p>
                 We currently have one HTML file for each product we offer. This
-                works ok when there are only 4 products, but we have plans to
+                works okay when there are only 4 products, but we have plans to
                 expand our inventory. We cannot continue with this model. The
                 product pages all follow a similar template. There should be one
                 HTML file that loads the details about the requested product
-                through Javascript.
+                through JavaScript.
               </p>
               <p>
                 Additionally as our code becomes more complex we will be well
@@ -86,18 +86,18 @@
                   modules.
                 </li>
                 <li>
-                  We will begin this week by creating a module
+                  We will begin now by creating a module
                   (<kbd>productDetails.js</kbd>) to contain the code we will
                   need to dynamically produce our product detail pages.
                 </li>
 
                 <li>
-                  it's very likely that other parts of our application will need
+                  It's very likely that other parts of our application will need
                   to make requests for product data. So let's make a
                   <kbd>productData.js</kbd> module to share that functionality.
                 </li>
                 <li>
-                  there will likely be other functionality that needs to be
+                  There will likely be other functionality that needs to be
                   shared between parts of the application, you should notice
                   that there is already a
                   <kbd>utils.js</kbd> module to hold those that is currently
@@ -111,8 +111,8 @@
               <h3>product-details.html</h3>
               <p>
                 Instead of having an HTML file per product like we do currently,
-                for scalability we would like one html file for all products
-                that has some javascript in it to load the details. We need to
+                for scalability we would like one HTML file for all products
+                that has some JavaScript in it to load the details. We need to
                 create this HTML file. Open one of your current product pages in
                 the editor, and file->Save As-> <kbd>product-details.html</kbd>
               </p>
@@ -139,7 +139,7 @@
               <h3>Refactor</h3>
               <ol>
                 <li>
-                  Create two new files in the js directory:
+                  Create two new files in the "js" directory:
                   <kbd>productData.js</kbd> and <kbd>productDetails.js</kbd>.
                 </li>
                 <li>
@@ -187,8 +187,8 @@ export default class ProductData  {
                 <li>
                   It would be nice to be able to use this class for more than
                   just tents. We can do that by using the constructor to your
-                  class. Pass in a category name (ie 'tents') Store it alone and
-                  also use it to build a path to the correct file (ie
+                  class. Pass in a category name (i.e. 'tents') Store it alone
+                  and also use it to build a path to the correct file (i.e.
                   <code>this.path = `../json/${this.category}.json`;</code> ).
                   <details>
                     <summary>
@@ -214,10 +214,10 @@ export default class ProductData  {
                   Copy the code from the <code>getProductsData()</code>,
                   function currently in <kbd>product.js</kbd> into the
                   <code>getData</code> method in our class. You will need to
-                  make a few small changes to the method. Namely we need the
-                  data to be returned instead of set to a variable. (you can
+                  make a few small changes to the method. Namely, we need the
+                  data to be returned instead of set to a variable. (You can
                   remove <code>getProductsData()</code> from
-                  <kbd>product.js</kbd> once you have moved it. ) You will also
+                  <kbd>product.js</kbd> once you have moved it.) You will also
                   need the <code>convertToJson</code> function. Place it at the
                   top of the file. You should not need to make any changes to
                   it.
@@ -246,7 +246,7 @@ console.log(dataSource.getData());
                     </code></pre>
                   </details>
                   <p>
-                    Remember that to use ESModules in Javascript we have to tell
+                    Remember that to use ESModules in JavaScript we have to tell
                     the browser we want to use modules...we do that with
                     <code>type="module"</code> in the script tag in the HTML.
                     You will need to add that in the
@@ -303,7 +303,7 @@ export default class ProductData  {
                 <p>
                   If the syntax on line 15 <code>(data) => data</code> is
                   confusing you may want to spend more time reading about arrow
-                  functions in Javascript. You could re-write that short
+                  functions in JavaScript. You could re-write that short
                   callback function like this using a more traditional anonymous
                   function declaration:
                 </p>
@@ -417,7 +417,7 @@ console.log(dataSource.findProductById(productId));
                 </li>
                 <li>
                   <code>renderProductDetails()</code>: method to generate the
-                  html to display our product.
+                  HTML to display our product.
                 </li>
               </ol>
               <p>
@@ -454,7 +454,7 @@ product.init();</code></pre>
                 Notice we import in the code we need from our modules. Then we
                 get the id of our product using our helper function
                 <code>getParams</code>. We create an instance of our
-                <code>ProductData</code> data class with the url it should use
+                <code>ProductData</code> data class with the URL it should use
                 to look for products. Then we use both of those to create an
                 instance of our <code>ProductDetails</code> class so that it has
                 everything it needs to work. Finally we call our
@@ -493,7 +493,7 @@ product.init();</code></pre>
                   <pre><code class="lang-js">async init() {
   // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
   // once we have the product details we can render out the HTML
-  // once the html is rendered we can add a listener to Add to Cart button
+  // once the HTML is rendered we can add a listener to Add to Cart button
   // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
   document.getElementById('addToCart')
           .addEventListener('click', this.addToCart.bind(this));
@@ -506,7 +506,7 @@ product.init();</code></pre>
           </ol>
         </div>
 
-        <h2>Instructors Solution</h2>
+        <h2>Instructor's Solution</h2>
         <p>
           As a part of this team activity, you are expected to look over a
           solution from the instructor, to compare your approach to that one.
@@ -534,11 +534,11 @@ product.init();</code></pre>
         <h2>Make a pull request.</h2>
         <p>
           After you have completed what you can, reviewed the instructor's
-          solution, and gotten your code working the driver should commit and
+          solution, and gotten your code working, the driver should commit and
           push their changes (don't forget to lint and format your code before
           committing!), then submit a pull request for this branch. Then review
           the pull request as a team, close it, and merge the branch back into
-          Main. Finally someone should move the Trello card to "Done".
+          Main. Finally, someone should move the Trello card to "Done".
         </p>
         <h2>Submission</h2>
         <p>

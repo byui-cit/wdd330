@@ -22,11 +22,12 @@
         <h2>Overview</h2>
         <p>
           Many of the changes we have already made were to prepare the site to
-          be able to scale up to as many products as we would like. This week we
-          will add products organized from 4 categories: Tents, Sleeping Bags,
-          Backpacks, and Hammocks. We will need to change the index page to show
-          our four categories, and then build a dynamic product-listing page
-          that will pull the products from an API, and display them.
+          be able to scale up to as many products as we would like. In this
+          activity we will add products organized from 4 categories: Tents,
+          Sleeping Bags, Backpacks, and Hammocks. We will need to change the
+          index page to show our four categories, and then build a dynamic
+          product-listing page that will pull the products from an API, and
+          display them.
         </p>
         <h2>Instructions</h2>
         <p>
@@ -51,7 +52,7 @@
               </p>
               <p>
                 The driver should make sure to <kbd>pull</kbd> any changes from
-                Github before proceeding. Next they should create a new branch
+                GitHub before proceeding. Next they should create a new branch
                 called <kbd>initials--team5</kbd>. So if the driver's name were
                 John Doe the branch should be called <code>jd--team5</code>
               </p>
@@ -63,7 +64,7 @@
               <h3>Refactor</h3>
               <p>
                 Create a new directory in <kbd>src</kbd> called
-                <kbd>product-listing</kbd>, and create an html file in it. Also
+                <kbd>product-listing</kbd>, and create an HTML file in it. Also
                 create a <kbd>product-listing.js</kbd> file in the JS directory.
                 Add the HTML to our new page to get the foundation up...header,
                 footer, styles, etc. (Hint...you may just want to use
@@ -79,9 +80,9 @@
               </p>
               <p class="callout">
                 You will need to fix some paths to get everything working
-                correctly...your page will not be able to find the css file or
+                correctly...your page will not be able to find the CSS file or
                 the new JS file we made until you do. Do not worry about fixing
-                the image urls yet. Those will change again anyway and we will
+                the image URLs yet. Those will change again anyway and we will
                 fix those later.
               </p>
               <p>
@@ -155,7 +156,7 @@
               <p>
                 Open up <kbd>productData.js</kbd>. In the constructor we set a
                 path for the products. That path was based off of the category
-                (up til now tents) and would later be used to pull the data.
+                (up until now tents) and would later be used to pull the data.
                 With the API we actually don't need to set the category in our
                 DataSource anymore. We can pass it in when we need it. This will
                 make our DataSource more flexible. Add the following line to the
@@ -195,7 +196,7 @@
               <!-- BEGIN STEP -->
               <h3>Pulling the correct products</h3>
               <p>
-                You should be passing category in the Url to the
+                You should be passing category in the URL to the
                 <kbd>product-listing</kbd> page. We need to retrieve it from the
                 parameter in <kbd>product-listing.js</kbd>. Then send it into
                 the <code>ProductList</code> class. Remember that we created a
@@ -242,16 +243,16 @@ myList.init();</code></pre>
                 <ol>
                   <li>
                     Because we moved the product listing page into a directory
-                    the url listed in the template for a product card in
+                    the URL listed in the template for a product card in
                     <kbd>product-listing/index.html</kbd> will be wrong. That
                     needs to be fixed first.
                   </li>
                   <li>
                     We removed the requirement for the DataSource to be set to a
                     specific category, and we updated the
-                    <code>getData</code> method. Now we need fix the
+                    <code>getData</code> method. Now we need to fix the
                     <code>findProductById</code> method. We can query the API
-                    directly for this. The Url for the api endpoint you need to
+                    directly for this. The URL for the API endpoint you need to
                     hit is:
                     <kbd>baseURL + `product/${id}`</kbd>
                   </li>
@@ -273,7 +274,7 @@ myList.init();</code></pre>
               <h3>Fix the images</h3>
               <p>
                 The data structure of our products changed slightly. This is why
-                the images are broken. analyze the data coming back from the API
+                the images are broken. Analyze the data coming back from the API
                 and figure out how to fix this issue. (You can use the
                 <kbd>PrimaryMedium</kbd> image for the productList, and
                 <kbd>PrimaryLarge</kbd> for the productDetail for now.)
@@ -286,7 +287,7 @@ myList.init();</code></pre>
               <h3>Fix the title</h3>
               <p>
                 Title of the page currently says: Top Products. Add the category
-                to that so that is looks like this: Top Products: Tents (if the
+                to that so that it looks like this: Top Products: Tents (if the
                 tent category link was selected);
               </p>
 
@@ -295,7 +296,7 @@ myList.init();</code></pre>
           </ol>
         </div>
 
-        <h2>Instructors Solution</h2>
+        <h2>Instructor's Solution</h2>
         <p>
           As a part of this team activity, you are expected to look over a
           solution from the instructor, to compare your approach to that one.
@@ -325,7 +326,7 @@ myList.init();</code></pre>
           After you have completed what you can, and reviewed the instructor's
           solution, the driver should commit and push their changes, then submit
           a pull request for this branch. Then review the pull request as a
-          team, close it, and merge the branch back into Main. Finally someone
+          team, close it, and merge the branch back into Main. Finally, someone
           should move the Trello card to "Done".
         </p>
         <h2>Submission</h2>

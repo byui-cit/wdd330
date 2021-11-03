@@ -21,10 +21,11 @@
         <hr />
         <h2>Overview</h2>
         <p>
-          Last week we got our checkout working...barely. If the user does
-          everything exactly the way you want the to the order will succeed. The
-          user hardly ever does everything just how you want them to :) We need
-          to harden up our code and add error handling and better validation.
+          In the last activity we got our checkout working...barely. If the user
+          does everything exactly the way you want the to the order will
+          succeed. The user hardly ever does everything just how you want them
+          to :) We need to harden up our code and add error handling and better
+          validation.
         </p>
         <h2>Instructions</h2>
         <p>
@@ -49,7 +50,7 @@
               </p>
               <p>
                 The driver should make sure to <kbd>pull</kbd> any changes from
-                Github before proceeding. Next they should create a new branch
+                GitHub before proceeding. Next they should create a new branch
                 called <kbd>initials--team7</kbd>. So if the driver's name were
                 John Doe the branch should be called <code>jd--team7</code>
               </p>
@@ -80,19 +81,19 @@
 }
               </code></pre>
               <p>
-                On line 1 we check our response to see if it is ok. Ok is any
-                status of 200, or most 300s. If the status on the response is
-                40x or 50x then it is NOT ok. The server we are communicating
-                with sends back a 400 response if something goes wrong. Then it
-                puts the details in the body of the response. If we fail the ok
-                test...we immediately throw an error with the message 'Bad
-                Response'. What we need to do is get the detailed error message
-                out of the response body.
+                On line 1 we check our response to see if it is 'ok'. 'Ok' is
+                any status of 200, or most 300s. If the status on the response
+                is 40x or 50x then it is NOT okay. The server we are
+                communicating with sends back a 400 response if something goes
+                wrong. Then it puts the details in the body of the response. If
+                we fail the okay test...we immediately throw an error with the
+                message 'Bad Response'. What we need to do is get the detailed
+                error message out of the response body.
               </p>
               <p>
-                Refactor this function by converting our response body to json
-                before we check if it's ok. Then if it is not ok then send the
-                response body on in our <code>throw</code> statement.
+                Refactor this function by converting our response body to JSON
+                before we check if it's okay. Then if it is not okay then send
+                the response body on in our <code>throw</code> statement.
               </p>
               <div class="callout">
                 <p>
@@ -103,7 +104,7 @@
                   ways to get around this.
                 </p>
                 <p>
-                  First we could <kbd>stringify</kbd> the object. Second is we
+                  First, we could <kbd>stringify</kbd> the object. Second, we
                   could send a custom object back with our
                   <code>throw</code> instead of the default
                   <code>new Error()</code>. In this case the second makes more
@@ -122,7 +123,7 @@
               </p>
               <pre><code class="lang-js">throw { name: 'servicesError', message: jsonResponse };</code></pre>
               The variable <code>jsonResponse</code> should be the body of the
-              response from the server that we converted to json.
+              response from the server that we converted to JSON.
               <!-- END STEP -->
             </li>
             <li>
@@ -169,9 +170,9 @@
                 of the fields are missing information. HTML can actually do a
                 really nice job of checking for that. All we need to do is add
                 <code>required</code> as an attribute of an
-                <code>input</code> element. If you did not do that last week,
-                add required to all of our form inputs. Then click the submit
-                button.
+                <code>input</code> element. If you did not do that in the last
+                activity, add required to all of our form inputs. Then click the
+                submit button.
               </p>
               <p>
                 Depending on how you are listening for the form submission your
@@ -179,10 +180,10 @@
                 <code>click</code> listener on the button we will need to
                 trigger the validation ourselves, if you listened for the
                 <code>submit</code> event on the form the validation should
-                automatically be working. Last week we determined that since we
-                were submitting our form through AJAX, we did not want the form
-                to do what it normally would do if submitted. In the listener
-                for the form button you have added
+                automatically be working. Previously, we determined that since
+                we were submitting our form through AJAX, we did not want the
+                form to do what it normally would do if submitted. In the
+                listener for the form button you have added
                 <code>e.preventDefault();</code>. That part of your code should
                 look something like this:
               </p>
@@ -193,7 +194,7 @@
 });</code></pre>
               <div class="callout">
                 <p>
-                  IF your HTML form validation is not working...do the following
+                  If your HTML form validation is not working...do the following
                   in your listener handler function:
                 </p>
                 <ol>
@@ -210,9 +211,9 @@
                     with <code>myForm.reportValidity()</code>
                   </li>
                   <li>
-                    Finally if our validity test came back false we do not want
-                    to continue...so wrap <code>myCheckout.checkout();</code> in
-                    an if statement.
+                    Finally, if our validity test came back false, we do not
+                    want to continue...so wrap
+                    <code>myCheckout.checkout();</code> in an if statement.
                   </li>
                 </ol>
                 <p>Your final code should look something like this:</p>
@@ -232,7 +233,7 @@
                 need to do on our end!
               </p>
               <p>
-                Thinking back to the reading from last week (<a
+                Thinking back to the reading from earlier (<a
                   href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation"
                   target="_blank"
                   rel="noreferrer"
@@ -259,7 +260,7 @@
                 <li>???</li>
               </ol>
               <p>
-                This is not a very long list. the main decision to be made is
+                This is not a very long list. The main decision to be made is
                 how do we want to message the user? We could either pop
                 something up in the current page, or take the user to a new page
                 with a success message. Leaving them on the page with the form
@@ -282,7 +283,7 @@
           <ol class="bigSteps">
             <li>
               <!-- BEGIN STEP -->
-              <h3>Handle the Unhappy Path :(</h3>
+              <h3>Handling the Unhappy Path :(</h3>
               <p>
                 The last thing we need to do is to handle the few last errors
                 the user might get. We want to stay on the checkout form page so
@@ -351,7 +352,7 @@ export function alertMessage(message, scroll = true) {
               <p>
                 When you add a product to the cart there is a good chance that
                 the action gives no feedback to the user. If you have already
-                fixed this and yours does give feedback...kudos! If not we can
+                fixed this and yours does give feedback...kudos! If not, we can
                 use our alert to quickly send the user a message that the item
                 was successfully added.
               </p>
@@ -361,7 +362,7 @@ export function alertMessage(message, scroll = true) {
           </ol>
         </div>
 
-        <h2>Instructors Solution</h2>
+        <h2>Instructor's Solution</h2>
         <p>
           As a part of this team activity, you are expected to look over a
           solution from the instructor, to compare your approach to that one.
@@ -391,7 +392,7 @@ export function alertMessage(message, scroll = true) {
           After you have completed what you can, and reviewed the instructor's
           solution, the driver should commit and push their changes, then submit
           a pull request for this branch. Then review the pull request as a
-          team, close it, and merge the branch back into Main. Finally someone
+          team, close it, and merge the branch back into Main. Finally, someone
           should move the Trello card to "Done".
         </p>
         <h2>Submission</h2>

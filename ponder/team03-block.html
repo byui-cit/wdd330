@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8" />
-    <title>BYU-Idaho WDD 330 | Team</title>
+    <title>BYU-Idaho WDD 330 | Individual</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../css/prism-coy.css" />
     <link rel="stylesheet" href="../css/course.css" />
@@ -17,7 +17,7 @@
         </div>
       </header>
       <main>
-        <h1>Ponder: Team 3 Activity</h1>
+        <h1>Ponder: Individual 3 Activity</h1>
         <hr />
         <h2>Overview</h2>
         <p>
@@ -28,20 +28,15 @@
         </p>
         <h2>Instructions</h2>
         <p>
-          Complete the following assignment as a team. Designate one team member
-          as the "main driver" and collaborate on their copy of the code.
-          Everyone on the team should be actively engaged in writing the code
-          and contributing to the solution. Once the solution is working, make
-          sure that everyone on the team gets a copy of the code. Each week let
-          someone else be the "main driver" of the coding.
+          Complete the following assignment individually. Each student will
+          write code for their own copy.
         </p>
         <p>
           There are many spots where code examples have been given. To get the
-          most out of this activity do not look at the examples until your group
-          has given that section a try. Then after you look at the example
-          resist the temptation to copy/paste. Use the examples to give
-          correction, or help you get unstuck...do not just use them to get it
-          done.
+          most out of this activity, do not look at the examples until you have
+          given that section a try. Then after you look at the example, resist
+          the temptation to copy/paste. Use the examples to get correction, or
+          help you get unstuck...do not just use them to get it done.
         </p>
 
         <div class="requirements">
@@ -50,16 +45,15 @@
             <li>
               <!-- BEGIN STEP -->
               <p>
-                The driver should visit the team's copy of the Trello board for
-                the project. Add each of the attending team members to the
-                "Team3: Dynamic product list" task...then move it to 'Doing'.
-                Read the details of the card together.
+                Visit the team's copy of the Trello board for the project. Add
+                yourself to the "Individual3: Dynamic product list" task...then
+                move it to 'Doing'. Read the details of the card.
               </p>
               <p>
-                The driver should make sure to <kbd>pull</kbd> any changes from
-                Github before proceeding. Next they should create a new branch
-                called <kbd>initials--team3</kbd>. So if the driver's name were
-                John Doe the branch should be called <code>jd--team3</code>
+                Make sure to <kbd>pull</kbd> any changes from GitHub before
+                proceeding. Create a new branch called
+                <kbd>initials--individual3</kbd>. So if your name were John Doe
+                the branch should be called <code>jd--individual3</code>
               </p>
 
               <!-- END STEP -->
@@ -153,25 +147,25 @@ export default class ProductListing {
                 As we think about building our product list, each product card
                 will have very similar markup. Templates are a way for us to
                 reuse markup in an efficient way. Last week we just generated
-                the dynamic html in Javascript but that does have a couple of
+                the dynamic HTML in JavaScript but that does have a couple of
                 issues.
               </p>
               <ol>
                 <li>
                   It breaks the separation of concerns. It would be good if we
                   left the HTML where it belongs...in the .html file instead of
-                  buried in the javascript. This leads to more maintainable
+                  buried in the JavaScript. This leads to more maintainable
                   code.
                 </li>
                 <li>
-                  The html and css for a site is often managed by a different
-                  group than the logic in the Javascript. If the HTML is in the
-                  javascript then everytime a styling change needs to be made
-                  the Javascript will have to be modified instead of just
+                  The HTML and CSS for a site is often managed by a different
+                  group than the logic in the JavaScript. If the HTML is in the
+                  JavaScript then every time a styling change needs to be made
+                  the JavaScript will have to be modified instead of just
                   changing the HTML
                 </li>
                 <li>
-                  Performance. Generating lots of HTML through Javascript can
+                  Performance. Generating lots of HTML through JavaScript can
                   lead to performance issues.
                 </li>
               </ol>
@@ -360,7 +354,7 @@ export default class ProductListing {
               <p>
                 Dealing with items 1, and 3 is easy...we can pass those in. But
                 what about #2, the function? Remember that functions can be
-                passed into other functions in Javascript. (Search 'js
+                passed into other functions in JavaScript. (Search 'js
                 callbacks' or 'js higher order functions' for more depth). Make
                 a new function in
                 <kbd>utils.js</kbd> called
@@ -395,24 +389,24 @@ export default class ProductListing {
           </ol>
         </div>
 
-        <h2>Instructors Solution</h2>
+        <h2>Instructor's Solution</h2>
         <p>
-          As a part of this team activity, you are expected to look over a
+          As a part of this individual activity, you are expected to look over a
           solution from the instructor, to compare your approach to that one.
           One of the questions on the I-Learn submission will ask you to provide
           insights from this comparison.
         </p>
         <p>
           Please DO NOT open the solution until you have worked through this
-          activity as a team for the one hour period. At the end of the hour, if
-          you are still struggling with some of the core requirements, you are
-          welcome to view the instructor's solution and use it to help you
+          activity individually for the one hour period. At the end of the hour,
+          if you are still struggling with some of the core requirements, you
+          are welcome to view the instructor's solution and use it to help you
           complete your own code. Even if you use the instructor's code to help
           you, you are welcome to report that you finished the core
           requirements, if you code them up yourself.
         </p>
         <p>
-          After working with your team for the one hour activity,
+          After working individually for the one hour activity,
           <a
             href="https://github.com/matkat99/sleepoutside/tree/team3/src"
             target="_blank"
@@ -423,17 +417,19 @@ export default class ProductListing {
         <h2>Make a pull request.</h2>
         <p>
           After you have completed what you can, reviewed the instructor's
-          solution, and gotten your code working the driver should commit and
-          push their changes then submit a pull request for this branch. Then
-          review the pull request as a team, close it, and merge the branch back
-          into Main. Finally someone should move the Trello card to "Done".
+          solution, and gotten your code working, commit and push your changes.
+          when you next meet with your team you should discuss with each other
+          which changes you would like to keep. You should only keep ONE
+          member's changes! Submit a pull request for the branch with the code
+          you have decided to keep. Then review the pull request, close it, and
+          merge the branch back into Main. Finally, move the Trello card to
+          "Done".
         </p>
         <h2>Submission</h2>
         <p>
           When you have finished this activity, please fill out the assessment
           in I-Learn. You are welcome to complete any additional parts of this
-          activity by yourself or with others after your meeting before
-          submitting the assessment.
+          activity before submitting the assessment.
         </p>
       </main>
       <!-- end #article -->

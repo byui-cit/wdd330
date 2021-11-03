@@ -38,7 +38,7 @@ main {
 }
 
 .list li {
-  flex: 1 0 6em;
+  flex: 0 0 8em;
   text-align: center;
   border: 1px solid;
   background-color: azure;
