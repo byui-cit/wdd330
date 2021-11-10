@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Prepare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Trello Sprint 1</h1>
+        <hr />
+        <p>
+          Each team should have made a copy of this
+          <a href="https://trello.com/b/LO93bmJy/sleepoutside" target="_blank"
+            >Trello board</a
+          >. This is a shared board that you will all be working from over the
+          semester.
+        </p>
+        <p>
+          There are some tasks marked "Team" and others that are not. Each week
+          the team should complete the appropriate team activity together. The
+          goal is then to complete one additional card per team member per lesson (two each week).
+          These should be done individually as much as possible, but remember
+          that you have a team to help you if you get stuck on a particular
+          task.
+        </p>
+        <p>
+          In order to demonstrate how this should work it is recommended that each member of the team complete the same card for this first time.
+          <strong
+            >After this week each member should complete different cards</strong
+          >.
+        </p>
+        <p>
+          Begin with the "Add item to cart broken" task. This is largely a
+          debugging and troubleshooting task, but it will help you to become
+          familiar with the code we were given.
+        </p>
+        <h2>Instructions</h2>
+        <ol class="bigSteps">
+          <li>
+            <!-- BEGIN STEP -->
+            <p>
+              Visit the team's copy of the Trello board for the project. Add
+              yourself to the "Add item to cart broken" task...then move it to
+              "Doing" (if the card is already in "Doing" then just add
+              yourself). Read the details of the card.
+            </p>
+            <p>
+              Make sure to <kbd>pull</kbd> any changes from GitHub before
+              proceeding. Next create a new branch called
+              <kbd>initials--add cart broken</kbd>. So if the name name were
+              John Doe the branch should be called
+              <code>jd--add cart broken</code>
+            </p>
+
+            <!-- END STEP -->
+          </li>
+          <li>
+            <!-- BEGIN STEP -->
+            <p>
+              Spend some time looking through the code. Start the development
+              environment up (<kbd>npm run start</kbd>). Try adding an item to
+              the cart. Notice that nothing seems to happen. Open the browser
+              developer tools and check there.
+            </p>
+            <p class="callout">
+              The code stores the cart contents inside localStorage. This is a
+              place in the browser where a website can keep things. LocalStorage
+              works like cookies, in that it will persist until a user clears
+              their browser cache, but you can store more information there. To
+              see what is currently stored in your browser's localStorage go to
+              the Application tab if you are in Chrome dev tools. Then on the
+              side select "Local Storage->http://127.0.0.1". Notice there should
+              be something there...you can clear out the contents of the storage
+              from here as well.
+            </p>
+            <p>
+              Try adding another item to the cart. Note what happens in
+              localStorage.
+            </p>
+
+            <!-- END STEP -->
+          </li>
+          <li>
+            <!-- BEGIN STEP -->
+            <p>Debug the code to figure out what is wrong and fix it.</p>
+            <details>
+              <summary>Hints:</summary>
+              <ul>
+                <li>
+                  Pay careful attention to the error in the console, but be
+                  aware that where the error is caught is not always where the
+                  problem is.
+                </li>
+                <li>
+                  Remember that you can set breakpoints to stop your code and
+                  inspect it. Do this. (Sources tab, open a JS file. Click on
+                  the line number where you want the breakpoint.) It is also a
+                  good way to figure out how everything is put together.
+                </li>
+                <li>
+                  As you poke around you will hopefully find the function
+                  <code>addToCart</code>. Pay attention to what it is doing.
+                  What does <code>setLocalStorage</code> do?
+                </li>
+              </ul>
+            </details>
+
+            <!-- END STEP -->
+          </li>
+          <li>
+            <h2>Make a pull request.</h2>
+            <p>
+              After you have completed the card and have things working, you
+              should commit and push your changes (don't forget to lint and
+              format your code before committing!), then submit a pull request
+              for this branch.
+            </p>
+            <p>
+              Normally your pull request would get reviewed by another member of
+              the team and merged back into main, in this case however we have
+              more than one branch that has solved the same problem. We only
+              want to merge <strong>ONE</strong> of those branches back into
+              main. Discuss with your team which branch you want to keep and
+              have one of the team merge that pull request. The other requests
+              can be closed without merging. Finally someone should move the
+              Trello card to "Done".
+            </p>
+            <p>From here on you should follow this process with each of the Trello tasks you complete:</p>
+            <ol>
+              <li>Choose a Trello card, assign yourself to it, and move to "Doing"</li>
+              <li>Make a branch</li>
+              <li>Complete the work</li>
+              <li>Lint and format</li>
+              <li>Commit and push</li>
+              <li>Move the Trello card to "Done"</li>
+              <li>Make a pull request for your branch</li>
+              <li>Let your group know there is a pull request waiting</li>
+              <li>
+                Another team member should review the pull request in GitHub and,
+                if everything looks good, Merge the request. I would also
+                recommend deleting the old branch as part of that process as
+                well.
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Building a Portfolio</h1>
+        <hr />
+
+        <p>
+          One of the requirements for this course is to develop a portfolio of
+          the work that you complete for the course. You will turn this in at
+          the end of the semester along with a self-evaluation. These items will
+          be used to determine your grade.
+        </p>
+        <p>
+          This activity is to give you some ideas for managing this portfolio.
+        </p>
+        <ol class="bigSteps">
+          <li>
+            <!-- BEGIN STEP -->
+            <h3>Code Management</h3>
+
+            <p>
+              Most of your portfolio for this course will be made up of code. It
+              would make sense then, to use a tool specifically designed to help
+              manage code to manage your portfolio. Create a repository for your
+              work for this class in
+              <a href="https://github.com" target="_blank" rel="noreferrer"
+                >GitHub</a
+              >, a free hosted code repository with the core ability to track
+              changes.
+            </p>
+            <div class="callout">
+              <p>
+                If you aren't sure how to get a version control repository
+                setup, here is a cheatsheet using GitHub:
+              </p>
+              <ol>
+                <li>
+                  Create an account with
+                  <a href="https://github.com" target="_blank" rel="noreferrer"
+                    >GitHub</a
+                  >
+                  if you don't already have one.
+                </li>
+                <li>
+                  Once logged in, find and click on the "New Repository" button.
+                </li>
+                <li>
+                  It will ask for a name, description, and whether to include a
+                  "README". Fill out the name, description, and check the README
+                  box.
+                </li>
+                <li>
+                  You should now see a screen listing out the files in the
+                  repository (it's a very short list). There should also be a big
+                  green button labeled "Clone or download" Click on it and copy
+                  the URL in the box (should look something like
+                  <code>https://github.com/matkat99/port.git</code>).
+                </li>
+                <li>
+                  At this point you need to decide if you want to manage your
+                  repository with a GUI tool or with the command line.
+                  <ul>
+                    <li>
+                      GUI Tool
+                      <ol>
+                        <li>
+                          Download and install the
+                          <a
+                            href="https://desktop.github.com"
+                            target="_blank"
+                            rel="noreferrer"
+                            >GitHub Desktop</a
+                          >
+                          app. Launch it and sign in with your GitHub
+                          credentials.
+                        </li>
+                        <li>
+                          Click on "add a new project" (usually the +) and
+                          select "Clone". If you have authenticated to your
+                          GitHub account correctly then you should see your
+                          repository listed. Select it and click "Clone
+                          Repository". It will ask you where it should store it.
+                          Select a directory on your hard drive.
+                        </li>
+                      </ol>
+                    </li>
+                    <li>
+                      Command Line
+                      <ol>
+                        <li>
+                          <p>
+                            Make sure your computer has Git installed. Open your
+                            command line prompt (Terminal.app on the Mac, CMD on
+                            Windows), then type
+                          </p>
+                          <pre><code>git --version</code></pre>
+                          <p>
+                            If you get an error, go
+                            <a
+                              href="https://git-scm.com/download"
+                              target="_blank"
+                              rel="noreferrer"
+                              >install Git</a
+                            >.
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            Navigate to the folder where you want the project
+                            stored on your hard drive. If you are unsure how to
+                            do that, then let's just put it on your desktop. You
+                            will automatically start in your User directory when
+                            you open a new command prompt...and it's easy to get
+                            back there. Type:
+                          </p>
+                          <pre><code>cd ~</code></pre>
+                          <p>on the Mac or for Windows type:</p>
+                          <pre><code>cd %user_profile%</code></pre>
+                          <p>then simply type:</p>
+                          <pre><code>cd Desktop</code></pre>
+                        </li>
+                        <li>
+                          <p>
+                            Enter
+                            <code
+                              >git clone &lt;URL copied from github&gt; &lt;name
+                              of directory you want created&gt;</code
+                            >
+                               <p>For example, mine would look like this:</p>
+                          </p>
+                          <code
+                            >git clone https://github.com/matkat99/port.git
+                            portfolio</code
+                          >
+                        </li>
+                      </ol>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Now you can open up that folder in your editor and begin
+                  making edits. You should probably also run through something
+                  like
+                  <a
+                    href="https://try.github.io/levels/1/challenges/1"
+                    target="_blank"
+                    rel="noreferrer"
+                    >try.github.io</a
+                  >
+                  to start learning how to use Git.
+                </li>
+              </ol>
+            </div>
+
+            <!-- END STEP -->
+          </li>
+          <li>
+            <!-- BEGIN STEP -->
+            <h3>Index page</h3>
+            <p>
+              At the root of your repository you should create an
+              <kdb>index.html</kdb> file. In this file you should keep a
+              directory of all your notes, exercises, challenges, etc. that you
+              add to the portfolio.
+            </p>
+
+            <!-- END STEP -->
+          </li>
+          <li>
+            <!-- BEGIN STEP -->
+            <h3>Turn on GitHub pages</h3>
+            <p>
+              Log into GitHub and enter the repository for this class. Go to
+              Settings. On the Options page, scroll down until you find the
+              section on GitHub Pages. In the dropdown under Source, choose
+              <kbd>master branch</kbd>. You should now be able to browse to your
+              repository at the URL GitHub shows you after the page refreshes.
+              It will look like this:
+              <kbd>https://username.github.io/repositoryname/</kbd>
+            </p>
+
+            <!-- END STEP -->
+          </li>
+          <li>
+            <!-- BEGIN STEP -->
+            <h3>Dynamic Table of Contents</h3>
+
+            <p>
+              Each week you will be adding to the table of contents of your
+              portfolio. Let's create that list of links dynamically with some
+              JavaScript as a review of what you learned in WDD 230 (CIT 230/CS
+              213). Create a directory called <kbd>js</kbd> in your portfolio,
+              and add a file called <kbd>main.js</kbd>. Add the appropriate
+              <code>script</code> tag to your HTML and write a JS function that
+              will do the following:
+            </p>
+            <ol>
+              <li>
+                Select an <code>ol</code> element from your index.html page.
+                (This means you need to add the HTML for this element to your
+                page. You can't select something that doesn't exist.)
+              </li>
+              <li>
+                Read a list of links from an array. (You will also need to
+                create this array.)
+              </li>
+              <li>
+                For each of the items in the array of links, you should create an
+                <code>li</code> element, add an <code>a</code> element with the
+                label and URL from the list of links, and add the new
+                <code>li</code> element into the <code>ol</code> element you
+                grabbed above.
+              </li>
+            </ol>
+            <p>
+              You can keep the structure of your list of links simple: you will
+              need a label that will be shown to the user, and the URL of the
+              page that should open when the link is clicked. It might look
+              something like this:
+            </p>
+            <pre><code class="lang-javascript">const links = [
+  {
+    label: "Week1 notes",
+    url: "week1/index.html"
+  }
+]
+            </code></pre>
+            <p>
+              Each week you will simply add new item(s) into your array to have
+              them automatically show up in the table of contents.
+            </p>
+            <!-- END STEP -->
+          </li>
+          <li>
+            <!-- BEGIN STEP -->
+            <h3>Record your work</h3>
+
+            <p>
+              As you read, take notes, and complete exercises, record your work in
+              this portfolio, making sure to keep the index up to date. If you
+              do so, turning in the link to your portfolio will be the best way
+              to turn in your work each week and at the final portfolio submission.
+            </p>
+
+            <!-- END STEP -->
+          </li>
+        </ol>
+
+        <h2>Example</h2>
+        <p>
+          Let's look at an example of how this might look in practice. Visit
+          this
+          <a
+            href=" https://matkat99.github.io/wdd330-portfolio-example/"
+            target="_blank"
+            rel="noreferrer"
+            >WDD 330 repository</a
+          >
+          on GitHub. Notice that I created an index file to list out all of my
+          work. I included questions from each week, and an indication of how I
+          spent my time that week.
+        </p>
+        <p>
+          If you look at the
+          <a
+            href="https://github.com/matkat99/wdd330-portfolio-example"
+            target="_blank"
+            rel="noreferrer"
+            >GitHub source code</a
+          >
+          you will see that there are also folders to hold my work from each
+          week.
+        </p>
+        <p>
+          If you drill into those folders you will see additional directories
+          for organization. Drill into <code>"objects"</code>. You will see an
+          <code>index.html</code> file and a couple of JavaScript files.
+        </p>
+        <p>
+          If you look at the <code>index.html</code> you will see that it is
+          basically the template file from the first Doing Stuff chapter, with a
+          couple of extra <code>&lt;script&gt;</code> elements added to the
+          bottom to include our JavaScript. The index is really just to make it
+          easier to view our examples in the browser console.
+        </p>
+        <p>
+          Take a moment to look through the <code>superObjects.js</code> file.
+          Notice that I have many of the code examples from the chapter in
+          there...I used a lot of <code>console.log()</code> commands to run
+          many of the examples. I also used this as an opportunity to record my
+          notes from the reading and my thoughts about the examples as well.
+        </p>
+        <p>
+          My workflow would be to open the <code>index.html</code> file in my
+          browser, then open up the browser console, then open the chapter I am
+          currently working on. If you were to pull these files down and do that
+          you would see a bunch of output. You could also try additional commands
+          right there as well.
+        </p>
+        <p>
+          Note that you will not see <strong>all</strong> of the examples from
+          the chapter in the .js files!...Many of the examples were exploratory
+          in nature so I simply ran them in the console of the browser once I
+          had my <code>index.html</code> page open there. It is much faster to
+          try lots of variations of a command there than it is to code it all up
+          in a JS file. Your goal is to get enough of the example code into the
+          file that you can experiment in the browser console and record your
+          findings as comments.
+        </p>
+        <p>
+          If you follow a similar system while working the examples
+          yourself, you will find your portfolio ready to show at any time.
+          When it is time to start the Team Challenge phase, create another
+          directory in your repository for your projects and they will be added
+          as well.
+        </p>
+        <h2>Resources</h2>
+        <p>
+          Tools such as GitHub are powerful, but do require a bit of work to
+          learn. I haven't mentioned anything about using them in this outline.
+          There are many good, free resources to get started with them if you
+          don't have any previous experience. A search will bring many of them
+          up easily. If you use GitHub, it has a very good getting started
+          tutorial right on their site to get you going.
+        </p>
+        <p>
+          It will be very worth your time to gain some mastery of at least one
+          of these tools.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>

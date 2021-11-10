@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Instructor Preparation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>W02 (L03-04) Instructor Preparation</h1>
+        <hr />
+        <h2>Overview</h2>
+		<h3>L03 Midweek</h3>
+        <p>The team activity for this lesson will have us start making changes to
+          the SleepOutside site. We will begin making it dynamic instead of
+          static. We start with the product detail page. Currently we have one
+          HTML file per product. This is not scalable so we will make one HTML
+          page that will load in the details we desire.
+		  </p>
+        <p>The students will also begin adding some structure to the code by
+          creating our first couple modules.
+		  </p>
+		
+		<h3>L04 End-of-Week</h3>
+		<p>The readings for this lesson cover a fairly wide variety of topics, including Debugging, Single Page Applications, and the HTML Template element. Plan on spending some time addressing questions.
+		  </p>
+        <p>The individual activity continues our work at making the site dynamic by
+          addressing the product list on the homepage. It does introduce using
+          a Template element, so you will want to include that in your demo.
+		  </p>
+		  <p>Again with the readings, encourage students to also look to other sources
+          when things don't make sense. The book does a pretty good job, but the
+          way it addresses some topics might be confusing to some students. Help
+          them to remember that there are other options. Several are listed in
+          this week's readings in fact. The notes they turn in do not have to all be from the assigned readings.
+		  </p>
+        <p>Encourage the students to record their questions while reading
+          and give them to you to be addressed.
+		  </p>
+        <h2>Meeting Time</h2>
+		<h3>L03 Midweek</h3>
+        <p>
+          Continue to give examples of building
+          dynamic DOM, using events, organizing with modules, and leveraging
+          things like the array methods that JavaScript gives us.
+        </p>
+        <p>
+          You might then do something like this
+          <a href="../examples/quotes/index.html" target="_blank"
+            >dynamic filterable list of quotes</a
+          >.
+        </p>
+        <p>
+          Try to get into the browser developer tools as much as possible to
+          troubleshoot.
+        </p>
+        <ol>
+          <li>
+            Start with a new directory and index.html, main.js, and
+            QuoteGetter.js files.
+          </li>
+          <li>
+            In the HTML we need a select element, a button, and a list to output
+            the quotes to.
+          </li>
+          <li>
+            In <kbd>main.js</kbd> we initially need to attach an event listener
+            to our button. It needs to grab the selected option in our select.
+            Test to make sure the listener works.
+          </li>
+          <li>
+            Then start on the QuoteGetter module. Create a class. I would
+            recommend passing in the ID of the select element, and the output
+            element.
+          </li>
+          <li>
+            Next we need to get the list of quotes. (A list can be found at
+            https://type.fit/api/quotes) Create a method to retrieve them, then
+            store them as part of the class.
+          </li>
+          <li>
+            Next we need to extract a unique list of author names from the quote
+            list. One way you could do this is to create a Set and map the
+            author into the Set. Sets automatically remove duplicates.
+            <code>new Set(quotes.map(quote=> quote.author))</code>. Then convert
+            it to an array and return it. <code>[...authors]</code>. You will
+            need to spend a few minutes talking about Sets and Spread.
+          </li>
+          <li>
+            Next take the author list and build them as options in our select in
+            the HTML.
+          </li>
+          <li>
+            Either in the class constructor, or in an init method we need to
+            make sure that we do all the setup required: get the quotes, make
+            the author list, and build the select based on the list.
+          </li>
+          <li>
+            I would pause to get everything wired up and test. (Import the class
+            into <kbd>main.js</kbd>. create an instance, call init if that's how
+            you approached it. Do some console.logging or use breakpoints to
+            make sure things are working.)
+          </li>
+          <li>
+            Next we need a method to filter our quote list by an author. It
+            should take an author as argument, and return a list of quotes by
+            that author.
+          </li>
+          <li>
+            Finally we need a function or method that will take a list of quotes
+            and output it as HTML.
+          </li>
+        </ol>
+        <p>
+          This is also a good time to remind students about issues that may
+          arise from JavaScript executing before the DOM is loaded. Talk about
+          ways to avoid those problems (onload listener, adding the script at
+          the bottom of the body, or using the <code>defer</code> flag on your
+          script element...<code>type="module"</code> actually defers it as
+          well).
+        </p>
+      	<h3>L04 End-of-Week</h3>
+<p>
+          To help the students prepare for the individual activity you might do
+          something like this
+          <a href="../examples/sw/index.html" target="_blank"
+            >SW Film information</a
+          >
+          app. It uses the HTML template element to model one way of providing
+          reusable HTML to our code. I realize that this is not a common way.
+          The truth is most folks let their framework handle the templating, or
+          include something like mustache or handlebar as part of their
+          development workflow... But I feel that this is helpful in getting the
+          students to think through some of the issues that must be addressed
+          with templating, without introducing another tool.
+        </p>
+        <p>
+          This is a more complex demo. Lots going on. Focus on try/catch to
+          harden their code first, then using templates, then making multiple
+          requests for data and building a more complex page last.
+        </p>
+        <ol>
+          <li>
+            Start by creating a new directory and files: index.html, main.js,
+            SwapiHelper.js.
+          </li>
+          <li>
+            Pull up the SWAPI documentation for the
+            <a href="https://swapi.dev/documentation#films" target="_blank"
+              >film endpoint</a
+            >. Note that some of the information is listed as lists of links.
+            Continue by brainstorming a list of tasks that need to be done if we
+            wanted to display this information. It might look something like
+            this:
+            <pre>
+get list of films
+output list of films
+when a film is clicked:
+    get detailed info on film
+    output film details
+    for each planet
+        get planet info
+        render planet with planet template
+    for each species
+        get species info
+        render with template
+    for each starship
+        get info
+        render with template
+    for each vehicle
+        get info
+        render with template</pre
+            >
+          </li>
+          <li>
+            You might turn the students loose on the first two steps as review
+            of what we have learned in previous lessons. They can use
+            <kbd>https://swapi.dev/api/films</kbd> to get the initial info they
+            need. Stress reusability.
+          </li>
+          <li>
+            Once they are done, have a conversation about the method they wrote
+            to get the info from the API. What happens if something goes wrong?
+            Harden the method with try/catch. Also make sure that what the
+            students came up with is reusable...we will be making lots of
+            different requests with that method.
+          </li>
+          <li>
+            Add the code to handle a click on a film. Talk about how we will be
+            using the same HTML to output all of the planets for example. In the
+            past we have used functions to generate the HTML, but we could also use
+            a <kbd>template</kbd> in the HTML.
+          </li>
+          <li>
+            Write the method in SwapiHelper to retrieve the details about a film
+            when it is clicked. In this case we can just filter the list of
+            films that we already have if it was saved to the class (suggest
+            they do that if they did not). Go ahead and output the film name and
+            opening crawl to our HTML. Add an unordered list with a class or id
+            as well to hold the list of planet information.
+          </li>
+          <li>
+            For each of the planets returned with the film data, we need to make
+            a request to the API with the URL provided. This is a great
+            opportunity to talk about resolving a list of Promises with
+            Promise.all().
+          </li>
+          <li>
+            Add a <kbd>template</kbd> element to the <kbd>head</kbd> of our
+            index.html file to display a planet. Might look something like this:
+            <pre><code class="lang-markup">&lt;template id="planet"&gt;
+  &lt;li&gt;
+    &lt;h4 class="planet-name"&gt;&lt;/h4&gt;
+    &lt;p&gt;Climate:&lt;span class="planet-climate"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Terrain:&lt;span class="planet-terrain"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Year: &lt;span class="planet-year"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Day: &lt;span class="planet-day"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;Population: &lt;span class="planet-population"&gt;&lt;/span&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/template&gt;</code></pre>
+          </li>
+          <li>
+            We now need a method to retrieve our template from the HTML, clone
+            it, insert the data for a planet, and attach it to the list in the
+            DOM. There is one in the individual activity for this lesson we could use as
+            a model if you think enough students have already completed that by
+            the time you are doing your demo.
+            <kbd>utils/renderListWithTemplate</kbd>. We also need a function to
+            insert the planet details into our template clone. Talk about how an
+            element can be used to call <code>querySelector</code> to limit our
+            search.
+          </li>
+          <li>
+            Pull it all together...get the details on the list of planets, pass
+            it to the render function, hydrate and attach. You might also spend
+            a few minutes on CSS to style the list of planets.
+          </li>
+          <li>
+            Talk about how with the work we have done adding the starships,
+            vehicles, and species would be pretty easy...we just need to add the
+            template to the HTML, and create a prepare function to load the
+            data. Show this with starships if you have time.
+          </li>
+        </ol>
+	  </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>

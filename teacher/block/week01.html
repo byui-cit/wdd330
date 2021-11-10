@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Instructor Preparation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>W01 (L01-02) Instructor Preparation</h1>
+        <hr />
+        <h2>Overview</h2>
+		<h3>L01 Midweek</h3>
+        <p>
+          This lesson is all about foundation. All of the tools we will be using
+          will be introduced, along with ideas about workflow in modern frontend
+          development. Time can also be spent on reviewing the JavaScript
+          concepts from the syllabus that the students are expected to know.
+          There is no team activity for this lesson.
+        </p>
+        <p>
+          Make sure students understand the grading structure. 30% comes
+          from reading and team/individual activities. 70% from self-evaluation and
+          portfolio. The self-evaluation will happen at the end of the semester.
+        </p>
+        <p>
+          Explain the way the course will work. They will be working in groups
+          through the whole semester. Those groups need to be formed by midweek.
+          2-3 per group ideally. At midweek, <strong>ensure that each student has self-enrolled in a team activity group and that each group has 2-3 students.</strong> They have been instructed to reach out to you if they have scheduling conflicts. Adjust and/or create groups as needed to put together students who have the same time availability.
+		</p>
+		<p>
+		  You might talk about some of the ideas in the
+          <a
+            href="https://byui-cit.github.io/advcss/resources/working-with-groups.html"
+            target="_blank"
+            >Working with Groups</a
+          >
+          document. The first 9 lessons (4.5 weeks) will be spent modeling what a typical web
+          frontend project might look like. They will work together to build a
+          simple ecommerce site. Some will be done all together in a peer
+          programming model. Other parts will be done individually.
+        </p>
+        <p>
+          The last part of the course will be spent working as teams to design and build a frontend application of
+          the students' choosing.
+        </p>
+        <p>
+          There is a high emphasis on working effectively as a team in the
+          course. Using tools like linters, bundlers, and GitHub are also
+          stressed. The students will be expected to branch, pull request and
+          merge with their projects. You may choose to spend some time talking
+          about that in this lesson as well.
+        </p>
+		<h3>L02 End-of-Week</h3>
+		<p>
+          The first team activity happens during this lesson. There will be one during most weeks. Groups should have been formed by midweek. 
+		</p>
+		<p>
+		  The team activities are intended to be done in peer programming style. For
+          online you might suggest something like multiplayer in
+          <a href="https://repl.it/" target="_blank" rel="noreferrer"
+            >repl.it</a
+          >
+          to code together, or screen sharing in Teams, Zoom, or Hangouts can
+          work as well. The teams need to schedule an hour at some point during
+          the week for the team activity. This week is pretty critical as they
+          will be setting up the project they will be working on over the next 4.5
+          weeks and learning how to use it.
+        </p>
+        <p>
+          Students should start working on the Trello tasks during this lesson as well.
+          They often start slowly. The goal should be for each team to complete
+          one card per team member per lesson (in addition to the team card). For
+          this lesson, however, you might suggest that they work as a team on the
+          "Add item to cart broken" task. They might only get that one card
+          done...and that is probably okay. It will get them into the code to
+          become familiar with it. It also acts as a bit of an icebreaker for
+          the team.
+        </p>
+        <p>
+          The rest of the cards are intended to be done as individuals...however,
+          I have had groups ask if they can work on all of them together. I have
+          allowed that with the idea that they work towards developing the
+          confidence to complete cards on their own over the next few lessons.
+        </p>
+		<p>
+          Help students to understand that the readings are important and encourage
+          them to also look to other sources when things don't make sense. The
+          book does a pretty good job, but the way it addresses some topics
+          might be confusing to some students. Help them to remember that there
+          are other options. Several are listed in this week's reading in fact.
+          The notes they turn in do not have to all be from the assigned reading.
+        </p>
+        <p>
+          Encourage the students to record their questions while reading
+          and give them to you to be addressed.
+        </p>
+        <h2>Meeting Time</h2>
+		<h3>L01 Midweek</h3>
+        <!-- <p>
+          For your meeting with them you might consider running through the
+          tools they are asked to install. You might even initialize a simple
+          Node application, and show them how to add packages. They will do more
+          of that later in the week in the team activity.
+        </p> -->
+        <p>
+          For your meeting I would review some JavaScript concepts. Array
+          methods, fetch, promises, modules would all be good to review. Point
+          out the resources in the syllabus for review! You could fetch some
+          data from something like
+          <a href="https://pokeapi.co" target="_blank">PokeApi</a>, or
+          <a href="https://www.swapi.tech" target="_blank">Swapi</a>. Use the
+          array methods to manipulate it, then build some HTML and output to the
+          page as a demo.
+        </p>
+        <p>
+          This
+          <a href="../examples/poke-demo/index.html" target="_blank">example</a>
+          shows one way you could go. It uses arrow functions...if you poll your
+          students and they feel uncomfortable with that, you could start your
+          demo with traditional anonymous functions and work into arrows. Get as
+          far as you can while giving good explanations of what you are doing.
+          You probably won't get everything in that example done.
+        </p>
+        <p>Recommended order:</p>
+        <ol>
+          <li>
+            Pull information for the types first to review fetch and promises.
+            Don't wrap the fetch call in a function initially
+            (https://pokeapi.co/api/v2/type/) Pull up the
+            <a href="https://pokeapi.co/docs/v2#types" target="_blank"
+              >documentation</a
+            >
+            to show them how we know what URL to use.
+          </li>
+          <li>
+            Then make a function to generate the HTML list to review DOM
+            manipulation, and array methods (forEach), and you can use
+            <kbd>data-</kbd> prefixed attributes to store the URL for each
+            specific type.
+          </li>
+          <li>
+            Attach a listener to the types list that will call a function called
+            <code>typeClickedHandler</code> talk about how we need to make
+            another call to the API, but the code would be very similar to what
+            we wrote before...refactor to take our previous code and make it
+            reusable with a function <code>getData(url, callback)</code>. Talk
+            about the callback. Lets us define the action done with the returned
+            data at runtime...very powerful!
+          </li>
+          <li>
+            Finish implementing the <code>typeClickedHandler</code>, talk about
+            the difference between <code>event.target</code>, and
+            <code>event.currentTarget</code>. You will need to make another
+            function to render the list of Pokemon.
+          </li>
+          <li>
+            Bring up that unknown, and shadow have no Pokemon and create a
+            function using <code>Array.filter</code> to remove them from our
+            list of types.
+          </li>
+          <li>
+            If you still have time do some CSS, including highlighting the
+            currently selected type by adding a class when it is clicked.
+          </li>
+        </ol>
+        <p>
+          Students who have come up through the new courses: CSE 121b and WDD
+          230 should have already seen everything in that demo. It should be
+          review...but many students will probably not recognize that.
+        </p>
+        <p>
+          You might also use your demo to show working with GitHub. Initialize
+          the repo...commit and push, even do a branch if you have time.
+        </p>
+
+        <!-- <p>Here are a few website examples you could talk through as well.</p>
+        <ul>
+          <li>
+            <a
+              href="https://www.google.com/maps/@43.8167458,-111.7911059,14z"
+              target="_blank"
+              rel="noreferrer"
+              >Google Maps</a
+            >
+          </li>
+          <li>
+            <a href="https://www.typeform.com/" target="_blank" rel="noreferrer"
+              >Typeform</a
+            >
+            Make sure to check out the form examples below
+          </li>
+          <li>
+            <a href="http://azumbrunnen.me" target="_blank" rel="noreferrer"
+              >Adrian Zumbrunnen</a
+            >
+          </li>
+          <li>
+            <a href="https://abc.go.com/" target="_blank" rel="noreferrer"
+              >ABC.com</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.smashingmagazine.com/2018/02/comprehensive-guide-to-mobile-app-design/"
+              target="_blank"
+              rel="noreferrer"
+              >Guide to mobile design
+            </a>
+          </li>
+        </ul> -->
+		<h3>L02 End-of-Week</h3>
+<p>
+          I would spend some time talking about the Node.js based development
+          environment we will be working in. Talk about the role of the package
+          manager (npm), bundlers (using Snowpack...I know it's not exactly a
+          bundler, but it's setup is very simple, it works well for multi-page
+          apps, will run Babel on our code as well as minify, and it doesn't add
+          a bunch of code so debugging looks cleaner), and task managers (npm).
+        </p>
+        <p>
+          The readings for this lesson are on OOP, this, and modules. So it would be
+          good to model a class based ESModule as well. Discuss DRY and the
+          importance of organizing as part of this.
+        </p>
+        <p>
+          You could code up something like this
+          <a href="../examples/expenses/index.html" target="_blank"
+            >Expense tracker</a
+          >.
+        </p>
+        <ol>
+          <li>
+            Start by creating the following files in a new directory:
+            <kbd>index.html</kbd>, <kbd>main.js</kbd>, and
+            <kbd>ExpenseTracker.js</kbd>. Add the HTML base (! tab in Vs Code)
+            with a script element bringing in <kbd>main.js</kbd>. Mention the
+            first change with modules: we need to add
+            <kbd>type="module"</kbd> to our script element.
+          </li>
+          <li>
+            Add a title to the HTML and inputs to get a description, and amount,
+            with a button to submit. Then add a div with an ID of output or
+            something.
+          </li>
+          <li>
+            In <kbd>main.js</kbd> add a listener to the button for a click. Have
+            it use a function called <kbd>submit</kbd> as the handler. Stub out
+            that function, grab the contents of the two inputs, add them to an
+            object and console.log it out so we know it is working.
+          </li>
+          <li>
+            Now to the module. In <kbd>ExpenseTracker.js</kbd> add a class
+            called <code>ExpenseTracker</code>, add a constructor and talk about
+            its role. Talk about re-usability. We might want more than one of
+            these eventually, so let's pass in some sort of identifier so we can
+            tell them apart. Use the constructor to store the label in the
+            class. Mention that the class will need to know where to output the
+            expenses, so pass in the ID of the output element.
+          </li>
+          <li>
+            Next add a method to the class called <kbd>addExpense</kbd>, it
+            should expect an expense object. It should add the expense to the
+            list of expenses (go back and add an empty array to the class in the
+            constructor) then output the expense to HTML. for now just add a
+            console.log outputting some success message.
+          </li>
+          <li>
+            At this point I would stop and finish getting the module to work
+            before finishing the functionality. Talk about
+            <code>export</code> and <code>export default</code>. Add
+            <code>export default</code> to the class. Then go back to
+            <kbd>main.js</kbd> and talk about importing. Then create an instance
+            of your class (<code
+              >const janExpenses = new ExpenseTracker('Jan', 'output')</code
+            >), and add <code>janExpenses.addExpense()</code> to the submit
+            handler. Test to make sure everything is working.
+          </li>
+          <li>
+            We will need a function to build the table we need, and another to
+            build the contents of the table body. Create two functions called
+            something like <kbd>renderTable</kbd>, and
+            <kbd>renderExpenses</kbd> in our module. <kbd>renderTable</kbd> only
+            needs to be called once, so we can do that in the constructor.
+            <kbd>renderExpenses</kbd> needs to be called every time we add a new
+            row to our expenses. I chose to add those two functions to the
+            module outside of the class. I use this as an opportunity to talk
+            about what should be in the class and publicly available, and what
+            shouldn't. (And that this is often a matter of opinion.) :)
+          </li>
+          <li>
+            Finish the render functions. Try to use examples of using the array
+            helper methods whenever possible. Test to make sure everything is
+            working.
+          </li>
+          <li>
+            Next show how easy it is to reuse our class to create a listing for
+            another month. Add a select element to the HTML to select a month.
+            Also add a new div to hold the new expense table (#febOutput). In
+            main.js create a new instance of our class:
+            <code
+              >const febExpenses = new ExpenseTracker('Feb', 'febOutput')</code
+            >, then modify the submit handler to look at the selected value in
+            our dropdown, and call the addExpense with the correct class
+            instance.
+          </li>
+          <li>
+            If you have time then you could add another class method to
+            calculate a running total and output that with each expense row. Or
+            you could spend some time on CSS.
+          </li>
+        </ol>
+        <p>
+          As you demo, take the opportunity to model debugging with the browser
+          tools, and watch for opportunities to use the array methods like
+          forEach, map, push, etc. in your code.
+        </p>
+        <!-- <p>
+          You can use something like <code>console.dir()</code> on an array to
+          show them what an array object looks like as well to introduce the
+          array methods. (<code
+            >array.includes(element) .push .pop .shift .unshift .slice .split
+            .reduce .filter array.map(callback)</code
+          >). Keep in mind that the team activity for next lesson will also be on
+          the array methods.
+        </p> -->
+        <!-- <p>
+          Your demo should show examples of using <code>const</code> and
+          <code>let</code>, and contain a review of the three methods for
+          declaring functions in JavaScript (function expression, function
+          declaration, and arrow function). You could build on the
+          <a href="../examples/calc/calc2.html" target="_blank"
+            >calculator code from the team activity</a
+          >
+          (partially converted using an object or
+          <a href="../examples/calc/calc3.html" target="_blank"
+            >fully converted to an object</a
+          >), or build a
+          <a href="random.html" target="_blank"
+            >random sentence generator as an example</a
+          >.
+        </p> -->
+	  </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>

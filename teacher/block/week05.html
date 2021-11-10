@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Instructor Preparation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>W05 (L09-10) Instructor Preparation</h1>
+        <hr />
+        <h2>Overview</h2>
+		<h3>L09 Midweek</h3>
+        <p>
+          The individual activity for this lesson will have the students create a simple
+          Administrative section of the site that will require authentication to
+          access. This is the last activity of working with the SleepOutside project.
+        </p>
+		<h3>L10 End-of-Week</h3>
+        <p>
+          Remind students that in the second half of this week they will begin working with their teams on their final
+          project.
+        </p>
+        <h2>Meeting Time</h2>
+		<h3>L09 Midweek</h3>
+        <p>
+          The readings introduced several of the HTML APIs and Canvas. It could
+          be fun to model several of those. (Quakes demo?)
+        </p>
+        <p>
+          If you are feeling adventurous and the students are up for it you
+          could run through a simple Canvas based game engine. Lots of good
+          advanced practices in here. This is based off of chapter 3 in
+          <a
+            href="https://www.sitepoint.com/premium/books/html5-games-novice-to-ninja/read/3"
+            target="_blank"
+            rel="noreferrer"
+            >HTML5 Games: Novice to Ninja</a
+          >. The book demonstrates a lot of good coding practices as it walks
+          you through building a game engine. I would recommend approaching it
+          like this:
+        </p>
+        <ol>
+          <li>
+            Start by having the class download the
+            <a href="../examples/game.zip">code</a>
+            (http://byui-cit.github.io/wdd330/examples/game.zip). A big part of
+            this exercise...and the reason we are giving them so much code to
+            start with...is to practice reviewing someone else's code to figure
+            out how it works.
+          </li>
+          <li>
+            Start in <kbd>main.js</kbd>. Point out the import...and the line
+            below it. This is not how we have generally imported things. Open
+            <kbd>index.js</kbd>. Talk about what is going on as well as the
+            destructuring {} happening on line 14.
+          </li>
+          <li>
+            Move on to the next lines...we create an instance of the
+            <code>CanvasRenderer</code> class. Open that file and look at the
+            constructor. The code there should feel comfortable to the students.
+          </li>
+          <li>
+            Next is the <code>KeyControls</code> module. Open it up and talk
+            about what it is doing. It uses getters which they may not have seen
+            before.
+          </li>
+          <li>
+            I would probably move down to the game loop next. Mention that
+            <code>setInterval</code> is one way to schedule something to happen
+            on a regular basis, but it has a few drawbacks...mainly it will
+            continue running in the background!
+            <code>requestAnimationFrame</code> is generally considered a better
+            choice. It runs on each new frame in the browser...60 / second.
+          </li>
+          <li>
+            The first few lines in there are to even out high performing and low
+            performing devices. We find how much time has passed since the loop
+            last ran, and then we can use that to figure out how much to move
+            things instead of just moving everything a fixed amount each time
+            through the loop. In a perfect system, using a fixed amount would
+            work fine because every computer would run the loop exactly 60 times
+            per second, and each loop would take the exact amount of time...but
+            reality is that there will be differences, and some computers will
+            run some of the loops slower than others.
+          </li>
+          <li>
+            Next move to the bottom of the loop and look at the canvas stuff.
+            <code>cxt.save()</code> saves the settings of the context, so we can
+            make changes in the font, color, position of the canvas coordinate
+            system, etc. and as soon as we call
+            <code>cxt.restore()</code> everything we changed will revert back to
+            the last save.
+          </li>
+          <li>
+            Talk about what needs to happen in general in a game loop: get user
+            input, move everything a bit, check for collisions, update. Let's
+            try updating our message. Uncomment the update call, and look at the
+            update function defined above. Note how you are using the DT (delta
+            time) to figure out how far to move the element.
+          </li>
+          <li>
+            Next open up the Container module and talk about it. Pay special
+            attention to the update method. Notice it will loop through all the
+            children and call their personal update if it exists. Note also the
+            use of <code>filter</code>. We are using it to remove children when
+            they are done (dead). Add an instance to main called
+            <kbd>scene</kbd>, then use the <code>add</code> method to add our
+            message to the container. Remove the call to message.update in the
+            game loop and instead call scene.update().
+          </li>
+          <li>
+            Then open up the CanvasRenderer and look at the render method. Note
+            that it uses recursion! Note also that it has a case to render a
+            Text asset. The code is very similar to what we had in the game
+            loop. We can remove the code in the game loop, and replace it with
+            <code>renderer.render(scene)</code>
+          </li>
+          <li>
+            Add a second text asset called <kbd>ship</kbd> to show how easy it
+            is to add additional game assets. Set the text property to something
+            like <kbd>&gt;()&gt;</kbd> or you could use an emoji: 🚀
+          </li>
+          <li>
+            Movement: We need an update method added to our ship. It should
+            check to see if any keys are currently pressed, and move the ship
+            accordingly. We should also check to make sure the ship does not
+            move outside of the canvas.
+            <pre><code class="lang-js">const ship = new Text("🚀", {
+  font: "30pt sans-serif",
+  fill: "DarkRed",
+  align: "center"
+});
+ship.pos.x = w / 2;
+ship.pos.y = h / 2;
+ship.update = function (dt) {
+  const { pos } = this;
+  pos.x += controls.x * dt * 200;
+  pos.y += controls.y * dt * 200;
+
+  // Confine player to the screen
+  if (pos.x < 0) pos.x = 0;
+  if (pos.x > w) pos.x = w;
+  if (pos.y < 0) pos.y = 0;
+  if (pos.y > h) pos.y = h;
+};</code></pre>
+          </li>
+          <li>
+            Bullets! Create another container called bullets. We will also need
+            to have a function to create a bullet. It could look something like
+            this:
+            <pre><code class="lang-js">// bullets
+const bullets = new Container();
+function fireBullet(x, y) {
+  const bullet = new Text("-", {
+    font: "30pt sans-serif",
+    fill: "Green",
+    align: "center"
+  });
+  bullet.pos.x = x;
+  bullet.pos.y = y;
+  bullet.update = function (dt) {
+    this.pos.x += 400 * dt;
+  };
+  bullets.add(bullet);
+  // Destroy bullets when they go out of the screen
+  bullets.children = bullets.children.filter((bullet) => {
+    return bullet.pos.x < w + 20;
+  });
+}</code></pre>
+          </li>
+          <li>
+            We will call our <code>fireBullet</code> function from the game
+            loop. We don't want to let the user fire 60 bullets/second
+            however...so we should check to see how long it has been, and after
+            a certain amount of time we allow the creation of another bullet:
+            <pre><code class="lang-js">// game state
+let lastShot = 0;
+//game loop
+function loopy(ms) {
+  requestAnimationFrame(loopy);
+  const t = ms / 1000;
+  dt = t - last;
+  last = t;
+  // fire bullet. controls.action will return true if the action key (spacebar) is currently pressed
+  if (controls.action && t - lastShot > 0.15) {
+    lastShot = t;
+    fireBullet(ship.pos.x + 24, ship.pos.y);
+  }
+...</code></pre>
+          </li>
+          <li>
+            You are probably out of time by now...but if not the next step would
+            be to add some bad guys. Another container would be perfect.
+            <pre><code class="lang-js">// baddies
+const baddies = new Container();
+function spawnBaddie(x, y, speed) {
+  const baddie = new Text("👾", {
+    font: "20pt sans-serif",
+    fill: "Blue",
+    align: "center"
+  });
+  baddie.pos.x = x;
+  baddie.pos.y = y;
+  baddie.update = function (dt) {
+    this.pos.x += speed * dt;
+  };
+  baddies.add(baddie);
+}
+scene.add(baddies);</code></pre>
+            <pre><code class="lang-js">// game state
+let lastShot = 0;
+let lastSpawn = 0;
+let spawnSpeed = 1.0;
+
+//game loop
+function loopy(ms) {
+  requestAnimationFrame(loopy);
+  const t = ms / 1000;
+  dt = t - last;
+  last = t;
+
+  if (controls.action && t - lastShot > 0.15) {
+    lastShot = t;
+    fireBullet(ship.pos.x + 24, ship.pos.y);
+  }
+  // Spawn bad guys
+  if (t - lastSpawn > spawnSpeed) {
+    lastSpawn = t;
+    // multiplying two small numbers will give us a smaller number...it keeps the speed from getting too fast :)
+    const speed = -50 - Math.random() * Math.random() * 100;
+    const position = Math.random() * (h - 24);
+    spawnBaddie(w, position, speed);
+    // Accelerating for the next spawn
+    spawnSpeed = spawnSpeed < 0.05 ? 0.6 : spawnSpeed * 0.97 + 0.001;
+  }
+
+  //move a bit
+  scene.update(dt, t);
+
+  renderer.render(scene);
+}</code></pre>
+          </li>
+          <li>
+            A final challenge you might extend...have them open up the
+            <kbd>main-completed.js</kbd> file and see if they can follow the
+            code and figure out how it all works.
+          </li>
+        </ol>
+		<h3>L10 End-of-Week</h3>
+		<p>You could use part of your meeting for questions on projects.</p>
+        <p>
+          This could be a great opportunity to talk about trying to make sense
+          of API documentation. Also discuss using the
+          <kbd>.gitignore</kbd> file to protect things like API keys.
+        </p>
+
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Instructor Preparation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>W03 (L05-06) Instructor Preparation</h1>
+        <hr />
+        <h2>Overview</h2>
+		<h3>L05 Midweek</h3>
+        <p>
+          The individual activity for this lesson is to apply more templating to our
+          site. We will pull the header and footer into files and loaf
+          them in with JavaScript.
+        </p>
+        <p>
+          The teams for the final project should meet before midweek to brainstorm and submit a list of project ideas. Help them navigate scope!
+        </p>
+		<h3>L06 End-of-Week</h3>
+		<p>
+          The reading for this lesson is on forms.
+        </p>
+        <h2>Meeting Time</h2>
+		<h3>L05 Midweek</h3>
+        <p>
+          For this meeting I would recommend spending a lot of time on
+          debugging. You could use this project
+          <a href="../examples/hikes/" target="_blank">hikes</a>
+          as a starting point. It has a lot of errors in it. Students can
+          download it from here:
+          <a href="https://byui-cit.github.io/wdd330/examples/hikes.zip"
+            >https://byui-cit.github.io/wdd330/examples/hikes.zip</a
+          >
+        </p>
+        <p>
+          Have them download it, run it, and start finding and eliminating
+          bugs. You could do the first few together then turn them loose on
+          some...or stay together...up to you. Emphasize a few things that
+          students seem to struggle with:
+        </p>
+        <ol>
+          <li>
+            Figuring out how to navigate through a project made up of multiple
+            files and modules. They get lost easily and have a hard time
+            following the flow. Open index.html and show the script src...this
+            is the entry point. Open that file and set a breakpoint.
+          </li>
+          <li>Once the code is paused remind how to step over, step in.</li>
+          <li>
+            Explain how we can follow the execution of an application with
+            stepping. You might step into a few functions and then draw
+            attention to the call stack and explain the significance.
+          </li>
+          <li>
+            Inspect the values of variables and objects, talk about how we are
+            looking to see if the values match what we expect...if not, how can
+            we figure out why?
+          </li>
+
+          <li>
+            Discuss examples of ways to avoid errors in our code. Such as if
+            statements checking for the existence of data before we try to use
+            it and using try/catch blocks to deal with errors more gracefully.
+          </li>
+        </ol>
+      	<h3>L06 End-of-Week</h3>
+<p>
+          This demo should review custom request headers, forms, and
+          making POST requests instead of the simple GETs we have been doing. We
+          do need some sort of a backend to do this though...this will require
+          some special setup...see below.
+        </p>
+        <p>
+          ...And here is a link to the project...<a
+            href="https://github.com/byui-cit/wdd330/tree/main/examples/blog"
+            target="_blank"
+            >simple blog</a
+          >. The link this lesson is to the repo...it won't function if the server
+          part is not running...
+        </p>
+        <ol>
+          <li>
+            We need a backend to make our POST requests to. We can use
+            <kbd>json-server</kbd> for this. Have the students create a
+            directory for this lesson's demo. Inside of that create a
+            <kbd>server</kbd> directory. Navigate to the directory in the
+            terminal and type
+            <pre><code class="lang-bash">npm init -y</code></pre>
+            to create a new node-based project. Then type
+            <pre><code class="lang-bash">npm install --save-dev json-server</code></pre>
+            Finally open the <kbd>package.json</kbd> file and add this line to
+            the <kbd>scripts</kbd> section:
+            <pre><code class="lang-json"
+              >"start": "json-server --watch ./database.json"</code
+            ></pre>
+          </li>
+          <li>
+            Create one more file in the <kbd>server</kbd> directory:
+            <kbd>database.json</kbd> Then add the following line in that file:
+            <kbd>{ { "posts": [] }</kbd>
+          </li>
+          <li>
+            Because the LiveServer extension watches the project directory for
+            changes to know when to reload, this database file will cause
+            problems for us unless we ignore it since it will get changed each
+            time we POST something to our server. Have the students type
+            <code>cmd/ctrl-shift-p</code> then enter "open settings". They are
+            looking for the "Preferences: Open Settings (UI)" option. Select it
+            then go to "Extentions->Live Server Config->Settings: Ignore Files.
+            Then click on the "Edit in settings.json". Add a line to ignore
+            .json files in the server directory. It should look like this when
+            they are done:
+            <pre><code class="lang-json">"liveServer.settings.ignoreFiles": [
+    "**/server/*.json",
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts"
+]</code></pre>
+          </li>
+          <li>
+            Start up our server by making sure you are in the
+            <kbd>server</kbd> directory in the command line and typing
+            <pre><code class="lang-bash">npm run start</code></pre>
+            Remind the students that to end this process they should click in
+            the command line to focus it...then type 'ctrl-c'.
+          </li>
+          <li>
+            Up a level from the <kbd>server</kbd> directory create a few more
+            files: index.html, main.js, DataService.js. Add some HTML to the
+            index.html file...and a script element to link it to main.js
+          </li>
+          <li>
+            Open DataService.js and create and export a class
+            <code>export default class DataService</code>. Pass into the
+            constructor the endpoint the instance will be used for. Create two
+            methods: <code>getData()</code>, and <code>postData(data)</code> We
+            will code up the post one first since otherwise there will be
+            nothing to get.
+          </li>
+          <li>
+            Set a variable at the top of our module for the base URL of our
+            server...we could also reuse our convertToJson method
+            <pre><code class="lang-js">
+const baseUrl = 'http://localhost:3000/';
+async function convertToJson(res) {
+    const data = await res.json();
+    if (res.ok) {
+      return data
+    } else {
+      throw { name: 'servicesError', message: data };
+    }
+}</code></pre>
+          </li>
+          <li>
+            Spend a few minutes talking about REST. We have been doing GET
+            requests up until now...since that is the default for Fetch. Talk
+            about doing POSTs. We will need to set some custom request options.
+            Below is a sample:
+            <pre><code class="lang-js">const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+}
+const results = await fetch(baseUrl + this.endpoint, options).then(convertToJson);
+return results;</code></pre>
+          </li>
+          <li>
+            Test the post method...check <kbd>database.json</kbd> to make sure
+            the data is there. Then move on to the
+            <code>getData()</code> method.
+          </li>
+          <li>
+            Once getData is working move into the index.html file...create a
+            form, add fields for name, description, and category. Talk about
+            HTML validation...what we get for free, and add a submit button.
+          </li>
+          <li>
+            In <kbd>main.js</kbd> add a <code>submit</code> listener to the
+            form. Talk about preventDefault, we are submitting the form through
+            AJAX so we don't want the default behavior to happen.
+          </li>
+          <li>
+            You might mention that you can manually access the HTML form
+            validation tools in JS: <code>form.checkValidity()</code> and
+            <code>form.reportValidity()</code>
+          </li>
+
+          <li>
+            What do we send to the server? We could go through and
+            "document.querySelector" out all the form fields and build our
+            object by hand...or we can leverage
+            <kbd>FormData</kbd>. FormData creates a nice name:value pairing of
+            each input in our form. Advantage: will easily capture all of the
+            form fields and does the heavy lifting for you if you are uploading
+            files through your form. Disadvantage: not all servers want
+            FormData. Ours in fact wants JSON...but it is pretty easy to convert
+            it for simple forms.
+            <pre><code class="lang-js">
+function formDataToJSON(formElement) {    
+    let formData = new FormData(formElement);
+    // Object.fromEntries creates a new object made from an iterable list like an Array or Map
+    // Object.entries takes an object and converts it into an Array that is iterable.
+    const converted = Object.fromEntries(formData.entries());
+    // if we have radios or checkboxes which share the same name
+      converted.tags = formData.getAll("tags");
+    return converted;
+}
+          </code></pre>
+          </li>
+        </ol>
+	  </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>
