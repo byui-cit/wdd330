@@ -18,9 +18,8 @@
             render with template
 
 */
-import SwapiHelper from './SwapiHelper.js';
+import SwapiHelper from "./SwapiHelper-template.js";
 
-
-const myHelper = new SwapiHelper('output', 'films');
+const myHelper = new SwapiHelper("output", "films");
 
 myHelper.init();
