@@ -81,6 +81,9 @@ main {
 .film-list li:hover {
   text-decoration: underline;
 }
+.active {
+  background-color: var(--orange);
+}
 
 .detail-list {
   list-style-type: none;

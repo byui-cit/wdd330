@@ -1,10 +1,16 @@
 const baseUrl = "https://swapi.dev/api/";
-
+function setActive(parent, target) {
+  // will add a class of active to the list item clicked...and will remove it from all others.
+  const children = [...parent.childNodes];
+  children.forEach((node) => node.classList.remove("active"));
+  target.classList.add("active");
+}
 function clickableList(list, elementId, callback) {
   const element = document.getElementById(elementId);
   element.innerHTML = list.map((film) => `<li>${film.title}</li>`).join("");
   element.addEventListener("click", (e) => {
     console.log(e.target);
+    setActive(element, e.target);
     callback(e.target.innerText);
   });
 }
