@@ -198,7 +198,7 @@ export default class CheckoutProcess {
                 products from for submitting our orders, but a different
                 endpoint. The URL should be:
               </p>
-              <pre><code class="lang-js">http://157.201.228.93:2992/checkout</code></pre>
+              <pre><code class="lang-js">http://server-nodejs.cit.byui.edu:3000/checkout</code></pre>
               <p>
                 Because we need to send the order information we will need to
                 make a <kbd>POST</kbd> request to the server instead of the
@@ -371,8 +371,8 @@ function formDataToJSON(formElement) {
                 The method should POST that object. You will need to create a
                 custom options object and pass it in with your fetch. (Remember
                 to stringify your object before sending it!) to the address
-                above (http://157.201.228.93:2992/checkout) and return the
-                server response. The response will be JSON.
+                above (http://server-nodejs.cit.byui.edu:3000/checkout) and
+                return the server response. The response will be JSON.
               </p>
               <div class="callout">
                 <p>
