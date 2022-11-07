@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 2</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          This activity will review the tools introduced last week, and begin
+          the process of making our application scalable by adding dynamically
+          generated product detail pages, and more organization using ESModules.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+        <p>
+          There are many spots where code examples have been given. To get the
+          most out of this activity, do not look at the examples until your
+          group has given that section a try. Then after you look at the
+          example, resist the temptation to copy/paste. Use the examples to get
+          correction, or help you get unstuck...do not just use them to get it
+          done.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team2: Dynamic product detail pages" task...then move it to
+                'Doing'. Read the details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                GitHub before proceeding. Next they should create a new branch
+                called <kbd>initials--team2</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team2</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Plan</h3>
+              <p>
+                We currently have one HTML file for each product we offer. This
+                works okay when there are only 4 products, but we have plans to
+                expand our inventory. We cannot continue with this model. The
+                product pages all follow a similar template. There should be one
+                HTML file that loads the details about the requested product
+                through JavaScript.
+              </p>
+              <p>
+                Additionally as our code becomes more complex we will be well
+                served by organizing it using ESModules.
+              </p>
+              <ul>
+                <li>
+                  Our goal will be to eventually have a one to one relationship
+                  with views/pages and modules. Then any functionality that
+                  needs to be shared between modules can be placed in a utility
+                  modules.
+                </li>
+                <li>
+                  We will begin now by creating a module
+                  (<kbd>ProductDetails.mjs</kbd>) to contain the code we will
+                  need to dynamically produce our product detail pages.
+                </li>
+
+                <li>
+                  It's very likely that other parts of our application will need
+                  to make requests for product data. That functionality has
+                  already been exposed in the <kbd>ProductData.mjs</kbd> module.
+                </li>
+                <li>
+                  There will likely be other functionality that needs to be
+                  shared between parts of the application, you should notice
+                  that there is already a
+                  <kbd>utils.mjs</kbd> module to hold those.
+                </li>
+              </ul>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <h3>product-details.html</h3>
+              <p>
+                Instead of having an HTML file per product like we do currently,
+                for scalability we would like one HTML file for all products
+                that has some JavaScript in it to load the details. We need to
+                create this HTML file. Open one of your current product pages in
+                the editor, and file->Save As-> <kbd>/product_pages/index.html</kbd>
+              </p>
+              <div class="callout">
+                <h3>IMPORTANT!</h3>
+                <p>
+                  Make sure that you are working in the <kbd>src</kbd> directory
+                  and NOT the <kbd>dist</kbd> directory! The build directory
+                  will get erased and completely rebuilt each time you run
+                  <kbd>npm run build</kbd>. Think of <kbd>dist</kbd> as the
+                  production version of your code. <kbd>src</kbd> is your
+                  working directory. You should not need to run
+                  <kbd>npm run build</kbd> very often...like once a week after
+                  you have merged some branches.
+                </p>
+                <p>
+                  When you run <kbd>npm run start</kbd> it will use the files in
+                  <kbd>src</kbd>.
+                </p>
+              </div>
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Review <kbd>ProductData.mjs</kbd></h3>
+              <p>Open up the <kbd>ProductData.mjs</kbd> module file. Note a few things: </p>
+              <details>
+                <summary>
+                  Click for example code (<kbd>productData.js</kbd>)
+                </summary>
+
+                <pre><code class="lang-js line-numbers">function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error('Bad Response');
+  }
+}
+
+export default class ProductData  {
+  constructor(category) {
+    this.category = category;
+    this.path = `../json/${this.category}.json`;
+  }
+  getData() {
+    return fetch(this.path)
+      .then(convertToJson).then((data) => data);
+  }
+  async findProductById(id) {
+    const products = await this.getData()
+    return products.find((item) => item.Id === id);
+  }
+}
+                  </code></pre>
+                  </details>
+              <ol>
+                <li>In order to make our module portable and easy to use, it uses a class to expose all the public facing code from our module. It is called <code>ProductData</code>, and it is the default export.</li>
+                <li>We will eventually want to use this class for more than
+                    just tents. We can do that by using the constructor to the
+                    class. If we pass in a category name (i.e. 'tents'), the class will store it
+                    and also use it to build a path to the correct file (i.e.
+                    <code>this.path = `../json/${this.category}.json`;</code> ).</li>
+                    <li>
+                        Notice the <code>getData()</code> method compared to the
+                        <code>findProductById()</code> method. One uses just promises
+                        and <code>.then()</code>, the other uses
+                        <a
+                          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+                          target="_blank"
+                          >async/await</a
+                        >. Many find the async/await syntax to be easier to read (and
+                        write) than the typical <code>.then()</code> based promise
+                        handling.
+                      </li>
+                      <li>If the syntax on line 16 <code>(data) => data</code> is
+                        confusing you may want to spend more time reading about arrow
+                        functions in JavaScript. You could re-write that short
+                        callback function like this using a more traditional anonymous
+                        function declaration:
+                      
+                      <pre><code class="lang-js">function(data) { return data; }</code></pre></li>
+                      <li> The callback on line 20 is similar...<code
+                        >(item) => item.Id === id</code
+                      >. Another way to write that could be:
+                    </p>
+                    <pre><code class="lang-js">function(item) { return item.Id === id; }</code></pre>
+                    <p>
+                      It is very common to see short functions that just return some
+                      value or expression written using the arrow function syntax.
+                    </p></li>
+          
+                <li>
+                    If you open up the <kbd>product.js</kbd> file you will see how the <kbd>ProductData.mjs</kbd> module is used. First note that we have to import it, then we can create an instance of our class...
+                    <pre><code class="lang-js">
+import ProductData from './ProductData.js';
+const dataSource = new ProductData('tents');
+                        </code></pre>
+                  
+                  <p class="callout">
+                    Remember that to use ESModules in JavaScript we have to tell
+                    the browser we want to use modules...we do that with
+                    <code>type="module"</code> in the script tag in the HTML.
+                    If you look at any of the HTML files in the <kbd>product-pages</kbd> directory you will see that this has already been added.
+                  </p>
+                </li>
+              </ol>
+   
+              <!-- END STEP -->
+            </li>
+
+            <li>
+              <h3>URL Parameters</h3>
+              <p>
+                We need to have some way of passing in the product that we want
+                to show the details for. A common way to do this is through a
+                <a
+                  href="https://www.sitepoint.com/get-url-parameters-with-javascript/"
+                  target="_blank"
+                  >URL Parameter</a
+                >. If we create a link like this:
+                <code>&lt;a href="product-details.html?product=880RR" &gt;</code
+                >. We have embedded the id of one of our products into the link.
+                When the page loads it will have access to that information. If
+                you read through that article it suggests the following lines of
+                code to retrieve it:
+              </p>
+              <pre><code class="lang-js">const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const product = urlParams.get('product')
+            </code></pre>
+              <p>
+                Use those lines to create a new function in the
+                <kbd>utils.js</kbd> file called
+                <code>getParams(param)</code> that we can use to get a parameter
+                from the URL when we need to. (Don't forget to return the
+                parameter!)
+              </p>
+
+              <p>
+                Import your new function into <kdb>product.js</kdb>. Open
+                <kbd>/index.html</kbd> and change the link to the first product
+                page from
+                <code>href="product_pages/marmot-ajax-3.html"</code> to
+                <code
+                  >href="product_pages/product-details.html?product=880RR"</code
+                >.
+              </p>
+              <p class="callout">
+                Where did the <code>880RR</code> come from? If you look in the
+                <kbd>json/tents.json</kbd> file you will see that each record in
+                there has an id. <code>880RR</code> is the id for the first
+                tent!
+              </p>
+              <p>
+                Then test your getParams function in <kbd>product.js</kbd> to
+                see if you can get the product id successfully when someone
+                navigates to the product-details page. This would be a good time
+                to test out our <code>findProductById</code> method as well.
+              </p>
+              <details>
+                <summary>
+                  Click for example code (<kbd>product.js</kbd>)
+                </summary>
+                <pre><code class="lang-js">
+import ProductData from './ProductData.mjs';
+import { setLocalStorage, getParam } from './utils.mjs';
+const dataSource = new ProductData('tents');
+
+const productId = getParam('product');
+
+console.log(dataSource.findProductById(productId));
+                </code></pre>
+              </details>
+              <p>
+                You should also update the rest of the links in
+                <kbd>/index.html</kbd> to match the first one. You can look up
+                the IDs in the <kbd>tents.json</kbd> file.
+              </p>
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>ProductDetails.mjs</h3>
+              <p>Create a new file in the <kbd>js</kbd> folder called <kbd>ProductDetails.mjs</kbd></p>
+              <p>
+                We should model the <kbd>ProductDetails.mjs</kbd> file similarly
+                to the <kbd>ProductData.mjs</kbd> file by placing the public
+                methods in a class. The following methods are recommended:
+              </p>
+              <ol>
+                <li>
+                  <code>constructor()</code>: this is recommended for classes
+                </li>
+                <li>
+                  <code>init()</code>: there are a few things that need to
+                  happen before our class can be used. Some will happen in the
+                  constructor and will happen automatically. Others it is nice
+                  to have more control over and so we will place them into an
+                  init method.
+                </li>
+                <li>
+                  <code>addToCart()</code>: This is the function that is
+                  currently in <kbd>product.js</kbd>. We need to move it here
+                </li>
+                <li>
+                  <code>renderProductDetails()</code>: method to generate the
+                  HTML to display our product.
+                </li>
+              </ol>
+              <p>
+                It will be nice for our product to keep track of important
+                information about itself. I would recommend something like this
+                for your constructor method:
+              </p>
+              <pre><code class="lang-js">constructor(productId, dataSource){
+  this.productId = productId;
+  this.product = {};
+  this.dataSource = dataSource;
+}</code></pre>
+              <p>
+                With that information the product will know which id it has, it
+                will have a source to get the information it needs when the time
+                comes, and will have a place to store the details we need to
+                show once we retrieve them.
+              </p>
+              <p>
+                To use our class we need to pull everything from the last few
+                steps together in the <kbd>product.js</kbd> file. Once we get
+                everything refactored that file should look something like this:
+              </p>
+              <pre><code class="lang-js">import ProductData from './ProductData.js';
+import ProductDetails from './ProductDetails.mjs';
+import { setLocalStorage, getParam } from './utils.mjs';
+
+const productId = getParam('product');
+const dataSource = new ProductData('tents');
+
+const product = new ProductDetails(productId, dataSource);
+product.init();</code></pre>
+              <p>
+                Notice we import in the code we need from our modules. Then we
+                get the id of our product using our helper function
+                <code>getParams</code>. We create an instance of our
+                <code>ProductData</code> data class with the URL it should use
+                to look for products. Then we use both of those to create an
+                instance of our <code>ProductDetails</code> class so that it has
+                everything it needs to work. Finally we call our
+                <code>init()</code> method using our class instance to finish
+                setting everything up.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Finish it up!</h3>
+              <p>
+                Complete this activity by writing the rest of the code to
+                display our product.
+              </p>
+              <ul>
+                <li>
+                  <code>renderProductDetails()</code>: Use the HTML in the
+                  <kbd>/product_pages/index.html</kbd> as a template to create this
+                  function
+                </li>
+                <li>
+                  <code>addToCart()</code>: move the code from
+                  <kbd>product.js</kbd> for this function and make any changes
+                  necessary to make it work.
+                </li>
+                <li>
+                  <code>init()</code>: this function needs to do a few things,
+                  copy/paste the following into your code to use as a guide for
+                  finishing it:
+                  <pre><code class="lang-js">async init() {
+  // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
+  // once we have the product details we can render out the HTML
+  // once the HTML is rendered we can add a listener to Add to Cart button
+  // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
+  document.getElementById('addToCart')
+          .addEventListener('click', this.addToCart.bind(this));
+}</code></pre>
+                </li>
+              </ul>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructor's Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for at least one hour. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/team2/src"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, reviewed the instructor's
+          solution, and gotten your code working, the driver should commit and
+          push their changes (don't forget to lint and format your code before
+          committing!), then submit a pull request for this branch. Then review
+          the pull request as a team, close it, and merge the branch back into
+          Main. Finally, someone should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>
