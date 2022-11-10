@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 5</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          Many of the changes we have already made were to prepare the site to
+          be able to scale up to as many products as we would like. In this
+          activity we will add products organized from 4 categories: Tents,
+          Sleeping Bags, Backpacks, and Hammocks. We will need to change the
+          index page to show our four categories, and then build a dynamic
+          product-listing page that will pull the products from an API, and
+          display them.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team5: Expand inventory" task...then move it to 'Doing'. Read
+                the details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                GitHub before proceeding. Next they should create a new branch
+                called <kbd>initials--team5</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team5</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Refactor</h3>
+              <p>
+                Create a new directory in <kbd>src</kbd> called
+                <kbd>product-listing</kbd>, and create an HTML file in it. Also
+                create a <kbd>product-listing.js</kbd> file in the JS directory.
+                Add the HTML to our new page to get the foundation up...header,
+                footer, styles, etc. (Hint...you may just want to use
+                src/index.html as a starting point. Then remove the banner and
+                text.)
+              </p>
+              <p>
+                Move the JS from the <kbd>main.js</kbd> that is responsible to
+                render our list of products to the new
+                <kbd>product-listing.js</kbd> file. Open up
+                <kbd>product-listing/index.html</kbd> in the browser to make
+                sure the tents we had before are still rendered.
+              </p>
+              <p class="callout">
+                You will need to fix some paths to get everything working
+                correctly...your page will not be able to find the CSS file or
+                the new JS file we made until you do. Do not worry about fixing
+                the image URLs yet. Those will change again anyway and we will
+                fix those later.
+              </p>
+              <p>
+                Finally add a grid of 4 boxes to the src/index.html page, one
+                for each category. They should look something like this:
+              </p>
+              <div class="fig-block">
+                <figure>
+                  <img
+                    src="../images/product-categories-grid.png"
+                    alt="index product grid."
+                  />
+                </figure>
+              </div>
+              <p>
+                Here are links to the icons. The icons are being used with a
+                Creative Commons license so we need to give credit to the
+                creator. We will do that in this case by adding it to the alt
+                attribute:
+              </p>
+              <ul>
+                <li>
+                  <a
+                    href="../images/category-icons/noun_Tent_3544767.svg"
+                    target="_blank"
+                    >Tent</a
+                  >
+                  (alt="Tent Icon from Noun Project: Mustofa Bayu")
+                </li>
+                <li>
+                  <a
+                    href="../images/category-icons/noun_Sleeping Bag_3544775.svg"
+                    target="_blank"
+                    >Sleeping Bag</a
+                  >
+                  (alt="Sleeping Bag Icon from Noun Project: Mustofa Bayu")
+                </li>
+                <li>
+                  <a
+                    href="../images/category-icons/noun_carrier bag_3544771.svg"
+                    target="_blank"
+                    >Backpack</a
+                  >
+                  (alt="Backpack Icon from Noun Project: Mustofa Bayu")
+                </li>
+                <li>
+                  <a
+                    href="../images/category-icons/noun_Hammock_791143.svg"
+                    target="_blank"
+                    >Hammock</a
+                  >
+                  (alt="Hammock Icon from Noun Project: Paul Richard")
+                </li>
+              </ul>
+              <p>
+                Each of the category elements should link to
+                <kbd>product-listing/index.html</kbd>. Make sure to pass the
+                correct category as part of the URL. (tents, backpacks,
+                sleeping-bags, hammocks).
+              </p>
+              <p>
+                If you need a reminder of how to add a URL parameter to a link
+                check out the template function in <kbd>ProductList.mjs</kbd>.
+                It has an example of passing a parameter.
+              </p>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Pulling from an API</h3>
+              <p>
+                Next we need to modify our code to pull the product data from an
+                API instead of from the local JSON file. Because of the way we
+                have structured our code this should be fairly easy.
+              </p>
+              <p>
+                Open up <kbd>ProductData.mjs</kbd>. In the constructor we set a
+                path for the products. That path was based off of the category
+                (up until now tents) and would later be used to pull the data.
+                With the API we actually don't need to set the category in our
+                DataSource anymore. We can pass it in when we need it. This will
+                make our DataSource more flexible. Add the following line to the
+                top of the file:
+              </p>
+              <pre><code class="lang-js">const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'</code></pre>
+              <p>
+                Then remove the category and path from the constructor. Then in
+                the <code>getData</code> method add a parameter of
+                <code>category</code>. Lets also take this opportunity to change
+                our fetch to use async/await. Change the
+                <code>getData</code> function to look like this:
+              </p>
+              <pre><code class="lang-js">async getData(category) {
+    const response = await fetch(baseURL + `products/search/${category}`);
+    const data = await convertToJson(response);
+    return data.Result;
+}</code></pre>
+              <p class="callout">
+                Why <code>data.Result</code> at the end of that? It used to be
+                simply <code>data</code>. The data sent back from the API is
+                structured differently. We will have some other corrections to
+                make because of this as well.
+              </p>
+              <p>
+                Open <kbd>ProductList.js</kbd> We will need to change the line
+                in the <code>init()</code> method where we get our data. It
+                should look like this after our changes:
+              </p>
+              <pre><code class="lang-js">const list = await this.dataSource.getData(this.category);</code></pre>
+              <p>
+                You should now be seeing products listed if you click on one of
+                the links, but there are two issues. The first is that no images
+                are showing. The second is that all the links are showing the
+                same list of products.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Pulling the correct products</h3>
+              <p>
+                You should be passing category in the URL to the
+                <kbd>product-listing</kbd> page. We need to retrieve it from the
+                parameter in <kbd>product-listing.js</kbd>. Then send it into
+                the <code>ProductList</code> class. Remember that we created a
+                method in <kbd>utils.js</kbd> earlier to grab parameters from a
+                URL.
+              </p>
+              <div class="callout">
+                We have been moving a lot of things around. At this point your
+                <kbd>product-list.js</kbd> file should look something like this:
+
+                <pre><code class="lang-js">import ProductData from './ProductData.js';
+import ProductList from './ProductList.js';
+import { loadHeaderFooter, getParam } from './utils.js';
+
+loadHeaderFooter();
+
+const category = getParam('category');
+// first create an instance of our ProductData class.
+const dataSource = new ProductData();
+// then get the element we want the product list to render in
+const listElement = document.querySelector('.product-list');
+// then create an instance of our ProductList class and send it the correct information.
+const myList = new ProductList(category, dataSource, listElement);
+// finally call the init method to show our products
+myList.init();</code></pre>
+              </div>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Fix the Product Detail page.</h3>
+              <p>
+                If you try and click on on of the products to see the
+                details...you will notice it is broken. We will need to make
+                some of the same changes to <kbd>product.js</kbd> and
+                <kbd>productDetail.js</kbd> that we made for the product
+                listing. Get the detail pages working again.
+              </p>
+              <div class="callout">
+                <p>
+                  There are a few places we need to check to do this. We should
+                  make a list:
+                </p>
+                <ol>
+                  <li>
+                    Because we moved the product listing page into a directory
+                    the URL listed in the template for a product card in
+                    <kbd>product-listing/index.html</kbd> will be wrong. That
+                    needs to be fixed first.
+                  </li>
+                  <li>
+                    We removed the requirement for the DataSource to be set to a
+                    specific category, and we updated the
+                    <code>getData</code> method. Now we need to fix the
+                    <code>findProductById</code> method. Before we did not have
+                    the ability to request a specific product, we could only
+                    request all products. The API we are using now has the
+                    ability to query directly for this. The URL for the API
+                    endpoint you need to hit is:
+                    <kbd>baseURL + `product/${id}`</kbd>
+                  </li>
+                  <li>
+                    Once you get it working you will find that the image is
+                    broken. We need to figure out why. See below for more on
+                    this.
+                  </li>
+                </ol>
+              </div>
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Fix the images</h3>
+              <p>
+                The data structure of our products changed slightly. This is why
+                the images are broken. Analyze the data coming back from the API
+                and figure out how to fix this issue. (You can use the
+                <kbd>PrimaryMedium</kbd> image for the productList, and
+                <kbd>PrimaryLarge</kbd> for the productDetail for now.)
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Fix the title</h3>
+              <p>
+                Title of the page currently says: Top Products. Add the category
+                to that so that it looks like this: Top Products: Tents (if the
+                tent category link was selected);
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructor's Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/vite-team5/src"
+            target="_blank"
+            rel="noreferrer noopener"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, and reviewed the instructor's
+          solution, the driver should commit and push their changes, then submit
+          a pull request for this branch. Then review the pull request as a
+          team, close it, and merge the branch back into Main. Finally, someone
+          should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>
