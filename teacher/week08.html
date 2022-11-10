@@ -49,6 +49,57 @@
           Alternatively you could model requesting a token with a
           username/password and using it in requests.
         </p>
+        <p>
+          There will probably also be questions on the higher order function
+          reading from last week. Take some time to give examples of closures,
+          possibly dipping into Factory functions. Talk about the difference
+          between classes and factory functions.
+        </p>
+        <pre><code class="lang-js">
+// simple closure example
+function counterCreator() {
+  let count = 0;
+  return () => {
+    console.log(count)
+    count++;
+  }
+}
+const counter = counterCreator();
+        </code></pre>
+        <pre><code class="lang-js">
+// currying example
+function multiply(a) {
+  
+  return (b) => {
+    return a * b;
+  }
+}
+const multiplyBy10 = multiply(10);
+multiplyBy10(4); // 40
+                  </code></pre>
+        <pre><code class="lang-js">
+// factory function
+function Ship(name, level) {
+  let health = level * 2;
+  const getHealth = () => health;
+  const getName = () => name;
+  const takeDmg = x => {
+    health -= x;
+    if(health <=0 ) { die(); }
+  }
+  const die = () => { console.log('you have died'); }
+  return {getHealth, getName, takeDmg};
+}
+const myShip = Ship('Hero', 2);
+const baddie = Ship('Enemy', 1);
+      </code></pre>
+        <p>
+          Here is another example for a fetch wrapper:
+          <a
+            href="https://www.freecodecamp.org/news/javascript-closures-explained-with-example/"
+            >freecodecamp</a
+          >
+        </p>
       </main>
       <!-- end #article -->
     </div>
