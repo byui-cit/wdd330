@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team 6</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 6</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>The next step for our site is to build out the checkout process.</p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team6: Checkout" task...then move it to 'Doing'. Read the
+                details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                Github before proceeding. Next they should create a new branch
+                called <kbd>initials--team6</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team6</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>The Cart</h3>
+              <p>
+                Check your cart page to make sure that it is correctly
+                displaying a total. If it is not then someone in your group
+                should really complete that card in Trello. :)
+              </p>
+              <p>
+                Add a <kbd>Checkout</kbd> button/link that will take us to the
+                checkout page.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Checkout page</h3>
+              <p>
+                Next we need to build a form on the checkout page to gather the
+                required information from our users. We will need the following:
+              </p>
+              <ol>
+                <li>Customer Name</li>
+                <li>
+                  Address (we will assume billing and shipping are the same)
+                </li>
+                <li>Credit card number, expiration date, and security code.</li>
+                <li>Submit button</li>
+              </ol>
+              <p>
+                The form should not submit unless all of the fields are filled
+                out. You should also show an order summary on this page. An
+                example of what this page could look like is below.
+              </p>
+              <div class="fig-block">
+                <figure>
+                  <img
+                    src="../images/sleepoutside-checkout-form.png"
+                    alt="checkout form."
+                  />
+                </figure>
+              </div>
+              <p>
+                Notice that the last section is just displaying that
+                information, but not in inputs. We need that information to be
+                sent to the server, but we don't want the users to be able to
+                edit that themselves! In the function that prepares the data to
+                send to the server that we will write we will need to add those
+                totals back in.
+              </p>
+              <p>
+                In a real site the server should verify the totals as well to
+                make sure that the user doesn't try anything funny.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Order summary</h3>
+              <p>
+                We need to fill in the information in the summary section. the
+                Item Subtotal will come from the items in the cart, and then we
+                need to add Tax and shipping costs and calculate the order
+                total. Once the user supplies a zip code you should calculate
+                both shipping and tax and display it in the order summary to the
+                user.
+              </p>
+              <div class="callout">
+                <p>
+                  Normally tax and shipping would be calculated according to the
+                  destination address. There would be a look up process that
+                  would figure out the right values to use. To keep ours simple
+                  we will use the same formulas for all orders.
+                </p>
+                <dl>
+                  <dt>Tax</dt>
+                  <dd>Use 6% for sales tax.</dd>
+                  <dt>Shipping</dt>
+                  <dd>
+                    Use $10 for the first item plus $2 for each additional item
+                    for shipping.
+                  </dd>
+                </dl>
+              </div>
+              <ol>
+                <li>
+                  Create a <kbd>CheckoutProcess</kbd> module, and add a method
+                  to calculate and display the item subtotal. This should get
+                  called when the page loads.
+                </li>
+                <li>
+                  Then create a second method to calculate and display shipping,
+                  tax, and order total. This method should get called after the
+                  user fills in the Zip code.
+                </li>
+              </ol>
+              <p>
+                Below is an example of what your
+                <code>CheckoutProcess</code> class might look like
+              </p>
+              <details>
+                <summary>CheckoutProcess.mjs</summary>
+                <pre><code class="lang-js">
+export default class CheckoutProcess {
+  constructor(key, outputSelector) {
+    this.key = key;
+    this.outputSelector = outputSelector;
+    this.list = [];
+    this.itemTotal = 0;
+    this.shipping = 0;
+    this.tax = 0;
+    this.orderTotal = 0;
+  }
+  init() {
+    this.list = getLocalStorage(this.key);
+    this.calculateItemSummary();
+  }
+  calculateItemSummary() {
+    // calculate and display the total amount of the items in the cart, and the number of items.
+    
+  }
+  calculateOrdertotal() {
+    // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
+    
+    // display the totals.
+    this.displayOrderTotals();
+  }
+  displayOrderTotals() {
+    // once the totals are all calculated display them in the order summary page
+    
+  }
+  
+}
+                </code></pre>
+              </details>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Refactor ProductData</h3>
+              <p>
+                We will use the same server we used last week to pull the
+                products from for submitting our orders, but a different
+                endpoint. The URL should be:
+              </p>
+              <pre><code class="lang-js">http://server-nodejs.cit.byui.edu:3000/checkout</code></pre>
+              <p>
+                Because we need to send the order information we will need to
+                make a <kbd>POST</kbd> request to the server instead of the
+                <kbd>GET</kbd> request we have been using.
+              </p>
+              <p>
+                We are already making requests to this server for product data
+                through our <kbd>ProductData</kbd> module. This would be the
+                logical place to add the functionality to submit an order. The
+                name "ProductData" becomes less descriptive of what is going on
+                in the module now however. It would probably be better with the
+                name <kbd>ExternalServices</kbd>. That is more descriptive.
+                Refactor your code to make this change.
+              </p>
+              <div class="callout">
+                <p>
+                  If you panicked a bit when you read that you are paying
+                  attention. Renaming something that you have already used in
+                  multiple places is not something to do lightly, but sometimes
+                  it is necessary. Because of this, good development tools will
+                  have built-in ways to help you. VS Code is a good tool.
+                </p>
+              </div>
+              <ol>
+                <li>
+                  Commit and push your changes before proceeding. That will make
+                  it easy to revert if something goes wrong :)
+                </li>
+                <li>
+                  Open <kbd>ProductData.mjs</kbd> and select the word
+                  <code>ProductData</code> in the class definition. Right click
+                  on it and select "Rename symbol" in the menu.
+                </li>
+                <li>
+                  Enter 'ExternalServices' and hold down the shift key while
+                  hitting enter/return. This will preview the changes. It should
+                  open up a new panel in the editor where it will show you
+                  everywhere it found the name that you want to change. If you
+                  left-click on one of the lines it will open the file side by
+                  side with how it was before the changes and how it will be
+                  after. Review each change. If the changes looks good then
+                  right-click on the same line in the Preview panel and select
+                  'apply Refactoring'. Then go File->Save All
+                </li>
+                <li>
+                  Next we need to adjust the filename of the module so that it
+                  reflects the change. If you right-click on the file in the
+                  file explorer in VS Code and select rename there...you should
+                  get a pop-up message that asks if you want to rename the
+                  imports as well. Say yes! File->Save All again
+                </li>
+                <li>
+                  Finally just to make sure nothing was missed...on the side of
+                  your VsCode window click on the magnifying glass icon
+                  (ctrl/cmd + shift + F). Type <kbd>ProductData</kbd> and if
+                  there are any more instances change them.
+                </li>
+                <li>
+                  Test the product list and product detail pages to make sure
+                  they still work!
+                </li>
+              </ol>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Submit the order</h3>
+              <p>
+                Our checkout process will involve a server. It is expecting us
+                to send it an object with all the information about the order in
+                a specific format. The object should look like the following
+                (order does not matter):
+              </p>
+              <pre><code class="lang-js">{ 
+  orderDate: '2021-01-27T18:18:26.095Z',
+  fname: "John",
+  lname: "Doe",
+  street: "123 Main",
+  city: "Rexburg",
+  state: "ID",
+  zip: "83440",
+  cardNumber: "1234123412341234",
+  expiration: "8/21",
+  code: "123",
+  items: [{
+    id: "20CXG"
+    name: "The North Face Pivoter 27 L Backpack"
+    price: 39.99,
+    quantity: 1
+  }, {
+    id: "14GVF",
+    name: "Marmot 5°F Rampart Down Sleeping Bag - 650 Fill, Mummy (For Men and Women)",
+    price: 229.99,
+    quantity: 1
+  }],
+  orderTotal: "298.18",
+  shipping: 12,
+  tax: "16.20"
+}</code></pre>
+              <p>
+                Create a couple of functions in your
+                <code>CheckoutProcess</code> module. One will be used to prepare
+                the items list part of this object for us. The other will get
+                called when the form is submitted and will get the data object
+                ready and send it to ExternalServices.
+              </p>
+              <pre><code class="lang-js">
+// takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+function packageItems(items) {
+// convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
+}
+
+export default class CheckoutProcess {
+  ...
+
+  async checkout(form) {
+    // build the data object from the calculated fields, the items in the cart, and the information entered into the form
+
+    // call the checkout method in our ExternalServices module and send it our data object.
+  }
+}
+</code></pre>
+              <div class="callout">
+                <p>
+                  Note that the keys in your object MUST match the keys shown
+                  above. You cannot send "firstName". It has to be "fname". That
+                  is what the server will be expecting. Check your names in the
+                  html form if you have differences.
+                </p>
+                <p>
+                  If you are struggling to convert your form into the object
+                  required take a look at the function below.
+                </p>
+                <details>
+                  <summary>HINT</summary>
+                  <pre><code class="lang-js">
+// takes a form element and returns an object where the key is the "name" of the form input.
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
+</code></pre>
+                </details>
+              </div>
+
+              <p>
+                Use <kbd>1234123412341234</kbd> for the card number,
+                <kbd>123</kbd> for the security code, and any expiration in the
+                future if you want your order to succeed.
+              </p>
+              <p class="callout">
+                For testing to save you time and typing remember that you can
+                set the <code>value=""</code> property of an HTML input
+                element...just remember to remove your defaults once everything
+                is working.
+              </p>
+              <p>
+                Add a new method to our newly renamed
+                <kbd>ExternalServices</kbd> class. Call it <kbd>checkout</kbd>.
+                It should accept the object that represents our order.
+              </p>
+              <p>
+                The method should POST that object. You will need to create a
+                custom options object and pass it in with your fetch. (Remember
+                to stringify your object before sending it!) to the address
+                above (http://server-nodejs.cit.byui.edu:3000/checkout) and
+                return the server response. The response will be JSON.
+              </p>
+              <div class="callout">
+                <p>
+                  All of the requests we have made thus far have been fairly
+                  simple and the default settings for fetch have been
+                  sufficient. The defaults will not work for us here. Fetch has
+                  an optional second argument that is for options. An options
+                  object that will work for use here is below:
+                </p>
+                <pre><code class="lang-js">const options = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(payload)
+}</code></pre>
+                <p>We would use it like this:</p>
+                <pre><code class="lang-js">fetch(url, options);</code></pre>
+              </div>
+
+              <div class="callout">
+                <p>
+                  We have a couple of choices here. One is we could watch for a
+                  <code>click</code> event on the form button, or we can watch
+                  for a <code>submit</code> event on the form.
+                </p>
+                <p>
+                  Whichever you choose, you will want to keep the form from
+                  doing what it would normally do on submit. You can do this by
+                  calling
+                  <code>event.preventDefault()</code> in the listener function.
+                </p>
+              </div>
+              <p>
+                You can consider this activity completed when you receive a
+                response from your POST to the server. The next activity will
+                continue this by handling the success and failure responses
+                appropriately.
+              </p>
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructors Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/vite-team6/src"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, and reviewed the instructor's
+          solution, the driver should commit and push their changes, then submit
+          a pull request for this branch. Then review the pull request as a
+          team, close it, and merge the branch back into Main. Finally someone
+          should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>
