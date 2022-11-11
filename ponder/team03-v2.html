@@ -64,7 +64,115 @@
 
               <!-- END STEP -->
             </li>
-
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Check Your Build</h3>
+              <p>
+                Last week we made some changes to the structure of our site. You
+                should have had some pull requests created and merged at this
+                point as well. Have you checked the "production" build of your
+                site since then? Remember that we are deploying our site to
+                Netlify. This deployment is actually automatic. Everytime you
+                change the "main" branch of your site it will update Netlify.
+              </p>
+              <p>
+                We can also check the production build locally. If you run
+                <kbd>npm run build</kbd> it will update the files in the
+                <kbd>dist</kbd> directory. You should do this periodically to
+                check to make sure nothing is broken!
+              </p>
+              <p>
+                If you visit your site on Netlify you will probably see that
+                some things are broken!
+              </p>
+              <p>
+                Before moving on go ahead and run <kbd>npm run build</kbd>. We
+                can get Vite to preview that build directory as well by adding a
+                new command to our <kbd>package.json</kbd> file. Add the
+                following: <code>"preview": "vite preview",</code> to the
+                scripts section, then run it. Check to see what still works and
+                what is broken.
+              </p>
+              <p>
+                When we made the changes to the product details page last week,
+                we forgot to update Vite so that it knew about the changes.
+                Let's do that now.
+              </p>
+              <p>
+                Open up the <kbd>vite.config.js</kbd> file. Note the section
+                that looks like this:
+              </p>
+              <pre><code class="lang-js">
+build: {
+  outDir: "../dist",
+  rollupOptions: {
+    input: {
+      main: resolve(__dirname, "src/index.html"),
+      cart: resolve(__dirname, "src/cart/index.html"),
+      product1: resolve(
+        __dirname,
+        "src/product_pages/cedar-ridge-rimrock-2.html"
+      ),
+      product2: resolve(__dirname, "src/product_pages/marmot-ajax-3.html"),
+      product3: resolve(
+        __dirname,
+        "src/product_pages/northface-alpine-3.html"
+      ),
+      product4: resolve(
+        __dirname,
+        "src/product_pages/northface-talus-4.html"
+      ),
+    },
+  },
+},
+              </code></pre>
+              <p>
+                We aren't using the specific product pages anymore, and instead
+                have an <kbd>index.html</kbd> file that we need to let our
+                bundler know about. Change that section so that it looks like
+                this instead:
+              </p>
+              <pre><code class="lang-js">
+build: {
+  outDir: "../dist",
+  rollupOptions: {
+    input: {
+      main: resolve(__dirname, "src/index.html"),
+      cart: resolve(__dirname, "src/cart/index.html"),
+      product: resolve(__dirname, "src/product_pages/index.html"
+      ),
+      
+    },
+  },
+},
+                </code></pre>
+              <p>
+                Anytime we add or remove more .HTML files to the site we will
+                need to update this config or the production version of our site
+                will break!
+              </p>
+              <p>
+                We need to make one more build tool related change. If you look
+                inside of the <kbd>dist</kbd> directory...you will notice that
+                the <code>.json</code> files from the json folder are not there!
+                Vite doesn't know it needs to copy them over.
+              </p>
+              <p>
+                The easiest way to fix this would be to change the name of the
+                directory those files are in to <kbd>public</kbd>. Vite will
+                automatically copy everything in that folder over to the build.
+                The path will change however, Vite places those resources in the
+                root so you will need to update
+                <code>ProductData.getData</code> Change the line that looks like
+                <code>this.path = `../json/${this.category}.json`;</code> to
+                <code>this.path = `/${this.category}.json`;</code>
+              </p>
+              <p>
+                You should move the <kbd>images</kbd> directory into the
+                <kbd>public</kbd> directory as well.
+              </p>
+              <!-- END STEP -->
+            </li>
             <li>
               <!-- BEGIN STEP -->
               <h3>Read the Data</h3>
