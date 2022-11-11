@@ -160,14 +160,11 @@ build: {
                 Vite doesn't know it needs to copy them over.
               </p>
               <p>
-                The easiest way to fix this would be to change the name of the
-                directory those files are in to <kbd>public</kbd>. Vite will
-                automatically copy everything in that folder over to the build.
-                The path will change however, Vite places those resources in the
-                root so you will need to update
-                <code>ProductData.getData</code> Change the line that looks like
-                <code>this.path = `../json/${this.category}.json`;</code> to
-                <code>this.path = `/${this.category}.json`;</code>
+                The easiest way to fix this would be to create a new directory
+                called <kbd>src/public</kbd>. Then move the
+                <kbd>json</kbd> directory into that new folder. Vite will
+                automatically copy everything in the <kbd>public</kbd> folder
+                over to the build.
               </p>
               <p>
                 You should move the <kbd>images</kbd> directory into the
