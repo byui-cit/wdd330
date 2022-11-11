@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/prism-coy.css" />
+    <link rel="stylesheet" href="../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 1</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          This activity will aid you in getting the project and environment
+          setup for your team. It will introduce a NodeJS based workflow and
+          development/build tools.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Normally the driver should be the only one entering code, the rest of
+          the team should direct the driver and tell them what to write. This
+          week will be an exception to that though in a couple of spots.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Each week let someone else be the
+          "main driver" of the coding.
+        </p>
+        <p>
+          It will be very helpful if you have completed the Sitepoint course on
+          <a
+            href="https://www.sitepoint.com/premium/courses/git-it-together-master-version-control-with-git-and-github-2902/"
+            target="_blank"
+            rel="noreferrer"
+            >Git It Together</a
+          >
+          before you do this.
+        </p>
+        <p>
+          If your group is ready to start the activity and you have not had a
+          chance to complete the course above...you can quickly review this
+          <a
+            href="https://guides.github.com/activities/hello-world/"
+            target="_blank"
+            >shorter GitHub guide</a
+          >
+          or this
+          <a
+            href="https://code.visualstudio.com/docs/editor/versioncontrol"
+            target="_blank"
+            >guide specifically about using git with VS Code</a
+          >
+
+          (Just remember to go back and do the other...it goes into much more
+          detail).
+        </p>
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+
+              <ol>
+                <li>
+                  Each member of the team should have already completed the
+                  <a href="../resources/course-setup.html">course setup</a>
+                  activity. Go and do that now if you have not.
+                </li>
+                <li>
+                  The driver should visit the Team's copy of the project Trello
+                  board and add each team member to the "Setup project for all
+                  team members" task. Then move it to "Doing".
+                </li>
+                <li>
+                  Make sure that you are familiar with how to use the command
+                  prompt for your operating system. Here are some quickstarts
+                  for the
+                  <a
+                    href="https://byui-cit.github.io/advcss/resources/cmd-line-mac.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    style="outline: none"
+                    >command line for Mac</a
+                  >
+                  and the
+                  <a
+                    href="https://byui-cit.github.io/advcss/resources/cmd-line-pc.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    style="outline: none"
+                    >command line for Windows</a
+                  >
+                  if you need a review.
+                </li>
+                <li>
+                  The driver for this week should then log into GitHub, and
+                  visit this
+                  <a href="https://github.com/matkat99/sleepoutside"
+                    >repository</a
+                  >
+                  for the project. Click on the "Use this template" button to
+                  create a copy of the base project code in a new repository
+                  then give the new repo a name.
+                </li>
+                <li>
+                  The driver should then goto Settings->Manage Access and add
+                  the rest of the team members as collaborators. (Each team
+                  member needs to have their own GitHub account for this step.
+                  Create one if you do not have one.)
+                </li>
+                <li>
+                  Each member of the team should then clone the repository to
+                  their computer.
+                </li>
+              </ol>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <p>Finish the project setup:</p>
+              <ol>
+                <li>
+                  Open the project in VS Code. File->Open, then select the
+                  <em>directory</em> that the repository cloned into.
+                </li>
+                <li>
+                  Each member of the team should then open a terminal window and
+                  switch to the project directory. If you are using VS Code
+                  <kbd>ctrl ~</kbd> toggles the terminal panel open and closed.
+                  When you open the terminal in VS Code it will automatically be
+                  set to the root of your project. Type <kbd>ls</kbd> if you are
+                  on a unix based system (MacOS, Linux), or <kbd>dir</kbd> if on
+                  Windows. Make sure that you see <kbd>package.json</kbd> in the
+                  list of files it prints out. If not you will need to change
+                  the working directory in the terminal to whatever directory
+                  you put the project files in. Then type
+                  <kbd>npm install</kbd>.
+                </li>
+                <li>
+                  Notice that a new directory was created:
+                  <kbd>node_modules</kbd>
+                </li>
+                <li>
+                  This project comes with several tools built in to help the
+                  team to write error free consistent code. The driver should
+                  open up the <kbd>package.json</kbd> file. There are two
+                  sections initially you should review.
+                  <code>devDependencies</code>, and <code>scripts</code>.
+
+                  <ul>
+                    <li>
+                      <code>devDependencies</code> contains all of the tools we
+                      will be using in our development for this project. When
+                      you ran <kbd>npm install</kbd> earlier, it referred to
+                      this list to know what to install.
+                    </li>
+                    <li>
+                      <code>scripts</code> are shortcuts to commands we can run
+                      to manage the project. It contains the following:
+                      <pre><code class="lang-json">"scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "lint": "eslint *.js src/**/*.js",
+    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\""
+},</code></pre>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <ul>
+                    <li>
+                      <code>start</code>: This will run our development server.
+                      You will use this the most.
+                    </li>
+                    <li>
+                      <code>build</code>: This will prepare our code to be
+                      deployed to production. You can run this at anytime to see
+                      what the "build" version of the site looks like.
+                    </li>
+                    <li>
+                      <code>lint</code>: This will run Eslint against the code
+                      to look for style and syntax errors. You should do this
+                      each time you are ready to commit. Make sure to clean up
+                      any errors it finds before you commit!
+                    </li>
+                    <li>
+                      <code>format</code>: This will run Prettier on your code
+                      and format it all consistently. You should also do this as
+                      a step in your commit process.
+                    </li>
+                  </ul>
+                  <p>
+                    The commands are run in the terminal. If you wanted to start
+                    up the development server for example you would type
+                    <kbd>npm run start</kbd>. If you wanted to lint your code:
+                    <kbd>npm run lint</kbd>
+                  </p>
+                  <p>
+                    Try running the linter now. What did you see? Have the
+                    driver open up the <kbd>.eslintrc.json</kbd> file. You may
+                    have noticed that one of the errors it is complaining about
+                    is that your quotes should all be single. You might be
+                    saying to yourself..."why does <em>that</em> matter?" Well,
+                    the truth is that it does not really matter whether you use
+                    single or double quotes in your code. What matters is that
+                    the whole team is consistent in using one or the other.
+                    Decide as a team whether you would like to use single or
+                    double quotes. Then find the line that looks like this:
+                    <code>"quotes":["error", "single"]</code> in the
+                    <kbd>.eslintrc.json</kbd> file. If you want single quotes
+                    then make no changes. If you want double quotes then change
+                    the word "single" to "double".
+                  </p>
+                  <p class="callout">
+                    The <kbd>.eslintrc.json</kbd> file belongs to the team. If
+                    your team disagrees with any of the rules that are being
+                    enforced, change them! Just make sure that all the team
+                    members are on board with the changes. If you do decide to
+                    dig into setting up custom Eslint rules you might want to
+                    get the <kbd>LintLens</kbd> extension for VSCode.
+                  </p>
+                  <p>
+                    Next run <kbd>npm run format</kbd>. Then go and run the
+                    linter again. What happened? Have the driver fix any
+                    remaining errors , then commit and push the changes.
+                  </p>
+                  <p>
+                    Each member of the team should run the format AND lint
+                    command BEFORE they commit after making any changes.
+                  </p>
+                  <p class="callout">
+                    If you are using VS Code there are extensions you can
+                    install that will format (Prettier) and lint (ESLint) your
+                    code everytime you save! Alternatively you could take
+                    advantage of npm and scripts such as
+                    <a
+                      href="https://docs.npmjs.com/cli/v6/using-npm/scripts"
+                      target="_blank"
+                      >prebuild</a
+                    >
+                    to further automate these tasks
+                  </p>
+                </li>
+                <li>
+                  Each person in the group should try running
+                  <kbd>npm run start</kbd>. This runs several processes on our
+                  code and launches a web server at <code>localhost:8080</code>.
+                  It should also open that address in your default browser as
+                  well, if it did not you can type that address directly into a
+                  browser. You should use this server as you develop your
+                  project instead of something like LiveServer!
+                  <p>
+                    When you are done working you can stop the dev server by
+                    typing <kbd>ctrl c</kbd> in the same terminal window in
+                    which the process is running. That will terminate it.
+                  </p>
+                </li>
+                <li>
+                  The driver should run <kbd>npm run build</kbd>. This will
+                  create a directory called <kbd>dist</kbd>. Commit those
+                  changes and push them to GitHub. If you goto github.com you
+                  will notice that the <kbd>dist</kbd> directory did not
+                  transfer with our commit. If you check the
+                  <kbd>.gitignore</kbd> file that is part of your project you
+                  will see why.
+                </li>
+                <li>
+                  We will be using a product called
+                  <a href="https://www.netlify.com/">Netlify</a> to host our
+                  site. One person in the group will need to create a free
+                  account there and login for the next step.
+                </li>
+                <li>
+                  After logging in you need to add a new site. Click on the "Add
+                  New Site" button and select "Import an Existing Project".
+                  Connect to your Github account using the "Github" button. You
+                  should see a list of repositories on your account. Find the
+                  one that contains the Sleepoutside project.
+                </li>
+                <li>
+                  Select the "main" branch. Then in the "build command" box
+                  enter <code>npm run build</code>. Then "Deploy Site". Netlify
+                  will produce a randomized URL for the site that should be
+                  shared with all the team members. This is the link to your
+                  "production" site.
+                  <p class="callout">
+                    The <kbd>build</kbd> version of the site will be considered
+                    the production version. This should always work! The
+                    instructor should be able to go to that address at any time
+                    and not see any errors. Netlify will update your site
+                    everytime it sees a change to the "main" branch. So after
+                    pull requests are reviewed and merged you should probably go
+                    check Netlify to make sure nothing broke.
+                  </p>
+                </li>
+              </ol>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <p>GitHub with a team</p>
+              <ol>
+                <li>
+                  The driver should create a file in the root of the project
+                  called <kbd>team.txt</kbd> and add the link to the team Trello
+                  board, and their name. Then commit that change, and push it up
+                  to GitHub.
+                </li>
+                <li>
+                  Each other member of the team should pull the changes down and
+                  add their names. Then commit and push.
+                </li>
+                <li>
+                  The driver should then edit <kdb>team.txt</kdb>. Add your
+                  middle initial. Then commit and push. What happened?
+                  <div class="callout">
+                    <p>
+                      This should have resulted in an error with Git. There were
+                      multiple changes made to the same file and Git doesn't
+                      know which to keep! This results in a
+                      <em>merge conflict</em>.
+                    </p>
+                    <p>How can we avoid conflicts? A couple of ways:</p>
+                    <ul>
+                      <li>
+                        First make sure whenever you sit down to work on the
+                        project you should <em>pull</em> before you do anything
+                        else to make sure you get changes any of your teammates
+                        have made recently.
+                      </li>
+                      <li>
+                        Commit often! Small commits are less likely to result in
+                        conflicts than large ones...and they are much easier to
+                        fix if a conflict does occur.
+                      </li>
+                      <li>
+                        Take advantage of software design techniques like
+                        <a
+                          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules"
+                          target="_blank"
+                          >modules</a
+                        >
+                        to break your code up into smaller pieces.
+                      </li>
+                      <li>
+                        Finally take advantage of Git's ability to
+                        <em>branch</em>. See the stretch goals for more on that.
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  Before you can commit the merge conflict will need to be
+                  resolved. Make sure that the <kbd>team.txt</kbd> file is open.
+                  You should see some additions to the file from Git. It should
+                  look something like below.
+                  <div class="fig-block">
+                    <figure>
+                      <img
+                        src="../images/330-merge-confilict.PNG"
+                        alt="merge error from GitHub"
+                      />
+                    </figure>
+                  </div>
+                  <p>
+                    We must decide which code should be kept. The code under the
+                    <code><<<<<< HEAD</code> is the code you were just trying to
+                    send up. The code under the <code>=========</code> is the
+                    code that was already in GitHub. If you want to keep the
+                    code you were just writing, and throw the other away you
+                    could choose "Accept Current Change". If you wanted to keep
+                    what was on GitHub and remove your recent changes choose
+                    "Accept Incoming Changes". Or if you choose "Accept Both
+                    Changes" it will smoosh both sets of changes together. This
+                    is often the quickest way to get rid of the conflict, but is
+                    usually requires more work to actually fix the problem.
+                  </p>
+                  <p>
+                    In this case we should accept both, then delete the name
+                    without the initial. That would leave us with the most
+                    current versions of everything.
+                  </p>
+                  <p>
+                    Once you fix the code you will need to <kbd>commit</kbd> the
+                    merge...then you will be able to <kbd>push</kbd> your
+                    changes to GitHub again.
+                  </p>
+                  <p class="callout">
+                    This was a simple merge…easy to see what we needed to
+                    keep…imagine if the file was 200-300 lines long, and two
+                    team members had made edits in 10-15 lines of code scattered
+                    across the file and caused a merge conflict! It would have
+                    been far harder to figure out what to keep and what to
+                    throw…KEEP your commits small!
+                  </p>
+                </li>
+              </ol>
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>Branching</p>
+              <p>
+                One of the most powerful features of Git is the ability to
+                <em>branch</em> your code. Branching makes a copy of your code
+                at the current point in time that you can make changes to
+                without affecting any other branch! This allows an organization
+                to always keep a fully working <em>production</em> version of
+                their code that can be deployed at any time, and also work on
+                adding features, fixing bugs, etc that often result in things
+                breaking until they are done.
+              </p>
+              <p>
+                You can also use branches to reduce merge conflicts if multiple
+                team members need to make changes to the same file in a
+                codebase. Each team member should complete the following steps:
+              </p>
+              <ol>
+                <li>
+                  Create a branch. Name your branch something like
+                  <kbd>initials--branch_test</kbd>. (So for me the actual name
+                  of the branch would be <kbd>st--branch_test</kbd>)
+                </li>
+                <li>
+                  Add a file in the root of the project called
+                  <kbd>yourname.txt</kbd>. Type your name in the file.
+                </li>
+                <li>Commit and publish (push) your branch to GitHub</li>
+                <li>
+                  Push your commit to GitHub...then do a pull after the other
+                  members of the team have all pushed their branches.
+                </li>
+                <li>
+                  Switch to one of the new branches in the repository. Notice
+                  what happens to the listing of files in your editor when you
+                  do. Switch back to your own branch. Switch back to the master
+                  branch. Discuss with your team what you saw.
+                </li>
+              </ol>
+              <div class="callout">
+                <p>
+                  Throughout the semester you will be fixing bugs and adding
+                  features to the SleepOutside site. When you assign a task to
+                  yourself I would create a new branch to hold the work you will
+                  do. Name the branch <kbd>initials--feature-name</kbd>. So if I
+                  were going to work on the card dealing with the cart total not
+                  calculating correctly, and my name were John Doe, I would make
+                  a branch with a name something like
+                  <kbd>jd--cart-total-calculation</kbd>
+                </p>
+                <p>
+                  When you are done with your work and you are confident
+                  everything is working you should submit a pull request (see
+                  below).
+                </p>
+              </div>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <p>Pull requests</p>
+              <p>
+                When you are done with the feature that you created a branch
+                for, the new code should be merged back into the master or main
+                branch. This can be done in two ways...one is by directly
+                merging the working branch back into the main branch, and the
+                other is through a pull request.
+              </p>
+              <p>
+                On projects where there is only one developer, merging directly
+                works fine...but when working with a team it is more common to
+                work through pull requests. A pull request essentially means "My
+                work is done and tested, I am ready for the code to be merged in
+                with the main branch. Can someone check it out and make sure you
+                don't see any issues. (So I don't break anything :)"
+              </p>
+              <p>
+                In our case right now, the branches do not contain anything
+                important that needs to be merged back into the main branch. So
+                most of them can just be deleted. Have one person however submit
+                a pull request for their branch so we can see what the process
+                is like.
+              </p>
+              <p>
+                After the pull request has been made (you can do this through
+                <a
+                  href="https://guides.github.com/activities/hello-world/#pr"
+                  target="_blank"
+                  >github.com</a
+                >) the driver should go to the repository in GitHub and review
+                the request and then finish the merge. Make sure that any extra
+                branches are deleted once you are done merging.
+              </p>
+              <p>Move the card in Trello to "Done".</p>
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+        <h2>Instructor's Solution</h2>
+
+        <p>No instructor's solution this week.</p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../js/course.js"></script>
+    <script src="../js/prism.js"></script>
+  </body>
+</html>
