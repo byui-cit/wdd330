@@ -133,6 +133,42 @@
                   <kbd>src</kbd>.
                 </p>
               </div>
+              <p>
+                We have one additional change to make right now as well. If you
+                open up the <kbd>vite.config.js</kbd> file you will see a
+                listing of all of the HTML files that are part of the project.
+                We just changed that so we need to update this file or our site
+                will break on production! It currently looks like this:
+              </p>
+              <pre><code class="lang-js">
+input: {
+  main: resolve(__dirname, "src/index.html"),
+  cart: resolve(__dirname, "src/cart/index.html"),
+  checkout: resolve(__dirname, "src/checkout/index.html"),
+  product1: resolve(
+    __dirname,
+    "src/product_pages/cedar-ridge-rimrock-2.html"
+  ),
+  product2: resolve(__dirname, "src/product_pages/marmot-ajax-3.html"),
+  product3: resolve(
+    __dirname,
+    "src/product_pages/northface-alpine-3.html"
+  ),
+  product4: resolve(
+    __dirname,
+    "src/product_pages/northface-talus-4.html"
+  ),
+},
+              </code></pre>
+              <p>
+                We need to remove all the product specific pages and replace
+                those entries with a link to
+                <kbd>/product_pages/index.html</kbd>
+              </p>
+              <p class="callout">
+                Any time we add new .HTML pages to the site we will need to
+                update this file!
+              </p>
             </li>
             <li>
               <!-- BEGIN STEP -->
