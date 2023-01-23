@@ -397,6 +397,115 @@ product.init();</code></pre>
 
               <!-- END STEP -->
             </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Check Your Build</h3>
+              <p>
+                We just made some changes to the structure of our site. You
+                probably don't realize it yet, but those changes actually broke
+                the production version of the site. Let's take a look.
+              </p>
+              <p>
+                We can check the production build locally. If you run
+                <kbd>npm run build</kbd> it will update the files in the
+                <kbd>dist</kbd> directory. You should do this periodically to
+                check to make sure nothing is broken!
+              </p>
+
+              <p>
+                Before moving on go ahead and run <kbd>npm run build</kbd>. We
+                can get Vite to preview that build directory as well by adding a
+                new command to our <kbd>package.json</kbd> file. Add the
+                following: <code>"preview": "vite preview",</code> to the
+                scripts section, then run it. Check to see what still works and
+                what is broken. (You always need run
+                <kbd>npm run build</kbd> before you run
+                <kbd>npm run preview</kbd> after you have made any changes.)
+              </p>
+              <p>
+                When we made the changes to the product details page, we forgot
+                to update Vite so that it knew about the changes. Let's do that
+                now.
+              </p>
+              <p>
+                Open up the <kbd>vite.config.js</kbd> file. Note the section
+                that looks like this:
+              </p>
+              <pre><code class="lang-js">
+build: {
+  outDir: "../dist",
+  rollupOptions: {
+    input: {
+      main: resolve(__dirname, "src/index.html"),
+      cart: resolve(__dirname, "src/cart/index.html"),
+      product1: resolve(
+        __dirname,
+        "src/product_pages/cedar-ridge-rimrock-2.html"
+      ),
+      product2: resolve(__dirname, "src/product_pages/marmot-ajax-3.html"),
+      product3: resolve(
+        __dirname,
+        "src/product_pages/northface-alpine-3.html"
+      ),
+      product4: resolve(
+        __dirname,
+        "src/product_pages/northface-talus-4.html"
+      ),
+    },
+  },
+},
+              </code></pre>
+              <p>
+                We aren't using the specific product pages anymore, and instead
+                have an <kbd>index.html</kbd> file that we need to let our
+                bundler know about. Change that section so that it looks like
+                this instead:
+              </p>
+              <pre><code class="lang-js">
+build: {
+  outDir: "../dist",
+  rollupOptions: {
+    input: {
+      main: resolve(__dirname, "src/index.html"),
+      cart: resolve(__dirname, "src/cart/index.html"),
+      product: resolve(__dirname, "src/product_pages/index.html"
+      ),
+      
+    },
+  },
+},
+                </code></pre>
+              <p>
+                Anytime we add or remove more .HTML files to the site we will
+                need to update this config or the production version of our site
+                will break!
+              </p>
+              <p>
+                We need to make one more build tool related change. If you look
+                inside of the <kbd>dist</kbd> directory...you will notice that
+                the <code>.json</code> files from the json folder are not there!
+                Vite doesn't know it needs to copy them over. That means that on
+                production the Product details page will not work since it
+                relies on that file to look up the product information.
+              </p>
+              <p>
+                The easiest way to fix this would be to create a new directory
+                called <kbd>src/public</kbd>. Then move the
+                <kbd>json</kbd> directory into that new folder. Vite will
+                automatically copy everything in the <kbd>public</kbd> folder
+                over to the build.
+              </p>
+              <p>
+                You should move the <kbd>images</kbd> directory into the
+                <kbd>public</kbd> directory as well.
+              </p>
+              <p>
+                Someone on the team should check the build periodically to make
+                sure it is not broken. A good time to do this would be each time
+                a pull request is merged!
+              </p>
+              <!-- END STEP -->
+            </li>
           </ol>
           <h3>Stretch Goals</h3>
 
