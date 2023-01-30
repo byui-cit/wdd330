@@ -273,7 +273,7 @@
                       Click for example code (<kbd>utils.js</kbd>)
                     </summary>
                     <pre><code class="lang-js">
-export function renderWithTemplate(template, parent, data, callback) {
+export function renderWithTemplate(template, parentElement, data, callback) {
     parentElement.insertAdjacentHTML("afterbegin", template);
     if(callback) {
         callback(data);
