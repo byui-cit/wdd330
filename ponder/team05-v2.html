@@ -219,11 +219,12 @@
               </p>
               <div class="callout">
                 We have been moving a lot of things around. At this point your
-                <kbd>product-list.js</kbd> file should look something like this:
+                <kbd>product-list.mjs</kbd> file should look something like
+                this:
 
-                <pre><code class="lang-js">import ProductData from './ProductData.js';
-import ProductList from './ProductList.js';
-import { loadHeaderFooter, getParam } from './utils.js';
+                <pre><code class="lang-js">import ProductData from './ProductData.mjs';
+import ProductList from './ProductList.mjs';
+import { loadHeaderFooter, getParam } from './utils.mjs';
 
 loadHeaderFooter();
 
