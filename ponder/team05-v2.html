@@ -157,6 +157,97 @@
             </li>
             <li>
               <!-- BEGIN STEP -->
+              <h3>Environment variables</h3>
+              <p>
+                We are about to change our application so that it communicates
+                with an API server. This server will provide endpoints that we
+                can hit to do things like pull product information, login users,
+                submit orders, etc. While we are working we will be making many
+                changes that we would not want to show up in a production
+                environment. It would be nice then to have a test or development
+                server we can use during development, where we can change
+                anything we need without worry, and another production or server
+                that has the real data that must be protected.
+              </p>
+              <p>
+                This separation is very common in development. This means
+                however that we are going to have to change the URL we use
+                depending on whether our code is running in a development
+                environment or a production environment. We could do this
+                manually...but chances are that at some point you WILL send your
+                development server URL to production at some point. That would
+                be bad.
+              </p>
+              <p>
+                Because this is a common problem a solution has been developed:
+                Environment variables. Values that change automatically
+                depending on where the code is running. Most of the time we
+                create these in a file called <kbd>.env</kbd> (dotenv). We are
+                using Vite as our build tool...it actually has the ability built
+                in to work with these files. It will automatically look for a
+                <kbd>.env</kbd> file and if it finds one it will make the
+                variables defined therein available through a special global:
+                <code>import.meta.env</code>.
+              </p>
+              <p>
+                Because Vite is for building frontend projects where all the
+                code ends up in the browser, it gives us a way to control which
+                of our environment variables become available in our client
+                facing code. Any variable we want to use in the code we send out
+                will need to be prefaced by <code>VITE_</code>. If you look in
+                the <kbd>src</kbd> directory you will see a file named
+                <kbd>.env.sample</kbd>, contained in that file is a variable we
+                need defined:
+                <code
+                  >VITE_SERVER_URL=http://server-nodejs.cit.byui.edu:3000/</code
+                >. This server URL is not something we need to keep secret, and
+                it is something we need available in our code, and so it has the
+                <code>VITE_</code> prefix. You will see how to use that in the
+                next step.
+              </p>
+              <p>
+                Open <kbd>.env.sample</kbd> and File-&gt;Save As just
+                <kbd>.env</kbd> so that Vite will see it. NOTE! Each member of
+                the team will need to do this!
+              </p>
+              <div class="callout">
+                <p>
+                  You may be wondering why that file is called
+                  <kbd>.env.sample</kbd>. Environment variables often contain
+                  sensitive information in them and so it is common to not
+                  include those files in the Git repo for the project. If you
+                  take a look in the <kbd>.gitignore</kbd> file that is part of
+                  the project you will see in fact that we have already been
+                  ignoring <code>.env</code> files. Files named that will never
+                  be tracked by Git.
+                </p>
+                <p>
+                  I wanted to give you an example of what the file needed to
+                  look like however, and so sent a sample of it with a different
+                  name. This is also a pretty common practice.
+                </p>
+                <p>
+                  The next question you may have is: "well if the environment
+                  variables do not get included in the repo...how do I get them
+                  out to my production environment?" We will address that below.
+                </p>
+              </div>
+              <p>
+                When our code gets deployed to Netlify (our production
+                environment) It will need to know the server URL it should use.
+                Since our <kbd>.env</kbd> file will not be part of the repo we
+                have to set it a different way. Have someone in the team login
+                to Netlify and pull up this project. Then goto "Site
+                Settings-&gt;Environment Variables". Add a new variable. The key
+                should be "VITE_SERVER_URL", and the value should be
+                "https://wdd330-backend.onrender.com". We will be using the same
+                value in all contexts.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
               <h3>Pulling from an API</h3>
               <p>
                 Next we need to modify our code to pull the product data from an
@@ -172,7 +263,11 @@
                 make our DataSource more flexible. Add the following line to the
                 top of the file:
               </p>
-              <pre><code class="lang-js">const baseURL = 'http://server-nodejs.cit.byui.edu:3000/'</code></pre>
+              <pre><code class="lang-js">const baseURL = import.meta.env.VITE_SERVER_URL</code></pre>
+              <p class="callout">
+                Notice we are using the environment variable we set in the
+                <kbd>.env</kbd> file!
+              </p>
               <p>
                 Then remove the category and path from the constructor. Then in
                 the <code>getData</code> method add a parameter of
@@ -345,6 +440,10 @@ myList.init();</code></pre>
           a pull request for this branch. Then review the pull request as a
           team, close it, and merge the branch back into Main. Finally, someone
           should move the Trello card to "Done".
+        </p>
+        <p>
+          After merging the pull request you should also check to make sure the
+          production site on Netlify is still working!
         </p>
         <h2>Submission</h2>
         <p>
