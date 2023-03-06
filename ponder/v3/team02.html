@@ -116,6 +116,26 @@
                 the editor, and file->Save As->
                 <kbd>/product_pages/index.html</kbd>
               </p>
+              <p>
+                We also need to make some changes to the new file. We need to
+                remove all of the product specific information, and we need to
+                make sure that we have some sort of a unique selector on each
+                element that we need to later fill in later. Here is one way
+                that could look:
+              </p>
+              <pre><code class="lang-markup">
+&lt;section class="product-detail"&gt;
+  &lt;h3 id="productName"&gt;&lt;/h3&gt;
+  &lt;h2 class="divider" id="productNameWithoutBrand"&gt;&lt;/h2&gt;
+  &lt;img id="productImage" class="divider" src="" alt="" /&gt;
+  &lt;p class="product-card__price" id="productFinalPrice"&gt;&lt;/p&gt;
+  &lt;p class="product__color" id="productColorName"&gt;&lt;/p&gt;
+  &lt;p class="product__description" id="productDescriptionHtmlSimple"&gt;&lt;/p&gt;
+  &lt;div class="product-detail__add"&gt;
+    &lt;button id="addToCart" data-id=""&gt;Add to Cart&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+              </code></pre>
               <div class="callout">
                 <h3>IMPORTANT!</h3>
                 <p>
@@ -133,15 +153,6 @@
                   <kbd>src</kbd>.
                 </p>
               </div>
-              <p>
-                The change we just made will actually break our production
-                version of the site that gets deployed to Netlify. The next team
-                activity will talk more about this, but if you want to fix it
-                now we need to change the <kbd>vite.config.js</kbd> file to let
-                Vite know about our new HTML file. Go check out step 2 in the
-                <a href="team03-v2.html">Team 3 activity instructions</a> if you
-                would like to fix it now.
-              </p>
             </li>
             <li>
               <!-- BEGIN STEP -->
@@ -163,16 +174,16 @@
     }
 }
     
-export function getData(category = "tents") {
-    return fetch(`../json/${category}.json`)
-        .then(convertToJson)
-        .then((data) => data);
+export function getProductsByCategory(category = "tents") {
+  return fetch(`../json/${category}.json`)
+    .then(convertToJson)
+    .then((data) => data);
 }
-    
+
 export async function findProductById(id) {
-    const products = await getData();
-    return products.find((item) => item.Id === id);
-}                  
+  const products = await getProductsByCategory();
+  return products.find((item) => item.Id === id);
+}
                   </code></pre>
               </details>
               <ol>
@@ -188,14 +199,14 @@ export async function findProductById(id) {
                   We will eventually want to use these functions for more than
                   just tents. We can do that by passing in the name of the
                   category of products we want to pull from into the
-                  <code>getData</code> function. Note that it defaults to
-                  <kbd>tents</kbd>, so if we pass in nothing when we use it
-                  (like on line 16), we will automatically get tents.
+                  <code>getProductsByCategory</code> function. Note that it
+                  defaults to <kbd>tents</kbd>, so if we pass in nothing when we
+                  use it (like on line 16), we will automatically get tents.
                 </li>
                 <li>
-                  Notice the <code>getData()</code> function compared to the
-                  <code>findProductById()</code> function. One uses just
-                  promises and <code>.then()</code>, the other uses
+                  Notice the <code>getProductsByCategory()</code> function
+                  compared to the <code>findProductById()</code> function. One
+                  uses just promises and <code>.then()</code>, the other uses
                   <a
                     href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
                     target="_blank"
@@ -333,25 +344,21 @@ console.log(findProductById(productId));
               </p>
               <ol>
                 <li>
-                  <code>ProductDetails(productId, selector)</code>: there are a
-                  few things that need to happen before our class can be used.
-                  This function will become the entrypoint into our module and
-                  will make sure that everything happens in the right order.
-                  This function should be the default export.
+                  <code>ProductDetails(productId)</code>: there are a few things
+                  that need to happen before our class can be used. This
+                  function will become the entrypoint into our module and will
+                  make sure that everything happens in the right order. This
+                  function should be the default export.
                 </li>
                 <li>
                   <code>addToCart()</code>: This is the function that is
                   currently in <kbd>product.js</kbd>. We need to move it here
                 </li>
                 <li>
-                  <code>renderProductDetails(selector)</code>: method to output
-                  the HTML to display our product.
+                  <code>renderProductDetails()</code>: method to fill in the
+                  details for the current product in the HTML.
                 </li>
-                <li>
-                  <code>productDetailsTemplate(product)</code>. This function is
-                  responsible to return the HTML needed to display the details
-                  about this product.
-                </li>
+
                 <li>
                   You will also need somewhere to store the product data that we
                   will lookup. You can just declare a variable in the module
@@ -501,16 +508,9 @@ build: {
               </p>
               <ul>
                 <li>
-                  <code>productDetailsTemplate</code> Use the HTML in the
-                  <kbd>/product_pages/index.html</kbd> as a template to create
-                  this function.
-                </li>
-                <li>
-                  <code>renderProductDetails()</code>: Use the template function
-                  you made to insert the HTML into the right spot in the
-                  index.html file. Once you have the function working remember
-                  to remove the HTML from the index.html file so you don't have
-                  multiple products showing up!
+                  <code>renderProductDetails()</code>: Use the ids you added to
+                  the HTML to insert the product details into the right spot in
+                  the index.html file.
                 </li>
                 <li>
                   <code>addToCart()</code>: move the code from
