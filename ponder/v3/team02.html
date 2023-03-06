@@ -510,7 +510,11 @@ build: {
                 <li>
                   <code>renderProductDetails()</code>: Use the ids you added to
                   the HTML to insert the product details into the right spot in
-                  the index.html file.
+                  the index.html file. Don't forget to add the product Id to the
+                  add button! (<a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset"
+                    >MDN dataset</a
+                  >)
                 </li>
                 <li>
                   <code>addToCart()</code>: move the code from
@@ -524,7 +528,7 @@ build: {
                   <pre><code class="lang-js">export default async function ProductDetails(productId, selector) {
   // use findProductById to get the details for the current product. findProductById will return a promise! use await or .then() to process it
   // once we have the product details we can render out the HTML
-  // once the HTML is rendered we can add a listener to Add to Cart button
+  // add a listener to Add to Cart button
  
 }</code></pre>
                 </li>
