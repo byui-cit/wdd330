@@ -94,7 +94,7 @@
                 <li>
                   It's very likely that other parts of our application will need
                   to make requests for product data. That functionality has
-                  already been exposed in the <kbd>ProductData.mjs</kbd> module.
+                  already been exposed in the <kbd>productData.mjs</kbd> module.
                 </li>
                 <li>
                   There will likely be other functionality that needs to be
@@ -156,14 +156,14 @@
             </li>
             <li>
               <!-- BEGIN STEP -->
-              <h3>Review <kbd>ProductData.mjs</kbd></h3>
+              <h3>Review <kbd>productData.mjs</kbd></h3>
               <p>
-                Open up the <kbd>ProductData.mjs</kbd> module file. Note a few
+                Open up the <kbd>productData.mjs</kbd> module file. Note a few
                 things:
               </p>
               <details>
                 <summary>
-                  Click for example code (<kbd>ProductData.mjs</kbd>)
+                  Click for example code (<kbd>productData.mjs</kbd>)
                 </summary>
 
                 <pre><code class="lang-js line-numbers">function convertToJson(res) {
@@ -174,14 +174,14 @@
     }
 }
     
-export function getProductsByCategory(category = "tents") {
+export function getData(category = "tents") {
   return fetch(`../json/${category}.json`)
     .then(convertToJson)
     .then((data) => data);
 }
 
 export async function findProductById(id) {
-  const products = await getProductsByCategory();
+  const products = await getData();
   return products.find((item) => item.Id === id);
 }
                   </code></pre>
@@ -199,14 +199,14 @@ export async function findProductById(id) {
                   We will eventually want to use these functions for more than
                   just tents. We can do that by passing in the name of the
                   category of products we want to pull from into the
-                  <code>getProductsByCategory</code> function. Note that it
-                  defaults to <kbd>tents</kbd>, so if we pass in nothing when we
-                  use it (like on line 16), we will automatically get tents.
+                  <code>getData</code> function. Note that it defaults to
+                  <kbd>tents</kbd>, so if we pass in nothing when we use it
+                  (like on line 16), we will automatically get tents.
                 </li>
                 <li>
-                  Notice the <code>getProductsByCategory()</code> function
-                  compared to the <code>findProductById()</code> function. One
-                  uses just promises and <code>.then()</code>, the other uses
+                  Notice the <code>getData()</code> function compared to the
+                  <code>findProductById()</code> function. One uses just
+                  promises and <code>.then()</code>, the other uses
                   <a
                     href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
                     target="_blank"
@@ -239,7 +239,7 @@ export async function findProductById(id) {
 
                 <li>
                   If you open up the <kbd>product.js</kbd> file you will see how
-                  the <kbd>ProductData.mjs</kbd> module is used. First note that
+                  the <kbd>productData.mjs</kbd> module is used. First note that
                   we have to import the function we need, then we can use that
                   function just like if it were declared locally in that file.
 
@@ -311,7 +311,7 @@ const product = urlParams.get('product')
                   Click for example code (<kbd>product.js</kbd>)
                 </summary>
                 <pre><code class="lang-js">
-import { findProductById } from "./ProductData.mjs";
+import { findProductById } from "./productData.mjs";
 import { setLocalStorage, getParam } from './utils.mjs';
 
 const productId = getParam('product');

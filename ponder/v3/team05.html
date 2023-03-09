@@ -26,8 +26,8 @@
           activity we will add products organized from 4 categories: Tents,
           Sleeping Bags, Backpacks, and Hammocks. We will need to change the
           index page to show our four categories, and then build a dynamic
-          product-listing page that will pull the products from an API, and
-          display them.
+          product-list page that will pull the products from an API, and display
+          them.
         </p>
         <h2>Instructions</h2>
         <p>
@@ -64,9 +64,9 @@
               <h3>Refactor</h3>
               <p>
                 Create a new directory in <kbd>src</kbd> called
-                <kbd>product-listing</kbd>, and create an
+                <kbd>product-list</kbd>, and create an
                 <kbd>index.html</kbd> file in it. Also create a
-                <kbd>product-listing.js</kbd> file in the JS directory. Add the
+                <kbd>product-list.js</kbd> file in the JS directory. Add the
                 HTML to our new page to get the foundation up...header, footer,
                 styles, etc. (Hint...you may just want to use src/index.html as
                 a starting point. Then remove the banner and text.)
@@ -79,9 +79,9 @@
               <p>
                 Move the JS from the <kbd>main.js</kbd> that is responsible to
                 render our list of products to the new
-                <kbd>product-listing.js</kbd> file. Open up
-                <kbd>product-listing/index.html</kbd> in the browser to make
-                sure the tents we had before are still rendered.
+                <kbd>product-list.js</kbd> file. Open up
+                <kbd>product-list/index.html</kbd> in the browser to make sure
+                the tents we had before are still rendered.
               </p>
               <p class="callout">
                 You will need to fix some paths to get everything working
@@ -144,13 +144,13 @@
               </ul>
               <p>
                 Each of the category elements should link to
-                <kbd>product-listing/index.html</kbd>. Make sure to pass the
+                <kbd>product-list/index.html</kbd>. Make sure to pass the
                 correct category as part of the URL. (tents, backpacks,
                 sleeping-bags, hammocks).
               </p>
               <p>
                 If you need a reminder of how to add a URL parameter to a link
-                check out the template function in <kbd>ProductList.mjs</kbd>.
+                check out the template function in <kbd>productList.mjs</kbd>.
                 It has an example of passing a parameter.
               </p>
               <!-- END STEP -->
@@ -255,12 +255,12 @@
                 have structured our code this should be fairly easy.
               </p>
               <p>
-                Open up <kbd>ProductData.mjs</kbd>. In the
-                <code>getProductsByCategory</code> function we use the category
-                that is passed in to create a local path to the correct file.
-                (up until now tents). The API we will be using is setup to allow
-                the category to still work for us in this way, but the URL we
-                need has changed. Add the following line to the top of the file:
+                Open up <kbd>productData.mjs</kbd>. In the
+                <code>getData</code> function we use the category that is passed
+                in to create a local path to the correct file. (up until now
+                tents). The API we will be using is setup to allow the category
+                to still work for us in this way, but the URL we need has
+                changed. Add the following line to the top of the file:
               </p>
               <pre><code class="lang-js">const baseURL = import.meta.env.VITE_SERVER_URL</code></pre>
               <p class="callout">
@@ -272,9 +272,9 @@
                 generate the complete path to the resource we need. While we are
                 working in this function we should also take this opportunity to
                 change our fetch to use async/await. Change the
-                <code>getProductsByCategory</code> function to look like this:
+                <code>getData</code> function to look like this:
               </p>
-              <pre><code class="lang-js">async getProductsByCategory(category) {
+              <pre><code class="lang-js">async getData(category) {
     const response = await fetch(baseURL + `products/search/${category}`);
     const data = await convertToJson(response);
     return data.Result;
@@ -304,9 +304,9 @@
               <h3>Pulling the correct products</h3>
               <p>
                 You should be passing category in the URL to the
-                <kbd>product-listing</kbd> page. We need to retrieve it from the
-                parameter in <kbd>product-listing.js</kbd>. Then send it into
-                the <code>ProductList</code> module. Remember that we created a
+                <kbd>product-list</kbd> page. We need to retrieve it from the
+                parameter in <kbd>product-list.js</kbd>. Then send it into the
+                <code>productList</code> module. Remember that we created a
                 method in <kbd>utils.js</kbd> earlier to grab parameters from a
                 URL.
               </p>
@@ -319,7 +319,7 @@
                 <kbd>product-list.js</kbd> file should look something like this:
 
                 <pre><code class="lang-js">import ProductData from './ProductData.mjs';
-import ProductList from './ProductList.mjs';
+import productList from './productList.mjs';
 import { loadHeaderFooter, getParam } from './utils.mjs';
 
 loadHeaderFooter();
@@ -329,8 +329,8 @@ const category = getParam('category');
 const dataSource = new ProductData();
 // then get the element we want the product list to render in
 const listElement = document.querySelector('.product-list');
-// then create an instance of our ProductList class and send it the correct information.
-const myList = new ProductList(category, dataSource, listElement);
+// then create an instance of our productList class and send it the correct information.
+const myList = new productList(category, dataSource, listElement);
 // finally call the init method to show our products
 myList.init();</code></pre>
               </div> -->
@@ -355,13 +355,13 @@ myList.init();</code></pre>
                   <li>
                     Because we moved the product listing page into a directory
                     the URL listed in the template for a product card in
-                    <kbd>product-listing/index.html</kbd> will be wrong. That
-                    needs to be fixed first.
+                    <kbd>product-list/index.html</kbd> will be wrong. That needs
+                    to be fixed first.
                   </li>
                   <li>
                     We updated the
-                    <code>getProductsByCategory</code> method to pull from the
-                    api instead of the local file. Now we need to fix the
+                    <code>getData</code> method to pull from the api instead of
+                    the local file. Now we need to fix the
                     <code>findProductById</code> method. Before we did not have
                     the ability to request a specific product, we could only
                     request all products. The API we are using now has the

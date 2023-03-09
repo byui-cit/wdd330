@@ -80,95 +80,7 @@
                 <kbd>npm run build</kbd> it will update the files in the
                 <kbd>dist</kbd> directory.
               </p>
-              <!-- <p>
-                If you visit your site on Netlify you will probably see that
-                some things are broken!
-              </p>
-              <p>
-                Before moving on go ahead and run <kbd>npm run build</kbd>. We
-                can get Vite to preview that build directory as well by adding a
-                new command to our <kbd>package.json</kbd> file. Add the
-                following: <code>"preview": "vite preview",</code> to the
-                scripts section, then run it. Check to see what still works and
-                what is broken. (You always need run
-                <kbd>npm run build</kbd> before you run
-                <kbd>npm run preview</kbd> after you have made any changes.)
-              </p>
-              <p>
-                When we made the changes to the product details page last week,
-                we forgot to update Vite so that it knew about the changes.
-                Let's do that now.
-              </p>
-              <p>
-                Open up the <kbd>vite.config.js</kbd> file. Note the section
-                that looks like this:
-              </p>
-              <pre><code class="lang-js">
-build: {
-  outDir: "../dist",
-  rollupOptions: {
-    input: {
-      main: resolve(__dirname, "src/index.html"),
-      cart: resolve(__dirname, "src/cart/index.html"),
-      product1: resolve(
-        __dirname,
-        "src/product_pages/cedar-ridge-rimrock-2.html"
-      ),
-      product2: resolve(__dirname, "src/product_pages/marmot-ajax-3.html"),
-      product3: resolve(
-        __dirname,
-        "src/product_pages/northface-alpine-3.html"
-      ),
-      product4: resolve(
-        __dirname,
-        "src/product_pages/northface-talus-4.html"
-      ),
-    },
-  },
-},
-              </code></pre>
-              <p>
-                We aren't using the specific product pages anymore, and instead
-                have an <kbd>index.html</kbd> file that we need to let our
-                bundler know about. Change that section so that it looks like
-                this instead:
-              </p>
-              <pre><code class="lang-js">
-build: {
-  outDir: "../dist",
-  rollupOptions: {
-    input: {
-      main: resolve(__dirname, "src/index.html"),
-      cart: resolve(__dirname, "src/cart/index.html"),
-      product: resolve(__dirname, "src/product_pages/index.html"
-      ),
-      
-    },
-  },
-},
-                </code></pre>
-              <p>
-                Anytime we add or remove more .HTML files to the site we will
-                need to update this config or the production version of our site
-                will break!
-              </p>
-              <p>
-                We need to make one more build tool related change. If you look
-                inside of the <kbd>dist</kbd> directory...you will notice that
-                the <code>.json</code> files from the json folder are not there!
-                Vite doesn't know it needs to copy them over.
-              </p>
-              <p>
-                The easiest way to fix this would be to create a new directory
-                called <kbd>src/public</kbd>. Then move the
-                <kbd>json</kbd> directory into that new folder. Vite will
-                automatically copy everything in the <kbd>public</kbd> folder
-                over to the build.
-              </p>
-              <p>
-                You should move the <kbd>images</kbd> directory into the
-                <kbd>public</kbd> directory as well.
-              </p> -->
+
               <p>
                 Someone on the team should check the build periodically to make
                 sure it is not broken. A good time to do this would be each time
@@ -179,11 +91,11 @@ build: {
 
             <li>
               <!-- BEGIN STEP -->
-              <h3>ProductList module</h3>
+              <h3>productList module</h3>
               <p>
-                Create a new file <kbd>ProductList.mjs</kbd> that we will use
+                Create a new file <kbd>productList.mjs</kbd> that we will use
                 for the code to generate a list of product cards in HTML from an
-                array. Add a function called <kbd>ProductList</kbd>, export your
+                array. Add a function called <kbd>productList</kbd>, export your
                 function as default, and import it into <kbd>main.js</kbd>. You
                 should also think about what other functions we will need to
                 complete this task.
@@ -194,7 +106,7 @@ build: {
                 nothing you do has any effect!
               </p>
               <p>
-                Begin creating your ProductList function by thinking about the
+                Begin creating your productList function by thinking about the
                 information it will need to accomplish it's purpose.
               </p>
               <p>
@@ -212,17 +124,17 @@ build: {
                 <kbd>tents.json</kbd> file (our current data source). We did
                 something similar last week. Then we only needed one product,
                 this time we need all of them. If you review the contents of our
-                <code>ProductData</code> module, you will see a function
-                <code>getProductsByCategory</code>. Import that into the module
-                and use it to get the list of products from <kbd>tents</kbd>.
+                <code>productData</code> module, you will see a function
+                <code>getData</code>. Import that into the module and use it to
+                get the list of products from <kbd>tents</kbd>.
               </p>
 
               <details>
                 <summary>
-                  Click for example code (<kbd>ProductList.mjs</kbd>)
+                  Click for example code (<kbd>productList.mjs</kbd>)
                 </summary>
                 <pre><code class="lang-js">
-export default function ProductList(selector, category) {
+export default function productList(selector, category) {
     
     // get the element we will insert the list into from the selector
     // get the list of products 
@@ -232,7 +144,7 @@ export default function ProductList(selector, category) {
                 </code></pre>
               </details>
               <p>
-                Then import your <code>ProductList</code> function into
+                Then import your <code>productList</code> function into
                 <kbd>main.js</kbd> and make sure that you get back a list of
                 products. (use console.log or a breakpoint) Review the code from
                 the week 2 team activity if you need help remembering how to do
@@ -334,7 +246,7 @@ export default function ProductList(selector, category) {
               <p>
                 We will create a template function for each of the templates we
                 need that will simply return a template literal string. At the
-                top of your <kbd>ProductList</kbd> module add a function for a
+                top of your <kbd>productList</kbd> module add a function for a
                 <code>productCardTemplate(product)</code>. You can use the
                 current HTML in the <kbd>/index.html</kbd> file as your starting
                 point. Remember to remove the specific product information!
@@ -343,7 +255,7 @@ export default function ProductList(selector, category) {
                 <summary>productCardTemplate() example</summary>
 
                 <pre><code class="lang-js">
-// ProductList.mjs
+// productList.mjs
 function productCardTemplate(product) {
     return `&lt;li class="product-card"&gt;
     &lt;a href="product_pages/index.html?product="&gt;
@@ -358,7 +270,7 @@ function productCardTemplate(product) {
 }             </code></pre>
               </details>
               <p>
-                Add another function to your ProductList module to use this
+                Add another function to your productList module to use this
                 template called <code>renderList</code>, call the template
                 function once for each product in our list, and then insert the
                 HTML strings into the DOM. The function should take the product
@@ -446,7 +358,7 @@ export default class ProductList {
                 Taking a list of data objects, converting it into HTML, and
                 inserting it into a DOM element seems like something that could
                 happen a lot. Right now our function is embedded in the
-                <code>ProductList</code> module...which makes it not very
+                <code>productList</code> module...which makes it not very
                 reusable. We will probably need to generate more content with
                 templates so let's make this function reusable. Look for all the
                 parts of the code that are specific to this use case: making a
@@ -500,7 +412,7 @@ export default class ProductList {
               </p>
               <p>
                 Then import in your function to the
-                <kbd>ProductList</kbd> module, and refactor to use our new
+                <kbd>productList</kbd> module, and refactor to use our new
                 utility function.
               </p>
 
@@ -511,9 +423,9 @@ export default class ProductList {
               <h3>Remove extra products</h3>
               <p>
                 <kbd>tents.json</kbd> has more tents than we currently need.
-                Write a method in <kbd>productList.js</kbd> that will filter our
-                list of products to just the 4 we need. Use that method to show
-                only those 4 tents.
+                Write a method in <kbd>productList.mjs</kbd> that will filter
+                our list of products to just the 4 we need. Use that method to
+                show only those 4 tents.
               </p>
 
               <!-- END STEP -->
