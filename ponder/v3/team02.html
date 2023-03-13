@@ -87,7 +87,7 @@
                 </li>
                 <li>
                   We will begin now by creating a module
-                  (<kbd>ProductDetails.mjs</kbd>) to contain the code we will
+                  (<kbd>productDetails.mjs</kbd>) to contain the code we will
                   need to dynamically produce our product detail pages.
                 </li>
 
@@ -327,25 +327,25 @@ console.log(findProductById(productId));
             </li>
             <li>
               <!-- BEGIN STEP -->
-              <h3>ProductDetails.mjs</h3>
+              <h3>productDetails.mjs</h3>
               <p>
                 Create a new file in the <kbd>js</kbd> folder called
-                <kbd>ProductDetails.mjs</kbd>
+                <kbd>productDetails.mjs</kbd>
               </p>
               <p>
-                The <kbd>ProductDetails.mjs</kbd> module will be responsible for
+                The <kbd>productDetails.mjs</kbd> module will be responsible for
                 all of the functionality needed to lookup data for a specific
                 product and display it in HTML. Good modules often follow a
                 "black box" philosophy. The module should be very upfront about
                 what it needs to function, but very opaque about the details of
                 how it accomplishes it's work. This means in part that we should
                 only expose as much as we need to for it to work. The following
-                methods are recommended:
+                functions are recommended:
               </p>
               <ol>
                 <li>
-                  <code>ProductDetails(productId)</code>: there are a few things
-                  that need to happen before our class can be used. This
+                  <code>productDetails(productId)</code>: there are a few things
+                  that need to happen before our module can be used. This
                   function will become the entrypoint into our module and will
                   make sure that everything happens in the right order. This
                   function should be the default export.
@@ -367,20 +367,20 @@ console.log(findProductById(productId));
               </ol>
 
               <p>
-                To use our class we need to pull everything from the last few
+                To use our module we need to pull everything from the last few
                 steps together in the <kbd>product.js</kbd> file. Once we get
                 everything refactored that file should look something like this:
               </p>
               <pre><code class="lang-js">import { getParam } from "./utils.mjs";
-import ProductDetails from "./ProductDetails.mjs";
+import productDetails from "./productDetails.mjs";
 
 const productId = getParam("product");
-ProductDetails(productId);</code></pre>
+productDetails(productId);</code></pre>
               <p>
                 Notice we import in the code we need from our modules. Then we
                 get the id of our product using our helper function
                 <code>getParams</code>. Then we use the function from
-                ProductDetails with the productId to finish setting everything
+                productDetails with the productId to finish setting everything
                 up.
               </p>
 
@@ -522,10 +522,10 @@ build: {
                   necessary to make it work.
                 </li>
                 <li>
-                  <code>ProductDetails()</code>: this function needs to do a few
+                  <code>productDetails()</code>: this function needs to do a few
                   things, copy/paste the following into your code to use as a
                   guide for finishing it:
-                  <pre><code class="lang-js">export default async function ProductDetails(productId, selector) {
+                  <pre><code class="lang-js">export default async function productDetails(productId, selector) {
   // use findProductById to get the details for the current product. findProductById will return a promise! use await or .then() to process it
   // once we have the product details we can render out the HTML
   // add a listener to Add to Cart button
