@@ -1,0 +1,30 @@
+.film-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none;
+}
+.film-list li {
+  padding: 0.5em;
+  border: 1px solid;
+  flex: 1 0 auto;
+  cursor: pointer;
+}
+.film-list li:hover {
+  text-decoration: underline;
+}
+
+.film-planets,
+.film-starships {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.film-planets li,
+.film-starships li {
+  border: 1px solid;
+  padding: 1em;
+  width: 45%;
+  flex: 1 1 15em;
+}
