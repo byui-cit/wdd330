@@ -1,6 +1,3 @@
-// function to add the base of our table to the html page.
-// why isn't this part of the class?
-
 let expenses = [];
 let total = 0;
 let outputId = "";
@@ -8,7 +5,7 @@ const key = "expenses";
 
 function tableTemplate() {
   return `<h2>Expenses</h2>
-  <table>
+  <table class="expense-table">
   <thead>
     <tr>
       <th>Description</th>
@@ -21,7 +18,7 @@ function tableTemplate() {
   </table>`;
 }
 function inputTemplate() {
-  return `<section id="input">
+  return `<section id="input" class="new-expense">
   <input id="description" type="text" placeholder="Description" />
   <input id="amount" type="text" placeholder="Amount" />
   <button id="submit">Enter</button>
@@ -57,7 +54,11 @@ function renderExpenses(expenses, elementId) {
 function buildExpense() {
   const description = document.getElementById("description");
   const amount = document.getElementById("amount");
-  const expense = { description: description.value, amount: amount.value };
+  // TODO: check here to make sure the input is valid :) that way we make sure that our parseFloat below won't fail
+  const expense = {
+    description: description.value,
+    amount: parseFloat(amount.value)
+  };
   description.value = "";
   amount.value = "";
   return expense;
@@ -79,9 +80,9 @@ function calculate() {
   expenses.forEach((expense, index) => {
     // if it is the first row then the total is the amount.
     if (index === 0) {
-      total = parseFloat(expense.amount);
+      total = expense.amount;
     } else {
-      total += parseFloat(expense.amount);
+      total += expense.amount;
     }
     expense.total = total;
   });
@@ -89,9 +90,12 @@ function calculate() {
 
 // notice the export default? That will make the class available outside the module to be imported
 export default function expenseTracker(id, input) {
+  // set the id to a local module variable
   outputId = id;
+  // render out the table and maybe the inputs
   renderTracker(outputId, input);
   // grab any expenses from localStorage
   expenses = JSON.parse(localStorage.getItem(key)) || [];
+  // render the expenses
   renderExpenses(expenses, outputId);
 }

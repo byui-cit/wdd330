@@ -45,7 +45,35 @@
     <main>
       <label for="allowInput">Allow Input?</label>
       <input type="checkbox" name="allowInput" id="allowInput" checked />
-      <section id="output"></section>
+      <section id="output">
+        <h2>Expenses</h2>
+        <table class="expense-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody class="outputBody">
+            <tr>
+              <td>Example Item</td>
+              <td>$10</td>
+              <td>$10</td>
+            </tr>
+            <tr>
+              <td>Another Item</td>
+              <td>$15</td>
+              <td>$25</td>
+            </tr>
+          </tbody>
+        </table>
+        <section id="input" class="new-expense">
+          <input id="description" type="text" placeholder="Description" />
+          <input id="amount" type="text" placeholder="Amount" />
+          <button id="submit">Enter</button>
+        </section>
+      </section>
     </main>
   </body>
 </html>

@@ -67,16 +67,165 @@
         <p>
           I would spend some time talking about the NodeJs based development
           environment we will be working in. Talk about the role of the package
-          manager (npm), bundlers (using Snowpack...I know it's not exactly a
-          bundler, but it's setup is very simple, it works well for multi-page
-          apps, will run Babel on our code as well as minify, and it doesn't add
-          a bunch of code so debugging looks cleaner), and task managers (npm)
+          manager (npm), bundlers (Vite), and task managers (npm)
         </p>
         <p>
-          The readings this week are on OOP, this, and modules. So it would be
-          good to model a class based ESModule as well. Discuss DRY and the
-          importance of organizing as part of this.
+          The readings this week are localStorage, and modules. So it would be
+          good to model using ESModules as well as localStorage use. Discuss DRY
+          and the importance of organizing as part of this.
         </p>
+        <h2>New demo for V3 (no classes)</h2>
+        <p>
+          You could code up something like this
+          <a href="../examples/expenses/v3/index.html" target="_blank"
+            >Expense tracker</a
+          >.
+        </p>
+        <ol>
+          <li>
+            To save a bit of time you could provide the students with the
+            <a href="../examples/expenses/v3/start/index.html" target="_blank"
+              >HTML</a
+            >. They should add to that <kbd>main.js</kbd>, and
+            <kbd>expenseTracker.mjs</kbd>. Point out that the HTML file already
+            has a script element linking to main.js. Note also the
+            <code>type="module"</code>
+          </li>
+          <li>
+            Spend a minute looking at the working demo. Then make up a list of
+            steps we will need to solve this problem. (See the demo: main.js for
+            a sample list)
+          </li>
+          <li>
+            Start by adding the code to main.js to get the current status of the
+            allowInput checkbox. Then add an error handler to listen for a
+            change to that box. This should be review for the students.
+          </li>
+          <li>
+            Next talk about how we would like the browser to remember whether
+            the user wants input or not. We can store that value in
+            localStorage. In the eventListener when the checkbox changes we show
+            how we can store that in localStorage. Then show how when the page
+            loads you can grab the value back out and set the checkbox to the
+            right state.
+            <pre><code class="lang-js">const inputCheck = document.querySelector("#allowInput");
+const storedAllowInput = localStorage.getItem("allow-input");
+inputCheck.checked = storedAllowInput;
+//expenseTracker("output", storedAllowInput);
+inputCheck.addEventListener("change", function () {
+  localStorage.setItem("allow-input", this.checked);
+  //expenseTracker("output", this.checked);
+});</code></pre>
+          </li>
+          <li>
+            Next we go to the module. We need to create a few template
+            functions: <code>tableTemplate()</code>,
+            <code>inputTemplate()</code>, and
+            <code>expenseTemplate(expense)</code>. Copy/paste the correct HTML
+            from index.html into each function.
+          </li>
+          <li>
+            Create the function that will become the default export next
+            <code>expenseTracker()</code>, talk about what we may need to send
+            into that function to initialize it. (an id where we want to output
+            stuff, and a boolean indicating whether to render the inputs)
+          </li>
+          <li>
+            You might comment out what needs to happen in the main
+            function...something like this:
+            <pre><code class="lang-js">export default function expenseTracker(id, input) {
+  // set the id to a local module variable
+  // render out the table and maybe the inputs
+  // grab any expenses from localStorage
+  // render the expenses
+}</code></pre>
+          </li>
+          <li>
+            Stub out the functions we will need to do this (<code
+              >renderTracker, renderExpenses</code
+            >) You would also talk more about localStorage and write that line
+            of code. Make sure to mention the differnece between storing a
+            string and an array or object in LocalStorage...we can really only
+            store strings...so we have to convert our array of objects into JSON
+            when we store it, and convert the JSON string back to an array when
+            we pull it back out:
+            <pre><code class="lang-js">export default function expenseTracker(id, input) {
+  // set the id to a local module variable
+  outputId = id;
+  // render out the table and maybe the inputs
+  renderTracker(outputId, input);
+  // grab any expenses from localStorage
+  expenses = JSON.parse(localStorage.getItem(key)) || [];
+  // render the expenses
+  renderExpenses(expenses, outputId);
+}
+            </code></pre>
+          </li>
+          <li>
+            Explain how to import our function into <kbd>main.js</kbd> and use
+            it. We already have the boolean we need to pass in...and the
+            elementId will be <kbd>output</kbd>. Test to make sure things still
+            work...you might insert some console.logs to help illustrate the
+            flow.
+          </li>
+          <li>
+            Complete <code>renderTracker</code> next, might look something like
+            this:
+            <pre><code class="lang-js">function renderTracker(elementId, input = true) {
+  const element = document.getElementById(elementId);
+  element.innerHTML = tableTemplate();
+  if (input) {
+    // when we change the value of innerHTML directly it destroys any listeners that might have been attached...this works in our favor in this case.
+    element.innerHTML += inputTemplate();
+    // add a listener to the button
+    document.querySelector("#submit").addEventListener("click", addExpense);
+  }
+}</code></pre>
+          </li>
+          <li>
+            Note we reference an <code>addExpense</code> function there...we
+            need to stub that out and write it next. Review pulling values from
+            inputs and working with objects. You could create a function to
+            build the object (<code>buildExpense</code>) or just inline it in
+            addExpense. The demo looks like this:
+            <pre><code class="lang-js">function buildExpense() {
+  const description = document.getElementById("description");
+  const amount = document.getElementById("amount");
+  // TODO: check here to make sure the input is valid :) that way we make sure that our parseFloat below won't fail
+  const expense = {
+    description: description.value,
+    amount: parseFloat(amount.value)
+  };
+  description.value = "";
+  amount.value = "";
+  return expense;
+}
+function addExpense() {
+  const expense = buildExpense();
+  // add the expense to the array of expenses;
+  expenses.push(expense);
+  // recalculate running total
+  calculate();
+  // store new list in localStorage
+  localStorage.setItem(key, JSON.stringify(expenses));
+  // output updated expenses
+  renderExpenses(expenses, outputId);
+  // clear out our form values
+}</code></pre>
+          </li>
+          <li>
+            Note that <code>addExpense</code> references another function that
+            doesn't exist yet: <code>calculate</code>. Stub that out so that you
+            can continue testing as you go. You may or may not actually code up
+            calculate...depends on time...you can always leave that as an
+            exercise for the students.
+          </li>
+          <li>
+            Write the <code>renderExpenses</code> function next. At this point
+            you should have a pretty functional app.
+          </li>
+        </ol>
+        <h2>Old demo (uses classes)</h2>
         <p>
           You could code up something like this
           <a href="../examples/expenses/index.html" target="_blank"
