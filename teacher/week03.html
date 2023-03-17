@@ -49,8 +49,81 @@
         <p>
           For your meeting with them continue to give examples of building
           dynamic DOM, using events, organizing with modules, and leveraging
-          things like the array methods that Javascripr gives us.
+          things like the array methods that Javascript gives us.
         </p>
+        <h3>New demo: SWAPI</h3>
+        <p>
+          Link to a finished version:
+          <a href="../../examples/sw/v3/index.html">Swapi demo</a>
+        </p>
+        <p>
+          This week might be a good week to spend a bit of time trying to
+          understand others code, as well as working on some CSS. You could
+          start by giving the students this javascript module:
+          <a href="https://byui-cit.github.io/wdd330/examples/sw/swapidemo.zip"
+            >swapidemo.zip</a
+          >. Begin by opening it up in your editor and walk through a few things
+          with them. Point out the overall structure...there are three sections:
+          templates, exports, helpers
+        </p>
+        <p>
+          Note the try/catch blocks in some of the functions. Explain a bit
+          about them.
+        </p>
+        <p>
+          Point out as well in the <code>getListDetails</code> function the use
+          of Promise.all()
+        </p>
+        <p>
+          Once you have pointed out a few things instruct the students to create
+          <kbd>index.html</kbd> and <kbd>main.js</kbd> files. Then have them
+          write the HTML and JS code necessary to get the module to display a
+          list of Star wars movies.
+        </p>
+        <p>
+          At this point draw attention to the links we generated. Point out the
+          url param and talk about how we can process them.
+        </p>
+        <ol>
+          <li>Create a film.html and film.js file</li>
+          <li>
+            In film.js console.log out <code>window.location</code> and discuss
+            what is there. Point out <code>search</code> in particular.
+          </li>
+          <li>
+            Show how <code>URLSearchParams()</code> can be used to parse the
+            search params.
+          </li>
+          <li>
+            Then the <code>.get(param)</code> method can be used to pull
+            specific params from the object.
+          </li>
+          <li>
+            <pre><code class="lang-js">const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const filmId = urlParams.get("filmId");</code></pre>
+          </li>
+          <li>
+            You might turn the students loose again to finish getting the
+            <kbd>film.html</kbd> page implemented...or you can finish together.
+          </li>
+        </ol>
+        <p>
+          After they get the module working spend any remaining time writing
+          some CSS for the page to dress it up. Basic layout would be
+          good...adding margin and padding to give whitespace.
+        </p>
+        <p>
+          Alternatively you could add some loading animations that will show
+          while we wait for the planets, etc to finish.
+        </p>
+        <p>
+          Another alternative would be to dig a bit further into the
+          <code>window.location</code> object and show how you can check to see
+          which page you are currently on...and use that to combine main.js and
+          films.js
+        </p>
+        <h3>Old demo</h3>
         <p>
           You might then do something like this
           <a href="../examples/quotes/index.html" target="_blank"

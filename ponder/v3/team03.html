@@ -354,6 +354,22 @@ export default class ProductList {
     const htmlStrings =  list.map(productCardTemplate);
     el.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
 }</code></pre>
+              <p class="callout">
+                You hopefully will recognize the
+                <a
+                  href="https://javascript.info/modifying-document"
+                  target="_blank"
+                  rel="noreferrer"
+                  >insertAdjacentHTML</a
+                >
+                from your recent readings. If you haven't used it before go
+                review that section of the reading again. It has some great
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML#description"
+                  >advantages</a
+                >
+                over just using <code>innerHTML</code>
+              </p>
               <p>
                 Taking a list of data objects, converting it into HTML, and
                 inserting it into a DOM element seems like something that could
