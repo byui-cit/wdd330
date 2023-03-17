@@ -20,4 +20,4 @@
 */
 import { renderFilmList } from "./swapiHelper.mjs";
 
-renderFilmList("films");
+renderFilmList("#films");

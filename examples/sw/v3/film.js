@@ -1,8 +1,5 @@
 /*
-    get list of films
-    output list of films
-    when a film is clicked:
-        get detailed info on film
+  get detailed info on film
         output film details
         for each planet
             get planet info
@@ -24,4 +21,4 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const filmId = urlParams.get("filmId");
 
-renderFilmDetails(filmId, "output");
+renderFilmDetails(filmId, "#output");

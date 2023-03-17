@@ -1,7 +1,26 @@
+body {
+  background-color: #333;
+  color: antiquewhite;
+  font-family: "Courier New", Courier, monospace;
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  width: 80%;
+  max-width: 960px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
 .film-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  justify-content: center;
   list-style-type: none;
 }
 .film-list li {
@@ -9,20 +28,43 @@
   border: 1px solid;
   flex: 1 0 auto;
   cursor: pointer;
+  background-color: antiquewhite;
 }
+
 .film-list li:hover {
   text-decoration: underline;
 }
 
-.film-planets,
-.film-starships {
+.film-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+}
+.film__title {
+  grid-column: 1/4;
+}
+.film-poster {
+  grid-row: 2/5;
+}
+.film__crawl {
+  grid-row: 2/5;
+}
+.film__planets {
+  grid-column: 1/4;
+}
+.film__starships {
+  grid-column: 1/4;
+}
+
+.film__planets-list,
+.film__starships-list {
   list-style-type: none;
   padding-left: 0;
   display: flex;
   flex-wrap: wrap;
 }
-.film-planets li,
-.film-starships li {
+.film__planets-list li,
+.film__starships-list li {
   border: 1px solid;
   padding: 1em;
   width: 45%;
