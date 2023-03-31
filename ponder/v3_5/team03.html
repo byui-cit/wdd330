@@ -441,7 +441,7 @@ return html`&lt;h2&gt;Top Products&lt;/h2&gt;
                   </li>
                   <li>
                     Then we see "init". This means the useEffect triggered and
-                    ran out init function. The first thing logged is
+                    ran our init function. The first thing logged is
                     <kbd>data</kbd>, the second thing logged is
                     <kbd>products</kbd>. Why is <kbd>products</kbd> still empty?
                     We called <code>setProducts</code>!
@@ -459,10 +459,11 @@ return html`&lt;h2&gt;Top Products&lt;/h2&gt;
                   to RELOAD!
                 </p>
                 <p>
-                  So when <code>useEffect</code> ran <code>init</code>, we
-                  <em>requested</em> an update of <code>products</code> with
-                  <code>setProducts</code>. This update triggered a reload...but
-                  an important thing to note is that <code>products</code>
+                  So when <code>useEffect</code> ran <code>init</code> and we
+                  got some data back, we <em>requested</em> an update of
+                  <code>products</code> with <code>setProducts</code>. This
+                  update triggered a reload...but an important thing to note is
+                  that <code>products</code>
                   <em
                     >does NOT update until the next render of the component!</em
                   >
