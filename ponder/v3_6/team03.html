@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/prism-coy.css" />
+    <link rel="stylesheet" href="../../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 3</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          This activity will continue the process of making our site more
+          dynamic. We will do this by addressing the home page. Eventually we
+          will want to list out more products, so we need to make the product
+          listing build dynamically based on provided data.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+        <p>
+          There are many spots where code examples have been given. To get the
+          most out of this activity do not look at the examples until your group
+          has given that section a try. Then after you look at the example
+          resist the temptation to copy/paste. Use the examples to give
+          correction, or help you get unstuck...do not just use them to get it
+          done.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team3: Dynamic product list" task...then move it to 'Doing'.
+                Read the details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                Github before proceeding. Next they should create a new branch
+                called <kbd>initials--team3</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team3</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Check Your Build</h3>
+              <p>
+                Last week we made some changes to the structure of our site. You
+                should have had some pull requests created and merged at this
+                point as well. Have you checked the "production" build of your
+                site since then? Remember that we are deploying our site to
+                Netlify. This deployment is actually automatic. Everytime you
+                change the "main" branch of your site it will update Netlify.
+              </p>
+              <p>
+                We can also check the production build locally. If you run
+                <kbd>npm run build</kbd> it will update the files in the
+                <kbd>dist</kbd> directory.
+              </p>
+
+              <p>
+                Someone on the team should check the build periodically to make
+                sure it is not broken. A good time to do this would be each time
+                a pull request is merged!
+              </p>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Building Components</h3>
+              <p>
+                A very popular way to build web apps currently is by creating
+                re-usable components. These components have all of the markup,
+                styling, and functionality packaged up in an easy to use form.
+                The module we made in the last activity followed this form to
+                some extent. all we had to do to get a product to display with
+                it's details was to call a function.
+              </p>
+              <p>
+                Our module works, but has a few drawbacks with performance and
+                implementation. Because it can be fairly difficult to solve
+                those problems, and because almost everyone writing web
+                applications runs into them many libraries and frameworks have
+                been built to help.
+              </p>
+              <p>
+                Part of your reading for this week was a
+                <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte"
+                  >tutorial on Svelte</a
+                >. Svelte is a framework for creating modern web applications
+                with components. We will be using it in our project starting
+                with this week to help us build our re-usable components.
+              </p>
+              <p>
+                One nice thing about Svelte components is that they are file
+                based. One file for all the HTML markup, CSS, and Javascript.
+                Another nice thing is that the templates are mostly just
+                HTML...with some Svelte specific templating additions.
+              </p>
+              <p>
+                We need to add Svelte to our project. Because we are already
+                using a package manager (npm) and a bundler (Vite) this is
+                really easy.
+              </p>
+              <p>Open the terminal in VSCode and run the following command:</p>
+              <pre><code class="lang-bash">npm i -save-dev svelte @sveltejs/vite-plugin-svelte</code></pre>
+              <p>
+                Svelte is a little different than many other frontend frameworks
+                like React, Vue, or Angular. It is actually a compiler. When you
+                write a React app for example you have to send the entire React
+                codebase along with your code so that it can work. Svelte runs a
+                compile process instead. When it is done you don't need the
+                Svelte library anymore, so you end up sending less code to the
+                browser.
+              </p>
+              <p>
+                We need the compiler to run each time we make a change to our
+                code however so we can see the effect of our changes. Luckily
+                because of the way in which our project is already setup it is
+                easy to make this happen. We will need to make a couple more
+                small changes however.
+              </p>
+              <p>
+                Add the following lines to your <kbd>vite.config.js</kbd> file
+                first:
+              </p>
+              <pre><code class="lang-js">import { svelte } from "@sveltejs/vite-plugin-svelte";</code></pre>
+              <pre><code class="lang-js">export default defineConfig({
+                plugins: [svelte()],
+                //... the rest of the config here ...
+              });</code></pre>
+              <p>At the end your file should look something like below:</p>
+              <pre><code class="lang-js">
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+
+export default defineConfig({
+    plugins: [svelte()],
+    root: "src/",
+    build: {
+    outDir: "../dist",
+    rollupOptions: {
+        input: {
+        main: resolve(__dirname, "src/index.html"),
+        cart: resolve(__dirname, "src/cart/index.html"),
+        checkout: resolve(__dirname, "src/checkout/index.html"),
+        productDetail: resolve(__dirname, "src/product_pages/index.html"),
+        },
+    },
+    },
+});
+              </code></pre>
+              <p>
+                Then create a new file in the root of your project called
+                <kbd>svelte.config.js</kbd>. Add the following to that file:
+              </p>
+              <pre><code class="lang-js">import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+
+export default {
+    preprocess: vitePreprocess(),
+}</code></pre>
+              <p>
+                The last change we need to make is to add the line
+                <code>"type": "module",</code> into our
+                <kbd>package.json</kbd> file. That's it. We can now use Svelte
+                in our project!
+              </p>
+              <div class="callout">
+                <p>
+                  There is one more thing you will probably want to do to finish
+                  your setup. There is a very nice VS Code extension for Svelte
+                  that will make your much life easier. It's called "Svelte for
+                  VS Code". Each member of the team should install it.
+                </p>
+              </div>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>productList component</h3>
+              <p>
+                Create a new folder in the your project:
+                <kbd>src/js/components/</kbd>. Create a new file in that
+                directory called <kbd>ProductList.svelte</kbd> that we will use
+                for the code to generate a list of product summary cards in HTML
+                from an array. (It's common practice in most component based
+                libraries to name components in this way.
+                PascalCased...camelCased but capitalized).
+              </p>
+              <p>
+                Inside the <kbd>ProductList.svelte</kbd> file we can actually
+                type HTML directly. Try adding something like:
+                <code>&lt;p&gt;My new product list componenent!&lt;/p&gt;</code>
+              </p>
+              <p>Then you can import your component into <kbd>main.js</kbd></p>
+              <pre><code class="lang-js">import ProductList from "./components/ProductList.svelte"</code></pre>
+              <p>We can add our component to the page like this:</p>
+              <pre><code class="lang-js">// main.js 
+import ProductList from "./components/ProductList.svelte";
+
+new ProductList({
+    target: document.querySelector(".products"),
+});</code></pre>
+              <p>
+                Visit the home page in the browser to make sure you see what you
+                expect!
+              </p>
+              <p class="callout">
+                Make sure that you add <kdb>main.js</kdb> into your index.html
+                file with a script tag. Otherwise you may end up wondering why
+                nothing you do has any effect!
+              </p>
+              <p>
+                Now that we have a basic component working, we can add the rest
+                of the functionality we need. Begin creating your ProductList
+                component by thinking about the information it will need to
+                accomplish it's purpose.
+              </p>
+              <p>
+                Eventually we will want to have more than one category of
+                products, and list each out independently. We will need to pass
+                in the category of products we want. In most component based
+                frameworks this is done with
+                <a href="https://learn.svelte.dev/tutorial/declaring-props"
+                  >props</a
+                >
+              </p>
+
+              <p>
+                Inside the component we will need to read the product data out
+                of the
+                <kbd>tents.json</kbd> file (our current data source). We did
+                something similar last week. Then we only needed one product,
+                this time we need all of them. If you review the contents of our
+                <code>productData</code> module, you will see a function
+                <code>getData</code>. Import that into the module and use it to
+                get the list of products from <kbd>tents</kbd>.
+              </p>
+              <p>
+                We can add Javascript to our component with a
+                <code>&lt;script&gt;</code> element. Your code thus far might
+                look like this:
+              </p>
+
+              <pre><code class="lang-js">
+&lt;script&gt;
+import { getData } from "../productData.mjs";
+
+// this is how we make a prop in svelte
+export let category;
+// if you are looking at this thinking that's strange to just stop with a promise
+// you would be right.  This will make more sense in a bit...stay tuned.
+let promise = getData(category);
+&lt;/script&gt;
+
+&lt;p&gt;My new product list component!&lt;/p&gt;
+                </code></pre>
+              <p>
+                To pass our prop into the component you will need to make a
+                change in <kbd>main.js</kbd>
+              </p>
+              <pre><code class="lang-js">new ProductList({
+    target: document.querySelector(".products"),
+    props: { category: "tents" },
+});</code></pre>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Working with templating</h3>
+              <p>
+                As you think about how to build out our list it would be good to
+                break it down into parts:
+              </p>
+              <ol>
+                <li>A title identifying the component</li>
+                <li>A list</li>
+                <li>
+                  A collection of product summary cards in the list...one for
+                  each product we want to display.
+                </li>
+              </ol>
+              <p>
+                We already have examples of all of this in the current
+                index.html file. Begin by copy/pasting the code inside of the
+                <code>.products</code> container into your
+                <kbd>ProductList</kbd> component. Since one of our goals is to
+                make the list dynamic as well we should get rid of all but one
+                of the <code>li</code> elements.
+              </p>
+              <pre><code class="lang-js">
+&lt;script&gt;
+import { getData } from "../productData.mjs";
+
+// this is how we make a prop in svelte
+export let category;
+// if you are looking at this thinking that's strange to just stop with a promise
+// you would be right.  This will make more sense in a bit...stay tuned.
+let promise = getData(category);
+&lt;/script&gt;
+
+&lt;h2&gt;Top Products&lt;/h2&gt;
+&lt;ul class="product-list"&gt;
+
+&lt;li class="product-card"&gt;
+    &lt;a href="product_pages/index.html?product=880RR"&gt;
+        &lt;img
+        src="images/tents/marmot-ajax-tent-3-person-3-season-in-pale-pumpkin-terracotta~p~880rr_01~320.jpg"
+        alt="Marmot Ajax tent"/&gt;
+        &lt;h3 class="card__brand"&gt;Marmot&lt;/h3&gt;
+        &lt;h2 class="card__name"&gt;Ajax Tent - 3-Person, 3-Season&lt;/h2&gt;
+        &lt;p class="product-card__price"&gt;$199.99&lt;/p&gt;&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+              </code></pre>
+              <p>
+                We are getting closer, but our component is still very static,
+                and we will only have one product listed instead of however many
+                are returned from the data source. A good templating tool should
+                help us with things like this. In fact, Svelte does have some
+                nice tools to help us with
+                <a href="https://learn.svelte.dev/tutorial/each-blocks"
+                  >looping</a
+                >
+                and even to handle
+                <a href="https://learn.svelte.dev/tutorial/await-blocks"
+                  >promises</a
+                >.
+              </p>
+              <p>
+                After reviewing the links above, update your template to use an
+                <code>{#await}</code> block and an <code>{#each}</code> block.
+                Check out the partial solution below if you get stuck.
+              </p>
+              <details>
+                <summary>Partial solution</summary>
+                <pre><code class="lang-js">
+&lt;h2&gt;Top Products&lt;/h2&gt;
+{#await promise}
+  <p>Loading</p>
+{:then products}
+&lt;ul class="product-list"&gt;
+{#each products as product}
+&lt;li class="product-card"&gt;
+    &lt;a href="product_pages/index.html?product=880RR"&gt;
+        &lt;img
+        src="images/tents/marmot-ajax-tent-3-person-3-season-in-pale-pumpkin-terracotta~p~880rr_01~320.jpg"
+        alt="Marmot Ajax tent"/&gt;
+        &lt;h3 class="card__brand"&gt;Marmot&lt;/h3&gt;
+        &lt;h2 class="card__name"&gt;Ajax Tent - 3-Person, 3-Season&lt;/h2&gt;
+        &lt;p class="product-card__price"&gt;$199.99&lt;/p&gt;&lt;/a&gt;
+    &lt;/li&gt;
+{/each}
+&lt;/ul&gt; 
+{/await} 
+                </code></pre>
+              </details>
+              <p>
+                At this point if everything is working you should see 6 copies
+                of the list item. They will all be identical, but we will fix
+                that next.
+              </p>
+              <!-- <p>
+                As we think about building our product list, each product card
+                will have very similar markup. Templates are a way for us to
+                reuse markup in an efficient way. Last week we were able to
+                leave the markup in the HTML file, and just fill in the values
+                with Javascript, but that won't work this week as we need
+                multiple copies of the template. There are many ways that
+                developers will handle templating issues. When choosing a
+                templating solution you should keep a few things in mind:
+              </p> -->
+
+              <!-- <ol>
+                <li>
+                  Ideally the solution will maintain the separation of concerns.
+                  It would be good if we left the HTML where it belongs...in the
+                  .html file instead of buried in the javascript. This leads to
+                  more maintainable code.
+                </li>
+                <li>
+                  The html and css for a site is often managed by a different
+                  group than the logic in the Javascript. If the HTML is in the
+                  javascript then everytime a styling change needs to be made
+                  the Javascript will have to be modified instead of just
+                  changing the HTML. If your templating solution involves
+                  embedding the HTML in the Javascript code, is it done in such
+                  a way that does not require a high level of JS knowledge in
+                  order to change a template?
+                </li>
+                <li>
+                  Performance. Our templating solution should not lead to
+                  performance issues.
+                </li>
+              </ol>
+              <p>Some of the options that are used can be found below:</p>
+              <ul>
+                <li>
+                  If the project is using a frontend framework or library like
+                  React, Angular, Vue, Svelte,
+                  <a
+                    href="https://2021.stateofjs.com/en-US/libraries/front-end-frameworks/#front_end_frameworks_experience_ranking"
+                    >etc</a
+                  >, the tool will usually have the templating solution built
+                  in. You should really use the built in solution. (For more
+                  information take WDD 430)
+                </li>
+                <li>
+                  Server Side Rendering (SSR) We could use a server side
+                  language like PHP, .NET, or NodeJS to insert the template when
+                  the page was requested, but before it was sent. (For more
+                  information take CSE 340 (PHP), CSE 341 (NodeJS), or CIT 365
+                  (.NET))
+                </li>
+                <li>
+                  There are templating solutions that become part of the
+                  frontend build process. Tools like
+                  <a href="https://handlebarsjs.com/">Handlebars</a>,
+                  <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a>,
+                  <a href="https://pugjs.org/">pug</a>
+                  <a
+                    href="https://www.developerdrive.com/best-javascript-templating-engines/"
+                    >etc</a
+                  >. Most of these tools would be integrated into your workflow
+                  through your bundler or task manager.
+                </li>
+                <li>
+                  Use the
+                  <a
+                    href="https://dev.to/ahferroin7/the-html5-template-element-26b6"
+                    target="_blank"
+                    rel="noreferrer"
+                    >&lt;template&gt;</a
+                  >
+                  tag in HTML with some Javascript to roll your own solution.
+                </li>
+                <li>
+                  Use template literal strings in Javascript to roll your own
+                  solution.
+                </li>
+              </ul> -->
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Finish it up</h3>
+              <p>
+                A product summary card is also something that we might want to
+                reuse in another context. It would be good to make that a
+                standalone component. Create a new file called
+                <kbd>ProductSummary.svelte</kbd> in the components directory and
+                refactor your code to make it work. You should pass the current
+                product in as a prop.
+              </p>
+              <p>
+                Now that we have actual products, update the
+                <code>ProductSummary</code> component to insert the correct
+                variables into your template. Then test again to make sure
+                everything is displaying correctly. Remember to remove the hard
+                coded products in the <kbd>/index.html</kbd> file so we don't
+                have any duplicates. Don't forget to insert in the product.Id
+                into the href in the link!
+              </p>
+
+              <!-- END STEP -->
+            </li>
+
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Remove extra products</h3>
+              <p>
+                <kbd>tents.json</kbd> has more tents than we currently need.
+                Write a method in <kbd>productList.mjs</kbd> that will filter
+                our list of products to just the 4 we need. Use that method to
+                show only those 4 tents.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructors Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/v3.6-team3/src"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, reviewed the instructor's
+          solution, and gotten your code working the driver should commit and
+          push their changes then submit a pull request for this branch. Then
+          review the pull request as a team, close it, and merge the branch back
+          into Main. Finally someone should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../../js/course.js"></script>
+    <script src="../../js/prism.js"></script>
+  </body>
+</html>
