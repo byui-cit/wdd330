@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/prism-coy.css" />
+    <link rel="stylesheet" href="../../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 4</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          This activity will finish the process of converting our site to a
+          dynamic site by making the header and footer components that can be
+          managed in one location.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+        <p>
+          There are many spots where code examples have been given. To get the
+          most out of this activity do not look at the examples until your group
+          has given that section a try. Then after you look at the example
+          resist the temptation to copy/paste. Use the examples to give
+          correction, or help you get unstuck...do not just use them to get it
+          done.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team4: Dynamic header and footer" task...then move it to
+                'Doing'. Read the details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                Github before proceeding. Next they should create a new branch
+                called <kbd>initials--team4</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team4</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Plan</h3>
+              <p>
+                As you completed the reading for this week there were two
+                articles about Single Page Applications (SPA). One outlining
+                what they are, and another indicating some of the drawbacks to
+                them. At this point we need to decide if a Single Page
+                Application is the right architecture for our application.
+                Discuss with your group your feelings. You may want to pull up
+                the two articles (<a
+                  href="https://blog.pshrmn.com/how-single-page-applications-work/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >How Single Page Applications work</a
+                >
+                and
+                <a
+                  href="https://gomakethings.com/the-problem-with-single-page-apps/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >The problem with single page apps</a
+                >
+                ) to refresh you memory about the advantages, disadvantages, and
+                alternatives.
+              </p>
+
+              <p>
+                Once you are done with your discussion, review the information
+                below with the instructor's recommendation and reasoning. Keep
+                in mind that there is no one right answer here. There's more
+                than one way to skin a cat...as the old adage goes. You may
+                disagree with the conclusion or reasoning and that is fine...but
+                because the future activities will make certain assumptions
+                about the structure of your app I would recommend that you still
+                follow the recommendation below.
+              </p>
+              <section class="hint">
+                <input type="checkbox" />
+                <h3>Instructor's recommendation</h3>
+                <i></i>
+                <div>
+                  <p>SPAs can be great in the right circumstances:</p>
+                  <ul>
+                    <li>
+                      Once the page has downloaded, switching between views is
+                      usually very fast
+                    </li>
+                    <li>
+                      In complex applications where there is a lot of state to
+                      manage SPAs make it easier
+                    </li>
+                    <li>
+                      when you need a very native application type of a feel.
+                    </li>
+                  </ul>
+                  <p>But they do come with a few drawbacks:</p>
+                  <ul>
+                    <li>
+                      Initial load times are often higher...people are most
+                      sensitive to initial load times...first impressions...
+                    </li>
+                    <li>SPAs are more complex than multipage apps</li>
+                    <li>
+                      SPAs often require more processing power on the
+                      client...so older less powerful computers and phones might
+                      struggle.
+                    </li>
+                    <li>
+                      You lose some great native features of browsers like
+                      history
+                    </li>
+                    <li>SEO often becomes hard</li>
+                  </ul>
+                  <p>
+                    In the case of our application I'm not sure the additional
+                    complexities added by converting to a SPA are worth the
+                    extra work and complexity it will introduce:
+                  </p>
+                  <ul>
+                    <li>
+                      We don't have complex state that needs to persist from one
+                      page to another. The product listing page for example
+                      really doesn't care what happens on the product detail
+                      page.
+                    </li>
+                    <li>
+                      It would be really nice to not have to write our own
+                      routing and history functionality.
+                    </li>
+                    <li>
+                      This really isn't trying to duplicate a native app...so a
+                      bit of flash on a page load isn't going to feel too out of
+                      place.
+                    </li>
+                    <li>
+                      As a retail site initial loading speed needs to be as fast
+                      as possible...and SEO is really important to get new
+                      customers to the site.
+                    </li>
+                  </ul>
+                  <p>
+                    In our case a SPA would be overkill, but there are some
+                    advantages to dynamically generating parts of the site. I
+                    like the hybrid approach introduced in the second article.
+                    We should implement something along those lines. The good
+                    news is that what we have done already follows that model.
+                  </p>
+                </div>
+              </section>
+              <!-- END STEP -->
+            </li>
+
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Header and Footer</h3>
+              <p>
+                The code for the Header and Footer of our site should be the
+                same (or nearly) on all pages. We currently have 4 copies of
+                those...one on each .html file in the site. If we need to make a
+                change to the header we will have to visit each page to keep
+                them the same. That is a bother with 4 pages...it becomes
+                unmanageable with larger sites. Just as it was for the product
+                list, templating can be a solution here as well.
+              </p>
+              <p>
+                Just like in the last activity we can leverage reusable
+                components for our header and footer. Create two new files in
+                the <kbd>js/components</kbd> folder:
+                <kbd>MainHeader.svelte</kbd> and <kbd>MainFooter.svelte</kbd>.
+              </p>
+
+              <p>
+                Then copy the html from
+                <em>inside</em> of the header and footer elements from the
+                src/index.html page into the respective file. We should then add
+                an id to the header and footer elements in index. In the end for
+                the header your code should look something like this (don't just
+                copy this code! Your code might have changes to it that are not
+                represented here. Copy the code out of your index.html file!):
+              </p>
+              <pre><code class="lang-markup">
+&lt;div class="logo"&gt;
+  &lt;img src="/images/noun_Tent_2517.svg" alt="tent image for logo"&gt;
+  &lt;a href="index.html"&gt; Sleep&lt;span class="highlight"&gt;Outside&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="cart"&gt;
+  &lt;a href="cart.html"&gt;
+    &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+      ...all the SVG code ...
+    &lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+              <pre><code class="lang-markup">&lt;!-- index.html --&gt;
+&lt;header class="divider" id="main-header"&gt;
+  
+&lt;/header&gt;
+</code></pre>
+              <p>
+                To load our templates we will use need to do the same thing we
+                did in the last activity with the Product List. We will need to
+                do this twice for every page in our site. Once for the header
+                and once for the footer. To streamline this we should create a
+                helper function.
+              </p>
+              <ol>
+                <li>
+                  Create a function in the <kbd>utils.mjs</kbd> file called
+                  <kbd>renderHeaderFooter</kbd> and export it.
+                </li>
+
+                <li>
+                  In that function render out the header and footer components
+                  to the correct elements when called.
+                </li>
+
+                <li>
+                  Update <kbd>main.js</kbd>. Import in
+                  <code>renderHeaderFooter</code> and then use that function to
+                  load the header and footer into <kbd>src/index.html</kbd>
+                </li>
+                <li>
+                  Do the same thing for
+                  <kbd>product_pages/index.html</kbd>,
+                  <kbd>cart/index.html</kbd> and
+                  <kbd>checkout/index.html</kbd> (you will probably need to
+                  create a <kbd>checkout.js</kbd> file for this)
+                </li>
+              </ol>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Adding a Cart count</h3>
+              <p>
+                Our header and footer are currently static, meaning that they
+                are always the same. It would be nice however if a user of our
+                site always had a visual indicator of how many items they
+                currently had in their cart. We will do this next.
+              </p>
+              <p>
+                Information can be passed into Svelte components using what are
+                known as props. You actually saw an example of this last
+                activity when we passed the category into the
+                <code>ProductList</code> component.
+              </p>
+              <pre><code class="lang-js">&lt;script&gt;
+import ProductSummary from "./ProductSummary.svelte";
+import { getData } from "../productData.mjs";
+// this is how we tell the component to expect a prop.
+export let category;
+
+let promise = getData(category);
+&lt;/script&gt;</code></pre>
+              <p>We provided the value for the prop like this:</p>
+              <pre><code class="lang-js">new ProductList({
+target: document.querySelector(".products"),
+props: { category: "tents" },
+});</code></pre>
+              <p>
+                If you look closer at the <code>ProductList</code> component
+                however you will see another way that props are passed...just
+                like normal HTML attributes.
+              </p>
+              <pre><code class="lang-markup">
+&lt;li&gt;&lt;ProductSummary product={product} /&gt;&lt;/li&gt;
+              </code></pre>
+              <p class="callout">
+                You may have noticed in your code the prop above was shortened
+                to <code>{product}</code> In Svelte if the variable you are
+                passing has the same name as the prop it can be shortened.
+              </p>
+
+              <p>
+                We should take advantage of this to pass in a count to our
+                header component. Change your
+                <code>renderHeaderFooter</code> function to pass a
+                <kbd>cartCount</kbd> property. You can just set it to a static
+                number for now.
+              </p>
+              <p>
+                Next modify the <code>MainHeader</code> component to catch the
+                prop and use it. Give this a try before reviewing the example
+                below
+              </p>
+              <details>
+                <summary>MainHeader</summary>
+                <pre><code class="lang-js">// ProductList.svelte
+&lt;script&gt;
+export let cartCount = 0;
+&lt;/script&gt;
+
+&lt;div class="logo"&gt;
+        &lt;img src="/images/noun_Tent_2517.svg" alt="tent image for logo" /&gt;
+        &lt;a href="index.html"&gt; Sleep&lt;span class="highlight"&gt;Outside&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="cart"&gt;
+        &lt;a href="cart/index.html"&gt;
+        &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+        &lt;!-- ...svg contents removed for brevity --&gt;
+            &lt;/svg
+        &gt;&lt;sup class="cart-count"&gt;{cartCount}&lt;/sup&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+
+
+// utils.mjs  renderHeaderFooter
+new MainHeader({
+    target: document.querySelector("#main-header"),
+    props: { cartCount: 3 },
+  });
+</code></pre>
+              </details>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Finish the cart count</h3>
+              <p>
+                You should see a number next to the backpack cart icon now...but
+                it is static. This number should reflect the actual number of
+                items in the cart. Add the code necessary to make this happen.
+                You may want to add a function to easily get the number of items
+                in the cart.
+              </p>
+              <p>
+                How can we get the number in the header to automatically update
+                when a new item is added without reloading the entire page? This
+                is where the power of a tool like Svelte really starts to show.
+              </p>
+              <p>
+                This week you were asked to continue the tutorial on Svelte. The
+                part that can help us here are
+                <a href="https://learn.svelte.dev/tutorial/writable-stores"
+                  >writable stores</a
+                >. Let's setup one together now.
+              </p>
+              <p>
+                Create a new file called <kbd>js/stores.mjs</kbd>. In it
+                according to the instructions we need to import in
+                <code>writable</code> from svelte. Then we can use that to
+                initialize a store called <code>cartCount</code>
+              </p>
+              <pre><code class="lang-js">
+import { writable } from "svelte/store";
+import { getCartCount } from "./utils.mjs";
+
+export const cartCount = writable(getCartCount());
+              </code></pre>
+              <p>
+                Notice that this example uses the helper function that you
+                should have written earlier to initialize the store to the
+                current number of items in the cart. To use our store we simply
+                import it in, then we tell the component to subscribe to changes
+                of that store. When we do this then anytime the store is updated
+                anywhere the component will automatically update! There is a
+                really nice shortcut for automatically subscribing a component
+                to a store: <code>$</code>
+              </p>
+              <pre><code class="lang-markup">// ProductList.svelte
+&lt;script&gt;
+import { cartCount } from "./stores.mjs";
+// we don't need the prop anymore
+// export let cartCount = 0;
+//note the $ below when we use the store in the template.
+&lt;/script&gt;
+
+&lt;div class="logo"&gt;
+        &lt;img src="/images/noun_Tent_2517.svg" alt="tent image for logo" /&gt;
+        &lt;a href="index.html"&gt; Sleep&lt;span class="highlight"&gt;Outside&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="cart"&gt;
+        &lt;a href="cart/index.html"&gt;
+        &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+        &lt;!-- ...svg contents removed for brevity --&gt;
+            &lt;/svg
+        &gt;&lt;sup class="cart-count"&gt;{$cartCount}&lt;/sup&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+              </code></pre>
+              <p>
+                The last part is to update the value in the store when another
+                item is added to the cart. We can update a store with
+                <code>cartCount.set()</code>. Update the
+                <code>addToCart</code> function in <kbd>productDetails</kbd> to
+                update the value of our <code>cartCount</code> store when an
+                item is added to the cart. When you are done then the small
+                number should automatically update immediately when "Add to
+                Cart" is pressed.
+              </p>
+              <p class="callout">
+                This 'reactivity' where the output of a component is updated
+                automatically to show changes in the "state" of a component is
+                one of the great benefits of using a frontend framework or
+                library like Svelte, React, Vue, Angular, etc.
+              </p>
+              <p>
+                To finish we should hide the number if there are no items in the
+                cart.
+              </p>
+              <p>You should also style it as well!</p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Refactor the Cart</h3>
+              <p>
+                Cart was already a dynamic page. It read the list of items out
+                of localStorage and then built the HTML to display them. It
+                needs to be updated however to match the rest of the
+                application. We should create a
+                <kbd>ShoppingCart.svelte</kbd> component similar to what we did
+                for <kbd>ProductList</kbd>.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructors Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/v3.6-team4/src"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, reviewed the instructor's
+          solution, and gotten your code working the driver should commit and
+          push their changes then submit a pull request for this branch. Then
+          review the pull request as a team, close it, and merge the branch back
+          into Main. Finally someone should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../../js/course.js"></script>
+    <script src="../../js/prism.js"></script>
+  </body>
+</html>
