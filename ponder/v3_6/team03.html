@@ -202,7 +202,7 @@ export default {
             </li>
             <li>
               <!-- BEGIN STEP -->
-              <h3>productList component</h3>
+              <h3>ProductList component</h3>
               <p>
                 Create a new folder in the your project:
                 <kbd>src/js/components/</kbd>. Create a new file in that
@@ -278,7 +278,7 @@ export let category;
 let promise = getData(category);
 &lt;/script&gt;
 
-&lt;p&gt;My new product list component!&lt;/p&gt;
+&lt;p&gt;Top products: {category}&lt;/p&gt;
                 </code></pre>
               <p>
                 To pass our prop into the component you will need to make a
@@ -288,7 +288,12 @@ let promise = getData(category);
     target: document.querySelector(".products"),
     props: { category: "tents" },
 });</code></pre>
-
+              <p>
+                Note that we can embed variables into our template using the
+                curly braces. This is similar to what we have done before with
+                template literal strings. We just don't need the $ in this case
+                or the backticks.
+              </p>
               <!-- END STEP -->
             </li>
             <li>
@@ -325,7 +330,7 @@ export let category;
 let promise = getData(category);
 &lt;/script&gt;
 
-&lt;h2&gt;Top Products&lt;/h2&gt;
+&lt;h2&gt;Top products: {category}&lt;/h2&gt;
 &lt;ul class="product-list"&gt;
 
 &lt;li class="product-card"&gt;
@@ -361,7 +366,7 @@ let promise = getData(category);
               <details>
                 <summary>Partial solution</summary>
                 <pre><code class="lang-js">
-&lt;h2&gt;Top Products&lt;/h2&gt;
+&lt;h2&gt;Top Products: {category}&lt;/h2&gt;
 {#await promise}
   <p>Loading</p>
 {:then products}
