@@ -191,6 +191,13 @@ export default {
               </p>
               <div class="callout">
                 <p>
+                  Once the changes from this team activity are merged back into
+                  the main branch, each member of the team should pull those
+                  changes and then run the command <code>npm install</code>. You
+                  should only have to do this once to grab the new tools into
+                  your local development environment.
+                </p>
+                <p>
                   There is one more thing you will probably want to do to finish
                   your setup. There is a very nice VS Code extension for Svelte
                   that will make your life much easier. It's called "Svelte for
@@ -506,7 +513,7 @@ let promise = getData(category);
               <h3>Remove extra products</h3>
               <p>
                 <kbd>tents.json</kbd> has more tents than we currently need.
-                Write a method in <kbd>productList.mjs</kbd> that will filter
+                Write a method in <kbd>productList.svelte</kbd> that will filter
                 our list of products to just the 4 we need. Use that method to
                 show only those 4 tents.
               </p>
