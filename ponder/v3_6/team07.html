@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>BYU-Idaho WDD 330 | Team 7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/prism-coy.css" />
+    <link rel="stylesheet" href="../../css/course.css" />
+  </head>
+
+  <body>
+    <div id="content">
+      <header class="headerBanner">
+        <div>
+          <h1><span>Web</span> Frontend Development II</h1>
+          <h2>WDD 330</h2>
+        </div>
+      </header>
+      <main>
+        <h1>Ponder: Team Activity 7</h1>
+        <hr />
+        <h2>Overview</h2>
+        <p>
+          In the last activity we got our checkout working...barely. If the user
+          does everything exactly the way you want the to the order will
+          succeed. The user hardly ever does everything just how you want them
+          to :) We need to harden up our code and add error handling and better
+          validation.
+        </p>
+        <h2>Instructions</h2>
+        <p>
+          Complete the following assignment as a team. Designate one team member
+          as the "main driver" and collaborate on their copy of the code.
+          Everyone on the team should be actively engaged in writing the code
+          and contributing to the solution. Once the solution is working, make
+          sure that everyone on the team gets a copy of the code. Each week let
+          someone else be the "main driver" of the coding.
+        </p>
+
+        <div class="requirements">
+          <h3>Core Requirements</h3>
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <p>
+                The driver should visit the team's copy of the Trello board for
+                the project. Add each of the attending team members to the
+                "Team7: Error handling and Validation" task...then move it to
+                'Doing'. Read the details of the card together.
+              </p>
+              <p>
+                The driver should make sure to <kbd>pull</kbd> any changes from
+                GitHub before proceeding. Next they should create a new branch
+                called <kbd>initials--team7</kbd>. So if the driver's name were
+                John Doe the branch should be called <code>jd--team7</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Figuring out what went wrong.</h3>
+              <p>
+                Currently if our order fails we get the very descriptive error
+                message "Bad Request". Turns out that the server is actually
+                sending back much more information than that, but we are
+                throwing it away by how we are processing our response. We need
+                to change this first.
+              </p>
+              <p>
+                Open the <kbd>externalServices.mjs</kbd> module and take a look
+                at the <code>convertToJson</code> function. It should look
+                something like this:
+              </p>
+              <pre><code class="lang-js line-numbers">async function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error('Bad Response');
+  }
+}
+              </code></pre>
+              <p>
+                On line 1 we check our response to see if it is 'ok'. 'Ok' is
+                any status of 200, or most 300s. If the status on the response
+                is 40x or 50x then it is NOT okay. The server we are
+                communicating with sends back a 400 response if something goes
+                wrong. Then it puts the details in the body of the response. If
+                we fail the okay test...we immediately throw an error with the
+                message 'Bad Response'. What we need to do is get the detailed
+                error message out of the response body.
+              </p>
+              <p>
+                Refactor this function by converting our response body to JSON
+                before we check if it's okay. Then if it is not okay then send
+                the response body on in our <code>throw</code> statement.
+              </p>
+              <div class="callout">
+                <p>
+                  <code>throw new Error()</code> is a nice way to let the
+                  application know that something went wrong. There is only one
+                  problem with it in this case...Error() takes a simple string
+                  as an argument. We can't send an object. There are a couple of
+                  ways to get around this.
+                </p>
+                <p>
+                  First, we could <kbd>stringify</kbd> the object. Second, we
+                  could send a custom object back with our
+                  <code>throw</code> instead of the default
+                  <code>new Error()</code>. In this case the second makes more
+                  sense.
+                </p>
+                <p>
+                  An Error object normally has a <kbd>name</kbd> property and a
+                  <kbd>message</kbd> property. Let's model our object after
+                  this.
+                </p>
+              </div>
+              <p>
+                Change the line that looks like
+                <code>throw new Error('Bad Response');</code> to something more
+                like this:
+              </p>
+              <pre><code class="lang-js">throw { name: 'servicesError', message: jsonResponse };</code></pre>
+              The variable <code>jsonResponse</code> should be the body of the
+              response from the server that we converted to JSON.
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Catching our Error</h3>
+              <p>
+                Throwing an error when something goes wrong does little good if
+                we don't <kbd>catch</kbd> it somewhere and deal with it.
+              </p>
+              <p>
+                In this case there are a couple of options for where to place
+                our
+                <code>catch</code>. We could place it in the
+                <code>checkout</code> method that we wrote in the
+                <kbd>externalServices</kbd> module, or we could place it in the
+                <code>checkout</code> method of the <kbd>checkoutProcess</kbd>
+                module. Discuss with your group for a few minutes the pros and
+                cons of putting it in each place.
+              </p>
+
+              <p>
+                Handling an error close to where it happened is usually a good
+                thing, but we need to let the user know what they did wrong in
+                this case. The form and form handling is in the
+                <kbd>checkoutForm</kbd> component, and so in this case it makes
+                sense to catch the error there.
+              </p>
+              <p>
+                Add a <code>try { } catch(err) { }</code> block in
+                <kbd>handleSubmit</kbd>. The part of the code that we are
+                worried about breaking should go inside
+                <code>try { // code here }</code>, and whatever you want to
+                happen if the code in the try blows up should go in the
+                <code>catch(err) { }</code>
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Form validation</h3>
+              <p>
+                One of the things that the server will complain about is if any
+                of the fields are missing information. HTML can actually do a
+                really nice job of checking for that. All we need to do is add
+                <code>required</code> as an attribute of an
+                <code>input</code> element. If you did not do that in the last
+                activity, add required to all of our form inputs. Then click the
+                submit button.
+              </p>
+              <p>
+                Depending on how you are listening for the form submission your
+                HTML validation may or may not be working. If you attached a
+                <code>click</code> listener on the button we will need to
+                trigger the validation ourselves, if you listened for the
+                <code>submit</code> event on the form the validation should
+                automatically be working. Previously, we determined that since
+                we were submitting our form through AJAX, we did not want the
+                form to do what it normally would do if submitted. In the
+                listener for the form button you have added
+                <code>preventDefault</code>.
+              </p>
+
+              <div class="callout">
+                <p>
+                  If your HTML form validation is not working...do the following
+                  in your listener handler function:
+                </p>
+                <ol>
+                  <li>Get the form from the DOM.</li>
+                  <li>
+                    Forms have a method called <code>checkValidity</code> that
+                    will return false if it finds anything in the form data that
+                    goes against our validation rules. Call it and store the
+                    result.
+                  </li>
+                  <li>
+                    We can also manually trigger the messages that the browser
+                    will add to the page when something is wrong. That is done
+                    with <code>myForm.reportValidity()</code>
+                  </li>
+                  <li>
+                    Finally, if our validity test came back false, we do not
+                    want to continue...so wrap the checkout process in an if
+                    statement.
+                  </li>
+                </ol>
+                <p>Your final code should look something like this:</p>
+                <pre><code class="lang-js">function handleSubmit(e) {
+    e.preventDefault();
+    var myForm = document.forms[0];
+    var chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if(chk_status) 
+      // ...checkout code here.  Might make sense to pull this out into another function
+});</code></pre>
+              </div>
+              <p>
+                By leveraging the built in HTML validation that the browser can
+                do, we dramatically reduced the amount of error handling we will
+                need to do on our end!
+              </p>
+              <p>
+                Thinking back to the reading from earlier (<a
+                  href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation"
+                  target="_blank"
+                  rel="noreferrer"
+                  >MDN: Client side form validation</a
+                >), what else should we add to our HTML validation to help our
+                users to give us good input? Discuss this with your team and add
+                those things you think appropriate.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Handling the Happy Path :)</h3>
+              <p>
+                Currently our application does not give any feedback to the user
+                about whether the order succeeded or failed. Let's start by
+                responding to a successful order. We should probably do the
+                following:
+              </p>
+              <ol>
+                <li>Give the user a success message</li>
+                <li>Clear out the cart.</li>
+                <li>???</li>
+              </ol>
+              <p>
+                This is not a very long list. The main decision to be made is
+                how do we want to message the user? We could either pop
+                something up in the current page, or take the user to a new page
+                with a success message. Leaving them on the page with the form
+                does not make a lot of sense...so let's move to a success page.
+              </p>
+              <p>
+                Inside of the <kbd>checkout</kbd> directory create a new file:
+                <kbd>success.html</kbd>. Add our base formatting including
+                header and footer, and then add a success message for the user.
+                Then add the code to your checkout process to take the user to
+                this page upon a successful checkout. Make sure to also clear
+                out our cart contents in localStorage.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Handling the Unhappy Path :(</h3>
+              <p>
+                The last thing we need to do is to handle the few last errors
+                the user might get. We want to stay on the checkout form page so
+                the user does not lose what they have already entered...and so
+                they can know what went wrong and fix it if possible. So a popup
+                message would be appropriate here.
+              </p>
+              <p class="callout">
+                When I say 'popup' here I am not referring to an
+                <code>alert</code>. We want something much less intrusive that
+                will not hijack the UI.
+              </p>
+              <p>
+                Creating custom alert messages is something that could be useful
+                outside of errors, so a new function in our utilities module
+                sounds appropriate. Create and export a function called
+                <kbd>alertMessage(message, scroll=true)</kbd> in
+                <kbd>utils.js</kbd>. Create an alert that matches the screenshot
+                below. Insert your alert at the top of the
+                <kbd>main</kbd> element. Since the checkout form is longer than
+                will fit on the screen of a mobile device, your alertMessage
+                should have the option to scroll the page back to the top to
+                make sure the user sees the error messages.
+              </p>
+              <div class="fig-block">
+                <figure>
+                  <img
+                    src="../../images/sleepoutside-checkout-alerts.png"
+                    alt="example of an alert message."
+                  />
+                </figure>
+              </div>
+              <details>
+                <summary>Click for example</summary>
+                <pre><code class="lang-js">
+export function alertMessage(message, scroll = true) {
+  // create element to hold our alert
+  const alert = document.createElement('div');
+  // add a class to style the alert
+  alert.classList.add('alert');
+  // set the contents. You should have a message and an X or something the user can click on to remove
+
+  // add a listener to the alert to see if they clicked on the X
+  // if they did then remove the child
+  alert.addEventListener('click', function(e) {
+      if( ) { // how can we tell if they clicked on our X or on something else?  hint: check out e.target.tagName or e.target.innerText
+        main.removeChild(this);
+      }
+  })
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if(scroll)
+    window.scrollTo(0,0);
+
+}
+                </code></pre>
+              </details>
+              <!-- END STEP -->
+            </li>
+            <li>
+              <!-- BEGIN STEP -->
+              <h3>Add an alert to Product detail</h3>
+              <p>
+                When you add a product to the cart there is a good chance that
+                the action gives no feedback to the user. If you have already
+                fixed this and yours does give feedback...kudos! If not, we can
+                use our alert to quickly send the user a message that the item
+                was successfully added.
+              </p>
+
+              <!-- END STEP -->
+            </li>
+          </ol>
+        </div>
+
+        <h2>Instructor's Solution</h2>
+        <p>
+          As a part of this team activity, you are expected to look over a
+          solution from the instructor, to compare your approach to that one.
+          One of the questions on the I-Learn submission will ask you to provide
+          insights from this comparison.
+        </p>
+        <p>
+          Please DO NOT open the solution until you have worked through this
+          activity as a team for the one hour period. At the end of the hour, if
+          you are still struggling with some of the core requirements, you are
+          welcome to view the instructor's solution and use it to help you
+          complete your own code. Even if you use the instructor's code to help
+          you, you are welcome to report that you finished the core
+          requirements, if you code them up yourself.
+        </p>
+        <p>
+          After working with your team for the one hour activity,
+          <a
+            href="https://github.com/matkat99/sleepoutside/tree/v3.6-team7/src"
+            target="_blank"
+            rel="noreferrer"
+            >click here for the instructor's solution</a
+          >.
+        </p>
+        <h2>Make a pull request.</h2>
+        <p>
+          After you have completed what you can, and reviewed the instructor's
+          solution, the driver should commit and push their changes, then submit
+          a pull request for this branch. Then review the pull request as a
+          team, close it, and merge the branch back into Main. Finally, someone
+          should move the Trello card to "Done".
+        </p>
+        <h2>Submission</h2>
+        <p>
+          When you have finished this activity, please fill out the assessment
+          in I-Learn. You are welcome to complete any additional parts of this
+          activity by yourself or with others after your meeting before
+          submitting the assessment.
+        </p>
+      </main>
+      <!-- end #article -->
+    </div>
+
+    <script src="../../js/course.js"></script>
+    <script src="../../js/prism.js"></script>
+  </body>
+</html>
