@@ -241,6 +241,69 @@
             </li>
             <li>
               <!-- BEGIN STEP -->
+              <h3>Handling the Unhappy Path :(</h3>
+              <p>
+                The next thing we need to do is to handle the errors the user
+                might get. We want to stay on the checkout form page so the user
+                does not lose what they have already entered...and so they can
+                know what went wrong and fix it if possible. So a popup message
+                would be appropriate here.
+              </p>
+              <p class="callout">
+                When I say 'popup' here I am not referring to an
+                <code>alert</code>. We want something much less intrusive that
+                will not hijack the UI.
+              </p>
+              <p>
+                Creating custom alert messages is something that could be useful
+                outside of errors, so a new function in our utilities module
+                sounds appropriate. Create and export a function called
+                <kbd>alertMessage(message, scroll=true)</kbd> in
+                <kbd>utils.js</kbd>. Create an alert component that matches the
+                screenshot below. Insert your alert <em>before</em> the
+                <kbd>main</kbd> element. Since the checkout form is longer than
+                will fit on the screen of a mobile device, your alertMessage
+                should have the option to scroll the page back to the top to
+                make sure the user sees the error messages.
+              </p>
+              <div class="fig-block">
+                <figure>
+                  <img
+                    src="../../images/sleepoutside-checkout-alerts.png"
+                    alt="example of an alert message."
+                  />
+                </figure>
+              </div>
+              <details>
+                <summary>Click for example</summary>
+                <pre><code class="lang-js">
+export function alertMessage(message, scroll = true, duration = 3000) {
+    const alert = new AlertMessage({
+        target: document.querySelector("body"),
+        anchor: document.querySelector("main"),
+        props: {
+        message,
+        },
+    });
+    // make sure they see the alert by scrolling to the top of the window
+    //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+    if (scroll) window.scrollTo(0, 0);
+    
+    // left this here to show how you could remove the alert automatically after a certain amount of time.
+    // setTimeout(function () {
+    //   alert.$destroy();
+    // }, duration);
+    }
+                </code></pre>
+              </details>
+              <!-- END STEP -->
+            </li>
+          </ol>
+          <h3>Stretch Goals</h3>
+
+          <ol class="bigSteps">
+            <li>
+              <!-- BEGIN STEP -->
               <h3>Handling the Happy Path :)</h3>
               <p>
                 Currently our application does not give any feedback to the user
@@ -269,75 +332,6 @@
                 out our cart contents in localStorage.
               </p>
 
-              <!-- END STEP -->
-            </li>
-          </ol>
-          <h3>Stretch Goals</h3>
-
-          <ol class="bigSteps">
-            <li>
-              <!-- BEGIN STEP -->
-              <h3>Handling the Unhappy Path :(</h3>
-              <p>
-                The last thing we need to do is to handle the few last errors
-                the user might get. We want to stay on the checkout form page so
-                the user does not lose what they have already entered...and so
-                they can know what went wrong and fix it if possible. So a popup
-                message would be appropriate here.
-              </p>
-              <p class="callout">
-                When I say 'popup' here I am not referring to an
-                <code>alert</code>. We want something much less intrusive that
-                will not hijack the UI.
-              </p>
-              <p>
-                Creating custom alert messages is something that could be useful
-                outside of errors, so a new function in our utilities module
-                sounds appropriate. Create and export a function called
-                <kbd>alertMessage(message, scroll=true)</kbd> in
-                <kbd>utils.js</kbd>. Create an alert that matches the screenshot
-                below. Insert your alert at the top of the
-                <kbd>main</kbd> element. Since the checkout form is longer than
-                will fit on the screen of a mobile device, your alertMessage
-                should have the option to scroll the page back to the top to
-                make sure the user sees the error messages.
-              </p>
-              <div class="fig-block">
-                <figure>
-                  <img
-                    src="../../images/sleepoutside-checkout-alerts.png"
-                    alt="example of an alert message."
-                  />
-                </figure>
-              </div>
-              <details>
-                <summary>Click for example</summary>
-                <pre><code class="lang-js">
-export function alertMessage(message, scroll = true) {
-  // create element to hold our alert
-  const alert = document.createElement('div');
-  // add a class to style the alert
-  alert.classList.add('alert');
-  // set the contents. You should have a message and an X or something the user can click on to remove
-
-  // add a listener to the alert to see if they clicked on the X
-  // if they did then remove the child
-  alert.addEventListener('click', function(e) {
-      if( ) { // how can we tell if they clicked on our X or on something else?  hint: check out e.target.tagName or e.target.innerText
-        main.removeChild(this);
-      }
-  })
-  // add the alert to the top of main
-  const main = document.querySelector('main');
-  main.prepend(alert);
-  // make sure they see the alert by scrolling to the top of the window
-  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
-  if(scroll)
-    window.scrollTo(0,0);
-
-}
-                </code></pre>
-              </details>
               <!-- END STEP -->
             </li>
             <li>
