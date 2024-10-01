@@ -30,5 +30,16 @@
         "Beautiful hike through Bechler meadows river to Denanda Falls",
       "directions":
         "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive to until you see the sign for Bechler Meadows on the left. Turn there. There is a parking area at the trailhead."
+    },
+    {
+      "name": "Coffee Pot Rapids",
+      "imgSrc": "//byui-cit.github.io/cit261/examples/falls.jpg",
+      "imgAlt": "Image of Bechler Falls",
+      "distance": "2.2 miles",
+      "difficulty": "Easy",
+      "description":
+        "Beautiful hike along the Henry's Fork of the Snake River to a set of rapids.",
+      "directions":
+        "Take Highway 20 north to Island Park. Continue almost to Mack's in. From Highway 20, turn west on Flatrock Road for 1 mile then turn off on Coffee Pot Road and travel one-half mile to the campground entrance road. There is a parking lot right outside the campground."
     }
   ]

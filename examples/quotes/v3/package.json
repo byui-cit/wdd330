@@ -1,0 +1,19 @@
+{
+  "name": "v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "htm": "^3.1.1",
+    "preact": "^10.13.1",
+    "preact-custom-element": "^4.2.1",
+    "vite": "^4.2.1"
+  }
+}

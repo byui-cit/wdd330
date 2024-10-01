@@ -1,0 +1,50 @@
+.outcomes-list ul > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.outcomes-list li > select {
+  flex: 1 0 100%;
+}
+@media screen and (min-width: 500px) {
+  .outcomes-list ul > li {
+    flex-wrap: nowrap;
+  }
+  .outcomes-list li > select {
+    flex: 0 0 5em;
+  }
+}
+
+.summary table {
+  background-color: #ddd;
+  padding: 0.5em;
+  max-width: 500px;
+}
+
+.summary p {
+  text-indent: 1em;
+  margin: 0;
+}
+#outcomes select {
+  font-size: 1.2em;
+  margin-right: 0.5em;
+  padding: 0.5em;
+  width: 10ch;
+}
+#outcomes button {
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+}
+
+.time {
+  display: flex;
+  gap: 1em;
+}
+.time > p {
+  display: flex;
+  flex-direction: column;
+}
+
+.hide {
+  display: none;
+}
