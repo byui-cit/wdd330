@@ -275,14 +275,14 @@
 import ProductSummary from "./ProductSummary.svelte";
 import { getData } from "../productData.mjs";
 // this is how we tell the component to expect a prop.
-export let category;
+let {category} = $props();
 
 let promise = getData(category);
 &lt;/script&gt;</code></pre>
               <p>We provided the value for the prop like this:</p>
-              <pre><code class="lang-js">new ProductList({
-target: document.querySelector(".products"),
-props: { category: "tents" },
+              <pre><code class="lang-js">const productList = mount(ProductList, {
+  target: document.querySelector(".products"),
+  props: { category: "tents" },
 });</code></pre>
               <p>
                 If you look closer at the <code>ProductList</code> component
@@ -314,7 +314,7 @@ props: { category: "tents" },
                 <summary>MainHeader</summary>
                 <pre><code class="lang-js">// ProductList.svelte
 &lt;script&gt;
-export let cartCount = 0;
+let {cartCount = 0} = $props();
 &lt;/script&gt;
 
 &lt;div class="logo"&gt;
@@ -332,10 +332,10 @@ export let cartCount = 0;
 
 
 // utils.mjs  renderHeaderFooter
-new MainHeader({
-    target: document.querySelector("#main-header"),
-    props: { cartCount: 3 },
-  });
+const header = mount(MainHeader, {
+  target: document.querySelector("#main-header"),
+  props: { cartCount: 3 },
+});
 </code></pre>
               </details>
 
@@ -346,51 +346,58 @@ new MainHeader({
               <h3>Finish the cart count</h3>
               <p>
                 You should see a number next to the backpack cart icon now...but
-                it is static. This number should reflect the actual number of
-                items in the cart. Add the code necessary to make this happen.
-                You may want to add a function to easily get the number of items
-                in the cart.
+                it is static and not accurate. This number should reflect the
+                actual number of items in the cart.
               </p>
               <p>
-                How can we get the number in the header to automatically update
-                when a new item is added without reloading the entire page? This
-                is where the power of a tool like Svelte really starts to show.
+                <strong>Create a function</strong> that will return the current
+                number of items stored in the cart. then Use that function to
+                supply the correct data to the <code>MainHeader</code> component
+                through it's prop
               </p>
               <p>
-                This week you were asked to continue the tutorial on Svelte. The
-                part that can help us here are
-                <a href="https://learn.svelte.dev/tutorial/writable-stores"
-                  >writable stores</a
-                >. Let's setup one together now.
+                Now when you reload the page the correct number of items should
+                show. But what happens if you add another item to the cart? How
+                can we get the number in the header to automatically update when
+                a new item is added without reloading the entire page? This is
+                where the power of a tool like Svelte really starts to show.
               </p>
               <p>
-                Create a new file called <kbd>js/stores.mjs</kbd>. In it
-                according to the instructions we need to import in
-                <code>writable</code> from svelte. Then we can use that to
-                initialize a store called <code>cartCount</code>
+                We have learned about Runes in Svelte. Particularly the
+                <code>$state</code> rune. When we make a state rune, anytime the
+                value of it is updated Svelte will re-render any component that
+                references that state variable. We need a sharable state
+                variable. Let's setup one together now.
               </p>
+              <p>
+                Create a new file called
+                <kbd>js/components/state.svelte.js</kbd>. Adding the
+                <code>.svelte</code> into the name of the file makes Svelte
+                aware of it and gives us the ability to use Runes in it. Add the
+                following:
+              </p>
+
               <pre><code class="lang-js">
-import { writable } from "svelte/store";
 import { getCartCount } from "./utils.mjs";
 
-export const cartCount = writable(getCartCount());
+export const cartState = $state({count: getCartCount()});
               </code></pre>
               <p>
-                Notice that this example uses the helper function that you
-                should have written earlier to initialize the store to the
-                current number of items in the cart. To use our store we simply
-                import it in, then we tell the component to subscribe to changes
-                of that store. When we do this then anytime the store is updated
-                anywhere the component will automatically update! There is a
-                really nice shortcut for automatically subscribing a component
-                to a store: <code>$</code>
+                Notice that we import in a function from <code>utils</code> that
+                should return the current number of items in the cart. You
+                should have just finished that function as you started this
+                step. We then create a state rune just like we have in our
+                components, we set it equal to an object, and use the function
+                to initialize it to the correct value. Note also that we have
+                exported our state rune.
               </p>
+              <p>To use it we simply import.</p>
               <pre><code class="lang-markup">// MainHeader.svelte
 &lt;script&gt;
-import { cartCount } from "./stores.mjs";
+import { cartState } from "./state.svelte.js";
 // we don't need the prop anymore
 // export let cartCount = 0;
-//note the $ below when we use the store in the template.
+
 &lt;/script&gt;
 
 &lt;div class="logo"&gt;
@@ -402,19 +409,17 @@ import { cartCount } from "./stores.mjs";
         &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
         &lt;!-- ...svg contents removed for brevity --&gt;
             &lt;/svg
-        &gt;&lt;sup class="cart-count"&gt;{$cartCount}&lt;/sup&gt;
+        &gt;&lt;sup class="cart-count"&gt;{cartState.count}&lt;/sup&gt;
         &lt;/a&gt;
     &lt;/div&gt;
               </code></pre>
               <p>
                 The last part is to update the value in the store when another
-                item is added to the cart. We can update a store with
-                <code>cartCount.set()</code>. Update the
-                <code>addToCart</code> function in <kbd>productDetails</kbd> to
-                update the value of our <code>cartCount</code> store when an
-                item is added to the cart. When you are done then the small
-                number should automatically update immediately when "Add to
-                Cart" is pressed.
+                item is added to the cart. Again we can simply import our rune
+                into <code>ProductDetails.mjs</code> and change it's value when
+                <code>addToCart</code> is called! When you are done then the
+                small number should automatically update immediately when "Add
+                to Cart" is pressed.
               </p>
               <p class="callout">
                 This 'reactivity' where the output of a component is updated
