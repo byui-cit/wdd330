@@ -224,15 +224,19 @@ export default {
                 type HTML directly. Try adding something like:
                 <code>&lt;p&gt;My new product list componenent!&lt;/p&gt;</code>
               </p>
-              <p>Then you can import your component into <kbd>main.js</kbd></p>
-              <pre><code class="lang-js">import ProductList from "./components/ProductList.svelte"</code></pre>
-              <p>We can add our component to the page like this:</p>
-              <pre><code class="lang-js">// main.js 
-import ProductList from "./components/ProductList.svelte";
+              <p>
+                We can add our component to the page by first importing your
+                component into <kbd>main.js</kbd>. We will also need a Svelte
+                utility: <code>mount</code>
+              </p>
+              <pre><code class="lang-js">import ProductList from "./components/ProductList.svelte";
+import { mount } from "svelte";
 
-new ProductList({
-    target: document.querySelector(".products"),
-});</code></pre>
+const productList = mount(ProductList, {
+  target: document.querySelector(".products"),
+});
+              </code></pre>
+
               <p>
                 Visit the home page in the browser to make sure you see what you
                 expect!
@@ -240,7 +244,8 @@ new ProductList({
               <p class="callout">
                 Make sure that you add <kdb>main.js</kdb> into your index.html
                 file with a script tag. Otherwise you may end up wondering why
-                nothing you do has any effect!
+                nothing you do has any effect! Remember that we are also using
+                modules...
               </p>
               <p>
                 Now that we have a basic component working, we can add the rest
@@ -279,7 +284,7 @@ new ProductList({
 import { getData } from "../productData.mjs";
 
 // this is how we make a prop in svelte
-export let category;
+let {category} = $props();
 // if you are looking at this thinking that's strange to just stop with a promise
 // you would be right.  This will make more sense in a bit...stay tuned.
 let promise = getData(category);
@@ -291,9 +296,10 @@ let promise = getData(category);
                 To pass our prop into the component you will need to make a
                 change in <kbd>main.js</kbd>
               </p>
-              <pre><code class="lang-js">new ProductList({
-    target: document.querySelector(".products"),
-    props: { category: "tents" },
+              <pre><code class="lang-js">
+const productList = mount(ProductList, {
+  target: document.querySelector(".products"),
+  props: { category: "tents" },
 });</code></pre>
               <p>
                 Note that we can embed variables into our template using the
@@ -331,7 +337,7 @@ let promise = getData(category);
 import { getData } from "../productData.mjs";
 
 // this is how we make a prop in svelte
-export let category;
+let {category} = $props();
 // if you are looking at this thinking that's strange to just stop with a promise
 // you would be right.  This will make more sense in a bit...stay tuned.
 let promise = getData(category);
