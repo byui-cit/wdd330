@@ -274,11 +274,35 @@
                   />
                 </figure>
               </div>
+              <div class="callout">
+                <p>
+                  Make sure to consider Accessibility when making your Alert. If
+                  you were using a screen reader and trying to complete this
+                  form, how would you know about the alert in the case something
+                  went wrong?
+                </p>
+                <p>
+                  This is something that
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles"
+                    >ARIA roles</a
+                  >
+                  can help us with. In this case there is actually an
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role"
+                    >Alert role</a
+                  >. Go read about it and return and finish.
+                </p>
+                <p>
+                  ...oh and don't forget to consider Accessibility for the close
+                  button (X) as well.
+                </p>
+              </div>
               <details>
                 <summary>Click for example</summary>
                 <pre><code class="lang-js">
 export function alertMessage(message, scroll = true, duration = 3000) {
-    const alert = new AlertMessage({
+    const alert = mount(AlertMessage,{
         target: document.querySelector("body"),
         anchor: document.querySelector("main"),
         props: {

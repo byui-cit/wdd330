@@ -200,16 +200,17 @@
                 <summary>CheckoutForm.svelte</summary>
                 <pre><code class="lang-js">
 import { getLocalStorage } from "../utils.mjs";
+import { onMount } from "svelte";
 
 // props
-export let key = "";
+  let { key = "" } = $props();
 
-// state vars
-let list = [];
-let itemTotal = 0;
-let shipping = 0;
-let tax = 0;
-let orderTotal = 0;
+  // state vars
+  let list = $state([]);
+  let itemTotal = $state(0);
+  let shipping = $state(0);
+  let tax = $state(0);
+  let orderTotal = $state(0);
 
 // initial setup
 const init = function () {
@@ -227,7 +228,7 @@ const calculateOrdertotal = function () {
 };
 
 // initial setup
-init(); </code></pre>
+onMount(init); </code></pre>
               </details>
               <!-- END STEP -->
             </li>
@@ -242,7 +243,7 @@ init(); </code></pre>
               <pre><code class="lang-js">http://server-nodejs.cit.byui.edu:3000/checkout</code></pre>
               <p>
                 You should be pulling the url from an environment variable and
-                storing it into a variable calle <code>baseUrl</code>. You can
+                storing it into a variable called <code>baseUrl</code>. You can
                 do something like this: <code>baseURL + "checkout/"</code> in
                 your fetch call.
               </p>
@@ -408,7 +409,7 @@ function formDataToJSON(formElement) {
                 </details>
               </div>
 
-              <p>
+              <p class="callout">
                 Use <kbd>1234123412341234</kbd> for the card number,
                 <kbd>123</kbd> for the security code, and any expiration in the
                 future if you want your order to succeed.
@@ -454,18 +455,16 @@ function formDataToJSON(formElement) {
                 <p>
                   We have a couple of choices here. One is we could watch for a
                   <code>click</code> event on the form button, or we can watch
-                  for a <code>submit</code> event on the form.
+                  for a <code>submit</code> event on the form. Semantically the
+                  submit might make more sense.
                 </p>
                 <p>
                   Whichever you choose, you will want to keep the form from
-                  doing what it would normally do on submit. You can do this by
-                  calling
-                  <code>event.preventDefault()</code> in the listener function.
-                </p>
-                <p>
-                  Or alternatively, Svelte also allows us to preventDefault like
-                  this:
-                  <code>on:submit|preventDefault={submitHandler}</code>
+                  doing what it would normally do on submit (load the page
+                  specified in the <code>action</code> of the form...reload the
+                  current page if no action is given). You can do this by
+                  calling <code>event.preventDefault()</code> in the listener
+                  function.
                 </p>
               </div>
               <p>

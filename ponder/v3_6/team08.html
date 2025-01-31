@@ -172,6 +172,14 @@
                 request to the server.
               </p>
               <pre><code class="lang-js">{ email: "user1@email.com" , password: "user1" }</code></pre>
+              <div class="callout">
+                <p>
+                  By the way...those are the credentials you should use while
+                  testing.
+                </p>
+                <p>Email: <code>user1@email.com</code></p>
+                <p>Password:<code>user1</code></p>
+              </div>
               <p>
                 If our request is successful (email and password match a user in
                 the database) then the server will return a token. This token
@@ -179,6 +187,7 @@
                 server. Save into localStorage with a key of
                 <kbd>so_token</kbd>.
               </p>
+
               <p class="callout">
                 If you get tired of typing <kbd>user1@email.com</kbd> you can
                 add <code>value="user1@email.com"</code> to your email input
@@ -311,7 +320,7 @@ function isTokenValid(token) {
         // get the current date
         let currentDate = new Date();
         // JWT exp is in seconds, the time from our current date will be milliseconds.
-        if (decoded.exp * 1000 < currentDate.getTime()) {
+        if (decoded.exp * 1000 &lt; currentDate.getTime()) {
         //token expiration has passed
         console.log("Token expired.");
         return false;
