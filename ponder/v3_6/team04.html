@@ -223,10 +223,10 @@
 &lt;/header&gt;
 </code></pre>
               <p>
-                To load our templates we will use need to do the same thing we
-                did in the last activity with the Product List. We will need to
-                do this twice for every page in our site. Once for the header
-                and once for the footer. To streamline this we should create a
+                To load our templates we will need to do the same thing we did
+                in the last activity with the Product List. We will need to do
+                this twice for every page in our site. Once for the header and
+                once for the footer. To streamline this we should create a
                 helper function.
               </p>
               <ol>
@@ -312,7 +312,7 @@ let promise = getData(category);
               </p>
               <details>
                 <summary>MainHeader</summary>
-                <pre><code class="lang-js">// ProductList.svelte
+                <pre><code class="lang-js">// MainHeader.svelte
 &lt;script&gt;
 let {cartCount = 0} = $props();
 &lt;/script&gt;
